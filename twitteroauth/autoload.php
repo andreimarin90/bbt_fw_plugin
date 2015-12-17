@@ -12,7 +12,7 @@ spl_autoload_register(function ($class) {
     $prefix = 'Abraham\\TwitterOAuth\\';
 
     // base directory for the namespace prefix
-    $base_dir = BBT_FW_DIR . '/extensions/twitteroauth/src/';
+    $base_dir = BBT_PL_DIR . '/twitteroauth/src/';
 
     // does the class use the namespace prefix?
     $len = strlen($prefix);
