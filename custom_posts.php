@@ -40,17 +40,9 @@ class BBT_Custom_Posts{
 
 		self::generate_shortcodes();
 
-		add_action('wp_enqueue_scripts', array('BBT_Custom_Posts','slider_enqueue') );
-
 		add_action('admin_enqueue_scripts', array('BBT_Custom_Posts','slider_admin_enqueue') );
 
 		self::register_ajax();
-
-	}
-
-	public static function slider_enqueue(){
-
-		//wp_enqueue_script('bbt-image-holder', bbt_locate_uri('bbt_framework/static/js/holder.js'),array(),null);
 
 	}
 
