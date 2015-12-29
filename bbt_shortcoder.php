@@ -237,12 +237,18 @@ class BBT_Shortcoder{
 								}
 							}
 						}
+
+						if(isset($shortcode['container'])) {
+							$container_array = (empty($shortcode['container']) || ($shortcode['container']) == 'false' ) ? array('content_element' => false, "is_container"	=>	false ) : array("content_element"	=>	$shortcode['container'] , "is_container"	=>	$shortcode['container'] );
+						}
+
 						vc_map( array(
 							"name" => $shortcode['title'],
 							"base" => BBT_PREFIX . $shortcode_id,
 							"content_element" => $shortcode['content'],
 							"is_container"	=>	$shortcode['content'],
-							"show_settings_on_create"	=>	!$shortcode['content'],
+							$container_array,
+							"show_settings_on_create"	=>	$shortcode['show_settings'],
 							"category" => THEME_PRETTY_NAME . " - " . $group['title'],
 							"params" => $params,
 							"icon" => !empty($shortcode['vc_icon']) ? $shortcode['vc_icon'] : BBT_FW . '/static/img/bbt.png',
