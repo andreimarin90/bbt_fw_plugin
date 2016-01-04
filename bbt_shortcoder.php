@@ -237,16 +237,13 @@ class BBT_Shortcoder{
 								}
 							}
 						}
-
-						if(isset($shortcode['container'])) {
-							$container_array = (empty($shortcode['container']) || ($shortcode['container']) == 'false' ) ? array('content_element' => false, "is_container"	=>	false ) : array("content_element"	=>	$shortcode['container'] , "is_container"	=>	$shortcode['container'] );
-						}
+						$container_array = (!isset($shortcode['container']) || ($shortcode['container'] == false) || ($shortcode['container'] == '') ) ? array('content_element' => false, "is_container"	=>	false ) : array("content_element"	=>	$shortcode['container'] , "is_container"	=>	$shortcode['container'] );
+						$vc_description = isset($shortcode['vc_desc']) ? $shortcode['vc_desc'] : $shortcode['description'];
 
 						vc_map( array(
 							"name" => $shortcode['title'],
+							"description" => $vc_description,
 							"base" => BBT_PREFIX . $shortcode_id,
-							"content_element" => $shortcode['content'],
-							"is_container"	=>	$shortcode['content'],
 							$container_array,
 							"show_settings_on_create"	=>	$shortcode['show_settings'],
 							"category" => THEME_PRETTY_NAME . " - " . $group['title'],
