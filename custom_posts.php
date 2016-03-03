@@ -279,7 +279,7 @@ class BBT_Custom_Posts{
 				'labels' => array(
 					'name' => ucwords($slider_term) . ' Categories',
 					'singular_name' => 'Category',
-					'menu_name' => ucwords($slider_term) . ' Categories',
+					'menu_name' => 'Categories',
 					'all_items' => 'All Categories',
 					'edit_item' => 'Edit Categories',
 					'view_item' => 'View Category',
