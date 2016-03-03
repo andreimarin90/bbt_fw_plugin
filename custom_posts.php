@@ -277,11 +277,11 @@ class BBT_Custom_Posts{
 			$taxonomy_options = array(
 				'label' => 'Categories',
 				'labels' => array(
-					'name' => 'Categories',
+					'name' => ucwords($slider_term) . ' Categories',
 					'singular_name' => 'Category',
-					'menu_name' => 'Categories',
+					'menu_name' => ucwords($slider_term) . ' Categories',
 					'all_items' => 'All Categories',
-					'edit_item' => 'Edt Categories',
+					'edit_item' => 'Edit Categories',
 					'view_item' => 'View Category',
 					'update_item' => 'Update Category',
 					'add_new_item' => 'Add New Category',
@@ -297,7 +297,7 @@ class BBT_Custom_Posts{
 				),
 				'public' => true,
 				'show_ui' => true,
-				'show_in_nav_menus' => false,
+				'show_in_nav_menus' => true,
 				'show_tagcloud' => false,
 				'show_admin_column' => true,
 				'hierarchical' => true
