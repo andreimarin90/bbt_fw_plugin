@@ -230,7 +230,7 @@ class BBT_Custom_Posts{
 			$slider_term = isset($slider['term'])?$slider['term']:'slide';
 			$slider_term_plural = isset($slider['term_plural'])?$slider['term_plural']:$slider_term.'s';
 			$slider_queryable = isset($slider['has_single'])?$slider['has_single']:false;
-			$slider_url_rewrite = isset($slider['url'])?$slider['url']:false;
+			$slider_url_rewrite = isset($slider['url']) ? $slider['url'] : false;
 
 			$post_options = array(
 				'label' => $slider_id,
@@ -266,7 +266,7 @@ class BBT_Custom_Posts{
 				):array(
 					'title'
 				),
-				'rewrite' => $slider_url_rewrite?array('slug'=>$slider_url_rewrite):true
+				'rewrite' => $slider_url_rewrite ? array('slug'=>$slider_url_rewrite) : true
 			);
 
 			if(isset($slider['post_options']))
@@ -307,6 +307,13 @@ class BBT_Custom_Posts{
 				$taxonomy_options = array_merge($taxonomy_options,$slider['taxonomy_options']);
 
 			register_taxonomy($slider_id.'_tax',$slider_id,$taxonomy_options);
+
+			//register other taxonomies
+			if(isset($slider['sub_taxonomy'])){
+				foreach($slider['sub_taxonomy'] as $sub_tax_id => $sub_tax){
+					register_taxonomy($sub_tax_id, $slider_id, $sub_tax);
+				}
+			}
 
 		}
 	}
