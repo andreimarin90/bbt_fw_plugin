@@ -23,6 +23,18 @@ class BBT_Shortcoder{
 				add_action('init',array( 'BBT_Shortcoder' , 'auto_load'),10);
 			}
 		}
+		
+		if (function_exists('vc_vc_add_shortcode_param')) {
+			vc_vc_add_shortcode_param('slider', 'bbt_slider_vc_option');
+		}
+		
+		if (function_exists('vc_add_shortcode_param')) {
+			vc_add_shortcode_param('toggle', 'bbt_toggle_vc_option');
+			vc_add_shortcode_param('multiple_select', 'bbt_multiple_vc_option');
+			vc_add_shortcode_param('image_selector', 'bbt_image_selector');
+			vc_add_shortcode_param('image_preview', 'bbt_image_preview');
+			vc_add_shortcode_param('bbt_icons' , 'bbt_icon_field');
+		}
 	}
 
 	public static function auto_load(){
@@ -297,5 +309,206 @@ class BBT_Shortcoder{
 				break;
 		}
 		return array($type,$value);
+	}
+	
+	/*
+	Add Range Option to Visual Composer Params
+	*/
+	
+	function bbt_slider_vc_option($settings, $value)
+	{
+		$dependency = vc_generate_dependencies_attributes($settings);
+		$param_name = isset($settings['param_name']) ? $settings['param_name'] : '';
+		$type       = isset($settings['type']) ? $settings['type'] : '';
+		$min        = isset($settings['min']) ? $settings['min'] : '';
+		$max        = isset($settings['max']) ? $settings['max'] : '';
+		$step       = isset($settings['step']) ? $settings['step'] : '';
+		$unit       = isset($settings['unit']) ? $settings['unit'] : '';
+		$uniqID    = uniqid();
+		$output     = '';
+		$output .= '<div class="bbt_slider_wrap" ><div ' . $dependency . ' class="mk-range-input ' . $dependency . '" data-value="' . $value . '" data-min="' . $min . '" data-max="' . $max . '" data-step="' . $step . '" id="rangeInput-' . $uniqID . '"></div><input name="' . $param_name . '"  class="bbt_input_selector wpb_vc_param_value ' . $param_name . ' ' . $type . '" type="text" value="' . $value . '"/><span class="unit">' . $unit . '</span></div>';
+		$output .= '<script type="text/javascript">
+
+			jQuery("#rangeInput-' . $uniqID . '") .bbtSliderVcOption();
+
+		</script>';
+
+		return $output;
+	}
+
+	function bbt_toggle_vc_option($settings, $value)
+	{
+		$dependency = vc_generate_dependencies_attributes($settings);
+		$param_name = isset($settings['param_name']) ? $settings['param_name'] : '';
+		$type       = isset($settings['type']) ? $settings['type'] : '';
+		$output     = '';
+		$uniqID     = uniqid();
+		$value      = 'false';
+
+		if(is_array($value)) {
+			foreach ($value as $key => $val) {
+				$value = $key;
+			}
+		}
+
+		$output .= '<span class="bbt_toggle mk-composer-toggle" id="toggle-switch-' . $uniqID . '"><span class="toggle-handle"></span><input type="hidden" ' . $dependency . ' class="wpb_vc_param_value ' . $dependency . ' ' . $param_name . ' ' . $type . '" value="' . $value . '" name="' . $param_name . '"/></span>';
+
+		$output .= '<script type="text/javascript">
+
+			jQuery("#toggle-switch-' . $uniqID . '") .bbtToggleVcOption();
+
+		</script>';
+
+		return $output;
+	}
+
+	function bbt_multiple_vc_option($settings, $value)
+	{
+		$dependency = vc_generate_dependencies_attributes($settings);
+		$param_name = isset($settings['param_name']) ? $settings['param_name'] : '';
+		$type       = isset($settings['type']) ? $settings['type'] : '';
+		$options    = isset($settings['options']) ? $settings['options'] : '';
+		$output     = '';
+		$uniqID    = uniqid();
+
+		$output .= '<select multiple="multiple" name="' . $param_name . '" id="multiselect-' . $uniqID . '" style="width:100%" ' . $dependency . ' class="wpb-multiselect ' . $dependency . ' wpb_vc_param_value ' . $param_name . ' ' . $type . '">';
+		if ($options != null && !empty($options)) {
+			foreach ($options as $key => $option) {
+				$selected = '';
+				if (in_array($key, explode(',', $value))) {
+					$selected = ' selected="selected"';
+				}
+				$output .= '<option value="' . $key . '"' . $selected . '>' . $option . '</option>';
+			}
+		}
+		$output .= '</select>';
+
+		$output .= '<script type="text/javascript">
+
+		jQuery("#multiselect-' . $uniqID . '").chosen();
+
+		</script>';
+
+		return $output;
+	}
+
+	function bbt_image_selector($settings, $value)
+	{
+		$dependency = vc_generate_dependencies_attributes($settings);
+		$param_name = isset($settings['param_name']) ? $settings['param_name'] : '';
+		$border     = isset($settings['border']) ? $settings['border'] : '';
+		$type       = isset($settings['type']) ? $settings['type'] : '';
+		$options    = isset($settings['value']) ? $settings['value'] : '';
+		$output     = '';
+		$uniqID    = uniqid();
+
+		$border_css = ($border == 'true') ? 'border:1px solid #ddd;' : '';
+		
+		if(is_array($value)) {
+			foreach ($value as $key => $val) {
+				$value = $key;
+			}
+		}
+
+		$output .= '<div class="bbt_multiple" id="visual-selector' . $uniqID . '">';
+		foreach ($options as $key => $option) {
+			$output .= '<a style="margin:10px 10px 0 0;' . $border_css . '" href="#" rel="' . $option . '"><img  src="' . get_template_directory_uri() . '/theme_config/sc_screens/client/' . $key . '" /></a>';
+		}
+		$output .= '<input name="' . $param_name . '" id="' . $param_name . '" ' . $dependency . ' 
+		class="wpb_vc_param_value ' . $dependency . ' ' . $param_name . ' ' . $type . '" 
+		type="hidden" value="' . $value . '"/>';
+		$output .= '</div>';
+
+		$output .= '<script type="text/javascript">
+
+			bbtImageSelector(' . ');
+
+		</script>';
+
+		return $output;
+	}
+
+	function bbt_image_preview($settings, $value)
+	{
+		$dependency = vc_generate_dependencies_attributes($settings);
+		$param_name = isset($settings['param_name']) ? $settings['param_name'] : '';
+		$border     = isset($settings['border']) ? $settings['border'] : '';
+		$type       = isset($settings['type']) ? $settings['type'] : '';
+		$options    = isset($settings['value']) ? $settings['value'] : '';
+		$output     = '';
+		$uniqID    = uniqid();
+
+		$border_css = ($border == 'true') ? 'border:1px solid #ddd;' : '';
+
+		$output .= '<div class="bbt_multiple" id="visual-selector' . $uniqID . '">';
+		foreach ($options as $key => $option) {
+			$output .= '<img  src="' . get_template_directory_uri() . '/theme_config/sc_screens/client/' . $key . '" />';
+		}
+		$output .= '<input name="' . $param_name . '" id="' . $param_name . '" ' . $dependency . ' 
+		class="wpb_vc_param_value ' . $dependency . ' ' . $param_name . ' ' . $type . '" 
+		type="hidden" value="' . $value . '"/>';
+		$output .= '</div>';
+
+		return $output;
+	}
+
+
+	function bbt_icon_field($settings, $value)
+	{
+		$dependency = vc_generate_dependencies_attributes($settings);
+		$param_name = isset($settings['param_name']) ? $settings['param_name'] : '';
+		$type = isset($settings['type']) ? $settings['type'] : '';
+		$class = isset($settings['class']) ? $settings['class'] : '';
+		$icons = myGlobals::$bbt_custom_vc_icons;
+		$uniqID    = uniqid();
+
+		if(is_array($value)) {
+			foreach ($value as $key => $val) {
+				$value = $key;
+			}
+		}
+
+		$output = '<input type="hidden" name="'.$param_name.'" class="wpb_vc_param_value ' . $dependency . ' '.$param_name.' '.$type.' '.$class.'" ' . $dependency . ' value="'.$value.'" id="trace-'. $uniqID .'"/>';
+		$output .='<div id="icon-dropdown" >';
+		$output .= '<ul class="bbt-icon-list">';
+		$n = 1;
+		foreach($icons as $icon)
+		{
+			$selected = ($icon == $value) ? 'class="selected"' : '';
+			$id = 'icon-'.$n;
+			$output .= '<li '.$selected.' data-ico="'.$icon.'"><i class="icon-'.$icon.'"></i><label class="icon">'.$icon.'</label></li>';
+			$n++;
+		}
+		$output .='</ul>';
+		$output .='</div>';
+		$output .= '<script type="text/javascript">
+				jQuery(document).ready(function(){
+					jQuery(".search").keyup(function(){
+				 
+						// Retrieve the input field text and reset the count to zero
+						var filter = jQuery(this).val(), count = 0;
+				 
+						// Loop through the icon list
+						jQuery(".icon-list li").each(function(){
+				 
+							// If the list item does not contain the text phrase fade it out
+							if (jQuery(this).text().search(new RegExp(filter, "i")) < 0) {
+								jQuery(this).fadeOut();
+							} else {
+								jQuery(this).show();
+								count++;
+							}
+						});
+					});
+				});
+
+				jQuery("#icon-dropdown li").click(function() {
+					jQuery(this).attr("class","selected").siblings().removeAttr("class");
+					var icon = jQuery(this).attr("data-ico");
+					jQuery("#trace-' . $uniqID . '").val(icon);
+					jQuery(".icon-preview").html("<i class=\'icon "+icon+"\'></i><label>"+icon+"</label>");
+				});
+		</script>';
+		return $output;
 	}
 }
