@@ -10,6 +10,7 @@
  */
 use Abraham\TwitterOAuth\TwitterOAuth;
 define("BBT_PL_DIR", plugin_dir_path( __FILE__ ));
+
 if(!class_exists('BBT_Custom_Posts')){
 	require_once BBT_PL_DIR . 'custom_posts.php';
 	add_action('after_setup_theme','bbt_custom_posts_plugin');

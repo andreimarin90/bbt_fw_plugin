@@ -257,7 +257,7 @@ class BBT_Shortcoder{
 							"description" => $vc_description,
 							"base" => BBT_PREFIX . $shortcode_id,
 							$container_array,
-							"show_settings_on_create"	=>	$shortcode['show_settings'],
+							"show_settings_on_create"	=>	isset($shortcode['show_settings']) ? $shortcode['show_settings'] : '',
 							"category" => THEME_PRETTY_NAME . " - " . $group['title'],
 							"params" => $params,
 							"icon" => !empty($shortcode['vc_icon']) ? $shortcode['vc_icon'] : BBT_FW . '/static/img/bbt.png',
