@@ -23,17 +23,17 @@ class BBT_Shortcoder{
 				add_action('init',array( 'BBT_Shortcoder' , 'auto_load'),10);
 			}
 		}
-		
+
 		if (function_exists('vc_vc_add_shortcode_param')) {
-			vc_vc_add_shortcode_param('slider', 'bbt_slider_vc_option');
+			vc_vc_add_shortcode_param('slider', array( 'BBT_Shortcoder' , 'bbt_slider_vc_option'));
 		}
-		
+
 		if (function_exists('vc_add_shortcode_param')) {
-			vc_add_shortcode_param('toggle', 'bbt_toggle_vc_option');
-			vc_add_shortcode_param('multiple_select', 'bbt_multiple_vc_option');
-			vc_add_shortcode_param('image_selector', 'bbt_image_selector');
-			vc_add_shortcode_param('image_preview', 'bbt_image_preview');
-			vc_add_shortcode_param('bbt_icons' , 'bbt_icon_field');
+			vc_add_shortcode_param('toggle', array( 'BBT_Shortcoder' , 'bbt_toggle_vc_option'));
+			vc_add_shortcode_param('multiple_select', array( 'BBT_Shortcoder' , 'bbt_multiple_vc_option'));
+			vc_add_shortcode_param('image_selector', array( 'BBT_Shortcoder' , 'bbt_image_selector'));
+			vc_add_shortcode_param('image_preview', array( 'BBT_Shortcoder' , 'bbt_image_preview'));
+			vc_add_shortcode_param('bbt_icons' , array( 'BBT_Shortcoder' , 'bbt_icon_field'));
 		}
 	}
 
@@ -314,8 +314,8 @@ class BBT_Shortcoder{
 	/*
 	Add Range Option to Visual Composer Params
 	*/
-	
-	function bbt_slider_vc_option($settings, $value)
+
+	public static  function bbt_slider_vc_option($settings, $value)
 	{
 		$dependency = vc_generate_dependencies_attributes($settings);
 		$param_name = isset($settings['param_name']) ? $settings['param_name'] : '';
@@ -336,7 +336,7 @@ class BBT_Shortcoder{
 		return $output;
 	}
 
-	function bbt_toggle_vc_option($settings, $value)
+	public static  function bbt_toggle_vc_option($settings, $value)
 	{
 		$dependency = vc_generate_dependencies_attributes($settings);
 		$param_name = isset($settings['param_name']) ? $settings['param_name'] : '';
@@ -362,7 +362,7 @@ class BBT_Shortcoder{
 		return $output;
 	}
 
-	function bbt_multiple_vc_option($settings, $value)
+	public static  function bbt_multiple_vc_option($settings, $value)
 	{
 		$dependency = vc_generate_dependencies_attributes($settings);
 		$param_name = isset($settings['param_name']) ? $settings['param_name'] : '';
@@ -392,7 +392,7 @@ class BBT_Shortcoder{
 		return $output;
 	}
 
-	function bbt_image_selector($settings, $value)
+	public static  function bbt_image_selector($settings, $value)
 	{
 		$dependency = vc_generate_dependencies_attributes($settings);
 		$param_name = isset($settings['param_name']) ? $settings['param_name'] : '';
@@ -428,7 +428,7 @@ class BBT_Shortcoder{
 		return $output;
 	}
 
-	function bbt_image_preview($settings, $value)
+	public static  function bbt_image_preview($settings, $value)
 	{
 		$dependency = vc_generate_dependencies_attributes($settings);
 		$param_name = isset($settings['param_name']) ? $settings['param_name'] : '';
@@ -453,7 +453,7 @@ class BBT_Shortcoder{
 	}
 
 
-	function bbt_icon_field($settings, $value)
+	public static  function bbt_icon_field($settings, $value)
 	{
 		$dependency = vc_generate_dependencies_attributes($settings);
 		$param_name = isset($settings['param_name']) ? $settings['param_name'] : '';
