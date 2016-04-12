@@ -507,9 +507,10 @@ class BBT_Shortcoder{
 				});
 
 				jQuery("#icon-dropdown li").click(function() {
+					var $input_hiddent = jQuery(this).parents("#icon-dropdown").siblings("input");
 					jQuery(this).attr("class","selected").siblings().removeAttr("class");
 					var icon = jQuery(this).attr("data-ico");
-					jQuery("#trace-' . $uniqID . '").val(icon);
+					$input_hiddent.attr("value", icon);
 					jQuery(".icon-preview").html("<i class=\'icon "+icon+"\'></i><label>"+icon+"</label>");
 				});
 		</script>';
