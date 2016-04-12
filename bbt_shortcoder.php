@@ -124,8 +124,12 @@ class BBT_Shortcoder{
 		wp_enqueue_style( 'bbt-select2-css', BBT_FW . '/static/css/select2.css' );
 		wp_enqueue_style( 'bbt-shortcoder-css', BBT_FW . '/static/css/shortcoder.css' );
 		wp_enqueue_style( 'bbt-metadata-css', BBT_FW . '/static/css/metadata.css' );
+		wp_enqueue_style( 'bbt-admin-css', BBT_FW . '/static/css/admin.css' );
+		wp_enqueue_style( 'bbt-chosen.min-css', BBT_FW . '/static/css/chosen.min.css' );
 		wp_enqueue_script( 'bbt-bootstrap-js', BBT_FW . '/static/js/bootstrap3.min.js' , array('jquery','jquery-ui-accordion'), false, true );
 		wp_enqueue_script( 'bbt-select2-js', BBT_FW . '/static/js/select2.min.js' , array('jquery'), false, true );
+		wp_enqueue_script( 'bbt-vc_extension-js', BBT_FW . '/static/js/vc_extension.js' , array('jquery'), false, true );
+		wp_enqueue_script( 'bbt-chosen.jquery.min-js', BBT_FW . '/static/js/chosen.jquery.min.js' , array('jquery'), false, true );
 		wp_enqueue_script( 'bbt-shortcoder-js', BBT_FW . '/static/js/shortcoder.js' , array('bbt-bootstrap-js','wp-color-picker'), false, true );
 		wp_enqueue_style( 'wp-color-picker' );
 		wp_localize_script( 'bbt-shortcoder-js', 'php_vars', array(
