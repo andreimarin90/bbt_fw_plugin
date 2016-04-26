@@ -27,6 +27,19 @@ if(!class_exists('BBT_Shortcoder')){
 	}
 }
 
+if(!class_exists('BBT_Demo_Import')){
+	require_once BBT_PL_DIR . 'demo-import/demo-import-class.php';
+	add_action('after_setup_theme','bbt_demo_import_plugin');
+	function bbt_demo_import_plugin(){
+		//check if demo content flder from our theme exists
+		if(is_dir(BBT_THEME_DIR . '/theme_config/demo-content'))
+		{
+			//load main demo import class
+			new BBT_Demo_Import();
+		}
+	}
+}
+
 if(!function_exists('getConnectionWithAccessToken')){
 	function getConnectionWithAccessToken($cons_key, $cons_secret, $oauth_token, $oauth_token_secret) {
 		require BBT_PL_DIR . 'twitteroauth/autoload.php';
