@@ -55,8 +55,8 @@ class BBT_Demo_Import{
 
 		//load BBT_Load class methods
 		$this->load = new BBT_Load;
-		$this->selfPath = BBT_FW . '/extensions/demo-import';
-		$this->selfPathDir = BBT_FW_DIR . '/extensions/demo-import';
+		$this->selfPath = plugin_dir_url( __FILE__ );
+		$this->selfPathDir = BBT_PL_DIR . 'demo-import/';
 
 		//get demos configurations
 		$this->demoConfigs = $this->bbt_get_demos_configurations();
@@ -168,6 +168,7 @@ class BBT_Demo_Import{
 	 * @access public
 	 */
 	public function bbt_make_import() {
+
 		//check if install id exists
 		if(isset($_POST['install_id']))
 		{
@@ -188,8 +189,8 @@ class BBT_Demo_Import{
 			if ( ! defined( 'WP_LOAD_IMPORTERS' ) )
 				define('WP_LOAD_IMPORTERS', true);
 
-			require_once $this->selfPathDir . '/libs/wordpress-importer.php';
-			require_once $this->selfPathDir . '/libs/bbt_wp_importer_class.php';
+			require_once $this->selfPathDir . 'libs/wordpress-importer.php';
+			require_once $this->selfPathDir . 'libs/bbt_wp_importer_class.php';
 
 			$bbt_wp_import = new BBT_WP_IMPORTER();
 
