@@ -24,16 +24,13 @@ class BBT_Shortcoder{
 			}
 		}
 
-		if (function_exists('vc_vc_add_shortcode_param')) {
-			vc_vc_add_shortcode_param('slider', array( 'BBT_Shortcoder' , 'bbt_slider_vc_option'));
-		}
-
 		if (function_exists('vc_add_shortcode_param')) {
 			vc_add_shortcode_param('toggle', array( 'BBT_Shortcoder' , 'bbt_toggle_vc_option'));
 			vc_add_shortcode_param('multiple_select', array( 'BBT_Shortcoder' , 'bbt_multiple_vc_option'));
 			vc_add_shortcode_param('image_selector', array( 'BBT_Shortcoder' , 'bbt_image_selector'));
 			vc_add_shortcode_param('image_preview', array( 'BBT_Shortcoder' , 'bbt_image_preview'));
 			vc_add_shortcode_param('bbt_icons' , array( 'BBT_Shortcoder' , 'bbt_icon_field'));
+			vc_add_shortcode_param('slider', array( 'BBT_Shortcoder' , 'bbt_slider_vc_option'));
 		}
 	}
 
@@ -328,6 +325,8 @@ class BBT_Shortcoder{
 		$max        = isset($settings['max']) ? $settings['max'] : '';
 		$step       = isset($settings['step']) ? $settings['step'] : '';
 		$unit       = isset($settings['unit']) ? $settings['unit'] : '';
+		$value       = isset($settings['value']) ? $settings['value'] : '';
+
 		$uniqID    = uniqid();
 		$output     = '';
 		$output .= '<div class="bbt_slider_wrap" ><div ' . $dependency . ' class="mk-range-input ' . $dependency . '" data-value="' . $value . '" data-min="' . $min . '" data-max="' . $max . '" data-step="' . $step . '" id="rangeInput-' . $uniqID . '"></div><input name="' . $param_name . '"  class="bbt_input_selector wpb_vc_param_value ' . $param_name . ' ' . $type . '" type="text" value="' . $value . '"/><span class="unit">' . $unit . '</span></div>';
