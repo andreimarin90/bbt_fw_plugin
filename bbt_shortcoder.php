@@ -318,8 +318,6 @@ class BBT_Shortcoder{
 
 	public static  function bbt_slider_vc_option($settings, $value)
 	{
-		bbt_print_r($value);
-
 		$dependency = vc_generate_dependencies_attributes($settings);
 		$param_name = isset($settings['param_name']) ? $settings['param_name'] : '';
 		$type       = isset($settings['type']) ? $settings['type'] : '';
