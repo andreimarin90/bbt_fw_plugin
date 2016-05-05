@@ -318,6 +318,8 @@ class BBT_Shortcoder{
 
 	public static  function bbt_slider_vc_option($settings, $value)
 	{
+		bbt_print_r($value);
+
 		$dependency = vc_generate_dependencies_attributes($settings);
 		$param_name = isset($settings['param_name']) ? $settings['param_name'] : '';
 		$type       = isset($settings['type']) ? $settings['type'] : '';
@@ -325,11 +327,15 @@ class BBT_Shortcoder{
 		$max        = isset($settings['max']) ? $settings['max'] : '';
 		$step       = isset($settings['step']) ? $settings['step'] : '';
 		$unit       = isset($settings['unit']) ? $settings['unit'] : '';
-		$value       = isset($settings['value']) ? $settings['value'] : '';
+		$default_value = isset($settings['value']) ? $settings['value'] : '';
+		$value       = !empty($value) ? $value : $default_value;
 
 		$uniqID    = uniqid();
 		$output     = '';
-		$output .= '<div class="bbt_slider_wrap" ><div ' . $dependency . ' class="mk-range-input ' . $dependency . '" data-value="' . $value . '" data-min="' . $min . '" data-max="' . $max . '" data-step="' . $step . '" id="rangeInput-' . $uniqID . '"></div><input name="' . $param_name . '"  class="bbt_input_selector wpb_vc_param_value ' . $param_name . ' ' . $type . '" type="text" value="' . $value . '"/><span class="unit">' . $unit . '</span></div>';
+		$output .= '<div class="bbt_slider_wrap" >
+			<div ' . $dependency . ' class="mk-range-input ' . $dependency . '" data-value="' . $value . '" data-min="' . $min . '" data-max="' . $max . '" data-step="' . $step . '" id="rangeInput-' . $uniqID . '"></div>
+			<input name="' . $param_name . '"  class="bbt_input_selector wpb_vc_param_value ' . $param_name . ' ' . $type . '" type="text" value="' . $value . '"/>
+			<span class="unit">' . $unit . '</span></div>';
 		$output .= '<script type="text/javascript">
 
 			jQuery("#rangeInput-' . $uniqID . '") .bbtSliderVcOption();
