@@ -346,7 +346,7 @@ class BBT_Shortcoder{
 		$type       = isset($settings['type']) ? $settings['type'] : '';
 		$output     = '';
 		$uniqID     = uniqid();
-		$value      = 'false';
+		//$value      = 'false';
 
 		if(is_array($value)) {
 			foreach ($value as $key => $val) {
@@ -354,7 +354,10 @@ class BBT_Shortcoder{
 			}
 		}
 
-		$output .= '<span class="bbt_toggle mk-composer-toggle" id="toggle-switch-' . $uniqID . '"><span class="toggle-handle"></span><input type="hidden" ' . $dependency . ' class="wpb_vc_param_value ' . $dependency . ' ' . $param_name . ' ' . $type . '" value="' . $value . '" name="' . $param_name . '"/></span>';
+		$output .= '<span class="bbt_toggle mk-composer-toggle" id="toggle-switch-' . $uniqID . '">
+		<span class="toggle-handle"></span>
+			<input type="hidden" ' . $dependency . ' class="wpb_vc_param_value ' . $dependency . ' ' . $param_name . ' ' . $type . '" value="' . $value . '" name="' . $param_name . '"/>
+		</span>';
 
 		$output .= '<script type="text/javascript">
 
