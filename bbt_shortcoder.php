@@ -325,11 +325,15 @@ class BBT_Shortcoder{
 		$max        = isset($settings['max']) ? $settings['max'] : '';
 		$step       = isset($settings['step']) ? $settings['step'] : '';
 		$unit       = isset($settings['unit']) ? $settings['unit'] : '';
-		$value       = isset($settings['value']) ? $settings['value'] : '';
+		$default_value = isset($settings['value']) ? $settings['value'] : '';
+		$value       = !empty($value) ? $value : $default_value;
 
 		$uniqID    = uniqid();
 		$output     = '';
-		$output .= '<div class="bbt_slider_wrap" ><div ' . $dependency . ' class="mk-range-input ' . $dependency . '" data-value="' . $value . '" data-min="' . $min . '" data-max="' . $max . '" data-step="' . $step . '" id="rangeInput-' . $uniqID . '"></div><input name="' . $param_name . '"  class="bbt_input_selector wpb_vc_param_value ' . $param_name . ' ' . $type . '" type="text" value="' . $value . '"/><span class="unit">' . $unit . '</span></div>';
+		$output .= '<div class="bbt_slider_wrap" >
+			<div ' . $dependency . ' class="mk-range-input ' . $dependency . '" data-value="' . $value . '" data-min="' . $min . '" data-max="' . $max . '" data-step="' . $step . '" id="rangeInput-' . $uniqID . '"></div>
+			<input name="' . $param_name . '"  class="bbt_input_selector wpb_vc_param_value ' . $param_name . ' ' . $type . '" type="text" value="' . $value . '"/>
+			<span class="unit">' . $unit . '</span></div>';
 		$output .= '<script type="text/javascript">
 
 			jQuery("#rangeInput-' . $uniqID . '") .bbtSliderVcOption();
@@ -346,7 +350,7 @@ class BBT_Shortcoder{
 		$type       = isset($settings['type']) ? $settings['type'] : '';
 		$output     = '';
 		$uniqID     = uniqid();
-		$value      = 'false';
+		//$value      = 'false';
 
 		if(is_array($value)) {
 			foreach ($value as $key => $val) {
@@ -354,7 +358,10 @@ class BBT_Shortcoder{
 			}
 		}
 
-		$output .= '<span class="bbt_toggle mk-composer-toggle" id="toggle-switch-' . $uniqID . '"><span class="toggle-handle"></span><input type="hidden" ' . $dependency . ' class="wpb_vc_param_value ' . $dependency . ' ' . $param_name . ' ' . $type . '" value="' . $value . '" name="' . $param_name . '"/></span>';
+		$output .= '<span class="bbt_toggle mk-composer-toggle" id="toggle-switch-' . $uniqID . '">
+		<span class="toggle-handle"></span>
+			<input type="hidden" ' . $dependency . ' class="wpb_vc_param_value ' . $dependency . ' ' . $param_name . ' ' . $type . '" value="' . $value . '" name="' . $param_name . '"/>
+		</span>';
 
 		$output .= '<script type="text/javascript">
 
