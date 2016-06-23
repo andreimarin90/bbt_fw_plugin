@@ -47,3 +47,4 @@ if(!function_exists('getConnectionWithAccessToken')){
 		return $connection;
 	}
 }
+require_once BBT_PL_DIR . 'helpers.php';
