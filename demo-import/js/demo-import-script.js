@@ -76,6 +76,9 @@ jQuery(document).ready(function($){
 
                         //hide popup on click
                         $mainThis.hidePopup();
+
+                        //redirect to homepage
+                        window.location = obj['home_url'];
                     }
                     else{
                        // setTimeout(function(){ $mainThis.hidePopup(); }, 5000);
