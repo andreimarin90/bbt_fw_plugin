@@ -196,6 +196,7 @@ class BBT_Demo_Import{
 
 			//start import
 			$install_info = $bbt_wp_import->bbt_start_importing($demo_path);
+			$install_info = array_merge($install_info, array('home_url' => home_url('/') ));
 
 			echo json_encode($install_info);
 

@@ -251,7 +251,8 @@ class BBT_Shortcoder{
 							}
 						}
 						$container_array = (!isset($shortcode['container']) || ($shortcode['container'] == false) || ($shortcode['container'] == '') ) ? array('content_element' => false, "is_container"	=>	false ) : array("content_element"	=>	$shortcode['container'] , "is_container"	=>	$shortcode['container'] );
-						$vc_description = isset($shortcode['vc_desc']) ? $shortcode['vc_desc'] : $shortcode['description'];
+						$shortcode_description = isset($shortcode['description']) ? $shortcode['description'] : '';
+						$vc_description = isset($shortcode['vc_desc']) ? $shortcode['vc_desc'] : $shortcode_description;
 
 						vc_map( array(
 							"name" => $shortcode['title'],
