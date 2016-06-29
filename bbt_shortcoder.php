@@ -350,8 +350,8 @@ class BBT_Shortcoder{
 		$type       = isset($settings['type']) ? $settings['type'] : '';
 		$output     = '';
 		$uniqID     = uniqid();
-		//$value      = 'false';
-
+		$value = ($value) ? $value : 'false';
+		
 		if(is_array($value)) {
 			foreach ($value as $key => $val) {
 				$value = $key;
