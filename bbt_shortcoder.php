@@ -41,6 +41,7 @@ class BBT_Shortcoder{
 		add_action( 'media_buttons' , array( 'BBT_Shortcoder' , 'add_shortcode_button'), 11);
 		add_action( 'admin_footer' , array( 'BBT_Shortcoder' , 'add_inline_popup_content' ) );
 		add_action( 'admin_enqueue_scripts' , array( 'BBT_Shortcoder' , 'add_scripts' ) );
+		add_action( 'wp_enqueue_scripts' , array( 'BBT_Shortcoder' , 'add_wp_scripts' ) );
 	}
 
 	private static function get_shortcodes_only_config(){
@@ -133,6 +134,10 @@ class BBT_Shortcoder{
 			'prefix'	=>	BBT_PREFIX,
 			'content'	=>	esc_html__('Your Content Here','BigBangThemesFramework')
 			) );
+	}
+
+	public static function add_wp_scripts(){
+		wp_enqueue_script( 'bbt-bbt-framework-js', BBT_FW . '/static/js/bbt-framework.js' , array('jquery'), false, true );
 	}
 
 	public static function get_attr( $att ){
