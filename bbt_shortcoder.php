@@ -15,13 +15,16 @@ class BBT_Shortcoder{
 		$config_file = locate_template('theme_config/shortcodes-options.php');
 		if($config_file !== ''){
 			self::$config_location = $config_file;
-			self::$load = new BBT_Load;
-			if(function_exists('vc_map')){
-				add_action('vc_before_init',array( 'BBT_Shortcoder' , 'auto_load'),10);
-				add_action('vc_before_init', array( 'BBT_Shortcoder' , 'vc_insert_sc') , 11);
-			}else{
-				add_action('init',array( 'BBT_Shortcoder' , 'auto_load'),10);
-			}
+
+		}
+
+		self::$load = new BBT_Load;
+
+		if(function_exists('vc_map')){
+			add_action('vc_before_init',array( 'BBT_Shortcoder' , 'auto_load'),10);
+			add_action('vc_before_init', array( 'BBT_Shortcoder' , 'vc_insert_sc') , 11);
+		}else{
+			add_action('init',array( 'BBT_Shortcoder' , 'auto_load'),10);
 		}
 
 		if (function_exists('vc_add_shortcode_param')) {
@@ -35,13 +38,14 @@ class BBT_Shortcoder{
 	}
 
 	public static function auto_load(){
-		self::$config = include self::$config_location;
-		self::get_shortcodes_only_config();
-		self::generate_shortcodes();
+		if(!empty(self::$config_location)) {
+			self::$config = include self::$config_location;
+			self::get_shortcodes_only_config();
+			self::generate_shortcodes();
+		}
 		add_action( 'media_buttons' , array( 'BBT_Shortcoder' , 'add_shortcode_button'), 11);
 		add_action( 'admin_footer' , array( 'BBT_Shortcoder' , 'add_inline_popup_content' ) );
 		add_action( 'admin_enqueue_scripts' , array( 'BBT_Shortcoder' , 'add_scripts' ) );
-		add_action( 'wp_enqueue_scripts' , array( 'BBT_Shortcoder' , 'add_wp_scripts' ) );
 	}
 
 	private static function get_shortcodes_only_config(){
@@ -134,10 +138,6 @@ class BBT_Shortcoder{
 			'prefix'	=>	BBT_PREFIX,
 			'content'	=>	esc_html__('Your Content Here','BigBangThemesFramework')
 			) );
-	}
-
-	public static function add_wp_scripts(){
-		wp_enqueue_script( 'bbt-bbt-framework-js', BBT_FW . '/static/js/bbt-framework.js' , array('jquery'), false, true );
 	}
 
 	public static function get_attr( $att ){
@@ -256,8 +256,7 @@ class BBT_Shortcoder{
 							}
 						}
 						$container_array = (!isset($shortcode['container']) || ($shortcode['container'] == false) || ($shortcode['container'] == '') ) ? array('content_element' => false, "is_container"	=>	false ) : array("content_element"	=>	$shortcode['container'] , "is_container"	=>	$shortcode['container'] );
-						$shortcode_description = isset($shortcode['description']) ? $shortcode['description'] : '';
-						$vc_description = isset($shortcode['vc_desc']) ? $shortcode['vc_desc'] : $shortcode_description;
+						$vc_description = isset($shortcode['vc_desc']) ? $shortcode['vc_desc'] : $shortcode['description'];
 
 						vc_map( array(
 							"name" => $shortcode['title'],
@@ -356,8 +355,8 @@ class BBT_Shortcoder{
 		$type       = isset($settings['type']) ? $settings['type'] : '';
 		$output     = '';
 		$uniqID     = uniqid();
-		$value = ($value) ? $value : 'false';
-		
+		//$value      = 'false';
+
 		if(is_array($value)) {
 			foreach ($value as $key => $val) {
 				$value = $key;
