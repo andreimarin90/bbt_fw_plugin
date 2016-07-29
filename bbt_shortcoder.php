@@ -484,7 +484,8 @@ class BBT_Shortcoder{
 			}
 		}
 
-		$output = '<input type="hidden" name="'.$param_name.'" class="wpb_vc_param_value ' . $dependency . ' '.$param_name.' '.$type.' '.$class.'" ' . $dependency . ' value="'.$value.'" id="trace-'. $uniqID .'"/>';
+		$output = '<input type="text" name="search_icon" class="search_md_icon" value="" id="search-'. $uniqID .'" style="width: 510px; margin-bottom: 15px;" />
+		<input type="hidden" name="'.$param_name.'" class="wpb_vc_param_value ' . $dependency . ' '.$param_name.' '.$type.' '.$class.'" ' . $dependency . ' value="'.$value.'" id="trace-'. $uniqID .'"/>';
 		$output .='<div id="icon-dropdown" >';
 		$output .= '<ul class="bbt-icon-list">';
 		$n = 1;
@@ -499,13 +500,13 @@ class BBT_Shortcoder{
 		$output .='</div>';
 		$output .= '<script type="text/javascript">
 				jQuery(document).ready(function(){
-					jQuery(".search").keyup(function(){
+					jQuery("#search-'. $uniqID .'").keyup(function(){
 				 
 						// Retrieve the input field text and reset the count to zero
 						var filter = jQuery(this).val(), count = 0;
 				 
 						// Loop through the icon list
-						jQuery(".icon-list li").each(function(){
+						jQuery(".bbt-icon-list li").each(function(){
 				 
 							// If the list item does not contain the text phrase fade it out
 							if (jQuery(this).text().search(new RegExp(filter, "i")) < 0) {
@@ -544,8 +545,9 @@ class BBT_Shortcoder{
 			}
 		}
 
-		$output = '<input type="hidden" name="'.$param_name.'" class="wpb_vc_param_value ' . $dependency . ' '.$param_name.' '.$type.' '.$class.'" ' . $dependency . ' value="'.$value.'" id="trace-'. $uniqID .'"/>';
-		$output .='<div id="icon-dropdown" >';
+		$output = '<input type="text" name="search_icon" class="search_md_icon" value="" id="search-'. $uniqID .'" style="width: 510px; margin-bottom: 15px;" />
+		<input type="hidden" name="'.$param_name.'" class="wpb_vc_param_value ' . $dependency . ' '.$param_name.' '.$type.' '.$class.'" ' . $dependency . ' value="'.$value.'" id="trace-'. $uniqID .'"/>';
+		$output .='<div id="icon-dropdown" style="max-height: 300px; overflow-y: auto;">';
 		$output .= '<ul class="bbt-icon-list">';
 		$n = 1;
 		foreach($icons as $icon)
@@ -559,13 +561,13 @@ class BBT_Shortcoder{
 		$output .='</div>';
 		$output .= '<script type="text/javascript">
 				jQuery(document).ready(function(){
-					jQuery(".search").keyup(function(){
+					jQuery("#search-'. $uniqID .'").keyup(function(){
 				 
 						// Retrieve the input field text and reset the count to zero
 						var filter = jQuery(this).val(), count = 0;
 				 
 						// Loop through the icon list
-						jQuery(".icon-list li").each(function(){
+						jQuery(".bbt-icon-list li").each(function(){
 				 
 							// If the list item does not contain the text phrase fade it out
 							if (jQuery(this).text().search(new RegExp(filter, "i")) < 0) {
