@@ -484,7 +484,8 @@ class BBT_Shortcoder{
 			}
 		}
 
-		$output = '<input type="text" name="search_icon" class="search_md_icon" value="" id="search-'. $uniqID .'" style="width: 510px; margin-bottom: 15px;" />
+		$output = '<input type="text" name="search_icon" class="search_md_icon" value="" id="search-'. $uniqID .'" style="width: 510px; margin-bottom: 15px; padding-right: 25px;" />
+		<i class="fa fa-search" style="position:relative; left:-25px;"></i>
 		<input type="hidden" name="'.$param_name.'" class="wpb_vc_param_value ' . $dependency . ' '.$param_name.' '.$type.' '.$class.'" ' . $dependency . ' value="'.$value.'" id="trace-'. $uniqID .'"/>';
 		$output .='<div id="icon-dropdown" >';
 		$output .= '<ul class="bbt-icon-list">';
@@ -545,7 +546,8 @@ class BBT_Shortcoder{
 			}
 		}
 
-		$output = '<input type="text" name="search_icon" class="search_md_icon" value="" id="search-'. $uniqID .'" style="width: 510px; margin-bottom: 15px;" />
+		$output = '<input type="text" name="search_icon" class="search_md_icon" value="" id="search-'. $uniqID .'" style="width: 510px; margin-bottom: 15px; padding-right: 25px;" />
+		<i class="fa fa-search" style="position:relative; left:-25px;"></i>
 		<input type="hidden" name="'.$param_name.'" class="wpb_vc_param_value ' . $dependency . ' '.$param_name.' '.$type.' '.$class.'" ' . $dependency . ' value="'.$value.'" id="trace-'. $uniqID .'"/>';
 		$output .='<div id="icon-dropdown" style="max-height: 300px; overflow-y: auto;">';
 		$output .= '<ul class="bbt-icon-list">';
