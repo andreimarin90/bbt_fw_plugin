@@ -3,7 +3,7 @@
  * Plugin Name: BBT Framework
  * Plugin URI: http://bigbangthemes.com/
  * Description: BBTFramework plugin part (registers custom post types, shortcodes and other features of the theme required to be in a plugin)
- * Version: 1.1.3
+ * Version: 1.1.4
  * Author: BigBangThemes
  * Author URI: http://bigbangthemes.com/
  * License: GPL2
@@ -32,7 +32,12 @@ if(!class_exists('BBT_Demo_Import')){
 	add_action('after_setup_theme','bbt_demo_import_plugin');
 	function bbt_demo_import_plugin(){
 		//check if demo content flder from our theme exists
-		if(is_dir(BBT_THEME_DIR . '/theme_config/demo-content'))
+		$dir = '';
+		if(defined('BBT_THEME_DIR')) { 
+			$dir = BBT_THEME_DIR . '/theme_config/demo-content';
+		}
+
+		if(is_dir( $dir ))
 		{
 			//load main demo import class
 			new BBT_Demo_Import();
