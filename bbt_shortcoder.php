@@ -18,9 +18,7 @@ class BBT_Shortcoder{
 
 		}
 
-		if(defined('BBT_Load')) {
-			self::$load = new BBT_Load;
-		}
+		self::$load = new BBT_Load;
 
 		if(function_exists('vc_map')){
 			add_action('vc_before_init',array( 'BBT_Shortcoder' , 'auto_load'),10);
