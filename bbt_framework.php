@@ -19,6 +19,14 @@ if(!class_exists('BBT_Custom_Posts')){
 	}
 }
 
+if(!class_exists('BBT_Category_Builder')){
+	require_once BBT_PL_DIR . 'bbt_category_builder.php';
+	add_action('after_setup_theme','bbt_category_builder');
+	function bbt_category_builder(){
+		new BBT_Category_Builder();
+	}
+}
+
 if(!class_exists('BBT_Shortcoder')){
 	require_once BBT_PL_DIR . 'bbt_shortcoder.php';
 	add_action('after_setup_theme','bbt_shortcoder_plugin');

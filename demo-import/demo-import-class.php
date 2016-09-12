@@ -80,7 +80,7 @@ class BBT_Demo_Import{
 		//$parent_page = defined('THEME_SMALL_NAME') ? THEME_SMALL_NAME . '_settings' : 'bigbangthemes_settings';
 
 		if(defined('BBT_PL_DIR'))
-			add_theme_page( 'BBT Demo Content', esc_html__('BBT Demo Content','BigBangThemesFramework'), 'manage_options' , $this->pageID, array(&$this, 'bbt_main_view_page') );
+			add_theme_page( 'BBT Demo Content', esc_html__('BBT Demo Content','bbt_fw_plugin'), 'manage_options' , $this->pageID, array(&$this, 'bbt_main_view_page') );
 	}
 
 	/**
@@ -147,7 +147,7 @@ class BBT_Demo_Import{
 					include($demo_path . '/config.php');
 
 					//get demo title
-					$configs['demo-' . md5($demo_path)]['title'] = (isset($config['title']) && !empty($config['title'])) ? $config['title'] : esc_html__('Demo Title','BigBangThemesFramework');
+					$configs['demo-' . md5($demo_path)]['title'] = (isset($config['title']) && !empty($config['title'])) ? $config['title'] : esc_html__('Demo Title','bbt_fw_plugin');
 					//get demo screenshot
 					$configs['demo-' . md5($demo_path)]['screenshot'] = (isset($config['screenshot']) && !empty($config['screenshot'])) ? $config['screenshot'] : '';
 					//get demo preview_link
@@ -173,7 +173,7 @@ class BBT_Demo_Import{
 		if(isset($_POST['install_id']))
 		{
 			if(empty($_POST['install_id'])){
-				echo json_encode(array('install' => 'no', 'message' => esc_html__('Missing Install','BigBangThemesFramework')));
+				echo json_encode(array('install' => 'no', 'message' => esc_html__('Missing Install','bbt_fw_plugin')));
 				die();
 			}
 
@@ -181,7 +181,7 @@ class BBT_Demo_Import{
 			$demo_path = (array_key_exists($_POST['install_id'], $this->demoConfigs)) ? $this->demoConfigs[$_POST['install_id']]['demo_path'] : array();
 
 			if(empty($demo_path)){
-				echo json_encode(array('install' => 'no', 'message' => esc_html__('No Demo Path','BigBangThemesFramework')));
+				echo json_encode(array('install' => 'no', 'message' => esc_html__('No Demo Path','bbt_fw_plugin')));
 				die();
 			}
 
@@ -203,7 +203,7 @@ class BBT_Demo_Import{
 		}
 		else
 		{
-			echo json_encode(array('install' => 'no', 'message' => esc_html__('Some configurations are missing','BigBangThemesFramework')));
+			echo json_encode(array('install' => 'no', 'message' => esc_html__('Some configurations are missing','bbt_fw_plugin')));
 		}
 
 		die();

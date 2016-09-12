@@ -18,6 +18,8 @@ class BBT_Shortcoder{
 
 		}
 
+		if(!class_exists('BBT_Load')) return;
+
 		self::$load = new BBT_Load;
 
 		if(function_exists('vc_map')){
@@ -78,8 +80,8 @@ class BBT_Shortcoder{
 					if(!empty($shortcode['add_class'])) {
 						$shortcode['atts']['add_class']	=	array(
 							'type'			=>	'text',
-							'title'			=>	esc_html__('Add CSS class','BigBangThemesFramework'),
-							'description'	=>	esc_html__('Custom css class that will be added to the element.','BigBangThemesFramework')
+							'title'			=>	esc_html__('Add CSS class','bbt_fw_plugin'),
+							'description'	=>	esc_html__('Custom css class that will be added to the element.','bbt_fw_plugin')
 							) ;
 					}
 					foreach ($shortcode['atts'] as $att_id => $att)
@@ -103,10 +105,10 @@ class BBT_Shortcoder{
 		if( !empty($admin_page) && $admin_page->base === 'post'){
 			add_thickbox();
 			echo '<a href="#" id="shortcoder" class="sc-button radius-5">
-				<span class="button-label radius-5 bg-dark" data-title="' . esc_html__("Shortcodes","BigBangThemesFramework") . '">
+				<span class="button-label radius-5 bg-dark" data-title="' . esc_html__("Shortcodes","bbt_fw_plugin") . '">
 					<i class="icon-brand"></i>
 				</span>
-				<span class="button-text">' . esc_html__("Shortcodes","BigBangThemesFramework") . '</span>
+				<span class="button-text">' . esc_html__("Shortcodes","bbt_fw_plugin") . '</span>
 			</a>';
 		}
 	}
@@ -138,7 +140,7 @@ class BBT_Shortcoder{
 		wp_enqueue_style( 'wp-color-picker' );
 		wp_localize_script( 'bbt-shortcoder-js', 'php_vars', array(
 			'prefix'	=>	BBT_PREFIX,
-			'content'	=>	esc_html__('Your Content Here','BigBangThemesFramework')
+			'content'	=>	esc_html__('Your Content Here','bbt_fw_plugin')
 			) );
 	}
 

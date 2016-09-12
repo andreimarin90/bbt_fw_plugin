@@ -1242,9 +1242,9 @@ class BBT_Custom_Posts_tax{
 	function bbt_taxonomy_add_fields() {
 	    ?>
 	    <div class="form-field">
-	        <label for="bbt_tax_order_input"><?php _ex( 'Order', 'portfolio category order', 'BigBangThemesFramework' ); ?></label>
+	        <label for="bbt_tax_order_input"><?php _ex( 'Order', 'portfolio category order', 'bbt_fw_plugin' ); ?></label>
 	        <input type="text" name="bbt_tax_order_input" id="bbt_tax_order_input" value="">
-	        <p class="description"><?php _ex( 'Set the order in which the categories should be displayed.', 'portfolio category order', 'BigBangThemesFramework' ); ?></p>
+	        <p class="description"><?php _ex( 'Set the order in which the categories should be displayed.', 'portfolio category order', 'bbt_fw_plugin' ); ?></p>
 	    </div>
 	    <?php
 	}
@@ -1255,10 +1255,10 @@ class BBT_Custom_Posts_tax{
 
 	    ?>
 	    <tr class="form-field">
-	    <th scope="row" valign="top"><label for="bbt_tax_order_input"><?php _ex( 'Order', 'portfolio category order', 'BigBangThemesFramework' ); ?></label></th>
+	    <th scope="row" valign="top"><label for="bbt_tax_order_input"><?php _ex( 'Order', 'portfolio category order', 'bbt_fw_plugin' ); ?></label></th>
 	        <td>
 	            <input type="text" name="bbt_tax_order_input" id="bbt_tax_order_input" value="<?php echo esc_attr( $term_meta ); ?>">
-	            <p class="description"><?php _ex( 'Set the order in which the categories should be displayed.', 'portfolio category order', 'BigBangThemesFramework' ); ?></p>
+	            <p class="description"><?php _ex( 'Set the order in which the categories should be displayed.', 'portfolio category order', 'bbt_fw_plugin' ); ?></p>
 	        </td>
 	    </tr>
 	    <?php
@@ -1275,7 +1275,7 @@ class BBT_Custom_Posts_tax{
 	}
 
 	function bbt_taxonomy_columns_head($columns) {
-	    $columns['order']  = _x( 'Order', 'portfolio category order column', 'BigBangThemesFramework' );
+	    $columns['order']  = _x( 'Order', 'portfolio category order column', 'bbt_fw_plugin' );
 	    return $columns;
 	}
 

@@ -120,7 +120,7 @@ class BBT_WP_IMPORTER extends BBT_WP_Import {
      */
     function import_start( $file ) {
         if ( ! is_file($file) ) {
-	        return new WP_Error( 'import_error', '<p>' . __( 'The file does not exist, please try again.', 'BigBangThemesFramework' ) . '</p>' . $this->footer() );
+	        return new WP_Error( 'import_error', '<p>' . __( 'The file does not exist, please try again.', 'bbt_fw_plugin' ) . '</p>' . $this->footer() );
         }
 
         $import_data = $this->parse( $file );
@@ -160,8 +160,8 @@ class BBT_WP_IMPORTER extends BBT_WP_Import {
 		wp_defer_term_counting( false );
 		wp_defer_comment_counting( false );
 
-		$this->finish_msg .= '<p>' . __( 'All done.', 'BigBangThemesFramework' ) . ' <a href="' . admin_url() . '">' . __( 'Have fun!', 'BigBangThemesFramework' ) . '</a>' . '</p>'
-		                          . '<p>' . __( 'Remember to update the passwords and roles of imported users.', 'BigBangThemesFramework' ) . '</p>';
+		$this->finish_msg .= '<p>' . __( 'All done.', 'bbt_fw_plugin' ) . ' <a href="' . admin_url() . '">' . __( 'Have fun!', 'bbt_fw_plugin' ) . '</a>' . '</p>'
+		                          . '<p>' . __( 'Remember to update the passwords and roles of imported users.', 'bbt_fw_plugin' ) . '</p>';
 
 		do_action( 'import_end' );
 	}
