@@ -23,7 +23,7 @@ if(!class_exists('BBT_Category_Builder')){
 	require_once BBT_PL_DIR . 'bbt_category_builder.php';
 	add_action('after_setup_theme','bbt_category_builder');
 	function bbt_category_builder(){
-		new BBT_Category_Builder();
+		$bbt_builder_instance = new BBT_Category_Builder();
 	}
 }
 

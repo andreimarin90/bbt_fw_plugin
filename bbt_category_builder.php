@@ -6,7 +6,7 @@ class BBT_Category_Builder{
 
         //add category builder post type
         add_action('init', array( $this, 'bbt_create_category_builder_post_type'));
-        //add_action('init', array( $this, 'bbt_add_vc_to_builder'), 99);
+        add_action('init', array( $this, 'bbt_add_vc_to_builder'), 99);
         //add categories meta box
         add_action( 'add_meta_boxes', array( $this, 'bbt_register_meta_boxes'), 99 , 2);
         //save categories metabox values
@@ -155,6 +155,13 @@ class BBT_Category_Builder{
             return;
 
         wp_set_post_categories( $post_id, $_POST['post_category']);
+
+        $saved_values = get_option('bbt_category_builder');
+        $saved_values = !empty($saved_values) ? array($post_id => $_POST['post_category']) + $saved_values : array($post_id => $_POST['post_category']);
+
+        update_option('bbt_category_builder', $saved_values);
+
+        //die();
     }
 
     /**
