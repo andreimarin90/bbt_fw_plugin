@@ -6,7 +6,7 @@ class BBT_Category_Builder{
 
         //add category builder post type
         add_action('init', array( $this, 'bbt_create_category_builder_post_type'));
-        add_action('init', array( $this, 'bbt_add_vc_to_builder'), 99);
+        add_action('init', array( $this, 'bbt_add_vc_to_builder'), 1);
         //add categories meta box
         add_action( 'add_meta_boxes', array( $this, 'bbt_register_meta_boxes'), 99 , 2);
         //save categories metabox values
