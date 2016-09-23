@@ -227,53 +227,56 @@ class BBT_Custom_Posts{
 		$slider_options = self::$slider_config;
 		
 		foreach($slider_options as $slider_id => $slider){
-			
-			$slider_term = isset($slider['term'])?$slider['term']:'slide';
-			$slider_term_plural = isset($slider['term_plural'])?$slider['term_plural']:$slider_term.'s';
-			$slider_queryable = isset($slider['has_single'])?$slider['has_single']:false;
+			$register = isset($slider['register'])? $slider['register'] : 'post_type';
+			$slider_term = isset($slider['term'])? $slider['term'] : 'slide';
+			$slider_term_plural = isset($slider['term_plural'])? $slider['term_plural'] : $slider_term.'s';
+			$slider_queryable = isset($slider['has_single']) ? $slider['has_single'] : false;
 			$slider_url_rewrite = isset($slider['url']) ? $slider['url'] : false;
 
-			$post_options = array(
-				'label' => $slider_id,
-				'labels' => array(
-					'name' => ucwords($slider_term_plural),
-					'singular_name' => ucwords($slider_term),
-					'menu_name' => $slider['name'],
-					'all_items' => 'All '.ucwords($slider_term_plural),
-					'add_new' => 'Add New',
-					'add_new_item' => 'Add New '.ucwords($slider_term),
-					'edit_item' => 'Edit '.ucwords($slider_term),
-					'new_item' => 'New '.ucwords($slider_term),
-					'view_item' => 'View '.ucwords($slider_term),
-					'search_items' => 'Search '.ucwords($slider_term_plural),
-					'not_found' => 'No '.$slider_term_plural.' found.',
-					'not_found_in_trash' => 'No '.$slider_term_plural.' found.',
-					'parent_item_colon' => 'Parent '.ucwords($slider_term)
-				),
-				'description' => 'Manage '.ucwords($slider_term_plural),
-				'public' => true,
-				'exclude_from_search' => true,
-				'publicly_queryable' => $slider_queryable,
-				'show_ui' => true,
-				'show_in_nav_menus' => $slider_queryable,
-				'show_in_menu' => true,
-				'show_in_admin_bar' => true,
-				'menu_position' => 100,
-				'menu_icon' => isset($slider['icon'])?BBT_THEME_URI.'/theme_config/'.$slider['icon']:null,
-				'capability_type' => 'post',
-				'hierarchical' => false,
-				'supports' => $slider_queryable?array(
-					'title','comments'
-				):array(
-					'title'
-				),
-				'rewrite' => $slider_url_rewrite ? array('slug'=>$slider_url_rewrite) : true
-			);
+			if($register !== 'taxonomy')
+			{
+				$post_options = array(
+					'label' => $slider_id,
+					'labels' => array(
+						'name' => ucwords($slider_term_plural),
+						'singular_name' => ucwords($slider_term),
+						'menu_name' => $slider['name'],
+						'all_items' => 'All '.ucwords($slider_term_plural),
+						'add_new' => 'Add New',
+						'add_new_item' => 'Add New '.ucwords($slider_term),
+						'edit_item' => 'Edit '.ucwords($slider_term),
+						'new_item' => 'New '.ucwords($slider_term),
+						'view_item' => 'View '.ucwords($slider_term),
+						'search_items' => 'Search '.ucwords($slider_term_plural),
+						'not_found' => 'No '.$slider_term_plural.' found.',
+						'not_found_in_trash' => 'No '.$slider_term_plural.' found.',
+						'parent_item_colon' => 'Parent '.ucwords($slider_term)
+					),
+					'description' => 'Manage '.ucwords($slider_term_plural),
+					'public' => true,
+					'exclude_from_search' => true,
+					'publicly_queryable' => $slider_queryable,
+					'show_ui' => true,
+					'show_in_nav_menus' => $slider_queryable,
+					'show_in_menu' => true,
+					'show_in_admin_bar' => true,
+					'menu_position' => 100,
+					'menu_icon' => isset($slider['icon'])?BBT_THEME_URI.'/theme_config/'.$slider['icon']:null,
+					'capability_type' => 'post',
+					'hierarchical' => false,
+					'supports' => $slider_queryable?array(
+						'title','comments'
+					):array(
+						'title'
+					),
+					'rewrite' => $slider_url_rewrite ? array('slug'=>$slider_url_rewrite) : true
+				);
 
-			if(isset($slider['post_options']))
-				$post_options = array_merge($post_options,$slider['post_options']);
+				if(isset($slider['post_options']))
+					$post_options = array_merge($post_options,$slider['post_options']);
 
-			register_post_type($slider_id,$post_options);
+				register_post_type($slider_id,$post_options);
+			}
 
 			$taxonomy_options = array(
 				'label' => 'Categories',
