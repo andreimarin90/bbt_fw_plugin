@@ -77,12 +77,13 @@ class BBT_Custom_Posts{
 
 		foreach($slider_options as $slider_id => $slider){
 
-			foreach($slider['output'] as $output_id => $output){
+			if(!isset($slider['output']) && !empty($slider['output']))
+				foreach($slider['output'] as $output_id => $output){
 
-				if(isset($output['shortcode']))
-					add_shortcode( $output['shortcode'], array('BBT_Custom_Posts','shortcode_view') );
+					if(isset($output['shortcode']))
+						add_shortcode( $output['shortcode'], array('BBT_Custom_Posts','shortcode_view') );
 
-			}
+				}
 
 		}
 
@@ -226,7 +227,7 @@ class BBT_Custom_Posts{
 		$slider_options = self::$slider_config;
 		
 		foreach($slider_options as $slider_id => $slider){
-
+			
 			$slider_term = isset($slider['term'])?$slider['term']:'slide';
 			$slider_term_plural = isset($slider['term_plural'])?$slider['term_plural']:$slider_term.'s';
 			$slider_queryable = isset($slider['has_single'])?$slider['has_single']:false;
