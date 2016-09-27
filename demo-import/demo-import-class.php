@@ -193,13 +193,11 @@ class BBT_Demo_Import{
 			require_once $this->selfPathDir . 'libs/bbt_wp_importer_class.php';
 
 			$bbt_wp_import = new BBT_WP_IMPORTER();
-
 			//start import
 			$install_info = $bbt_wp_import->bbt_start_importing($demo_path);
 			$install_info = array_merge($install_info, array('home_url' => home_url('/') ));
 
 			echo json_encode($install_info);
-
 		}
 		else
 		{

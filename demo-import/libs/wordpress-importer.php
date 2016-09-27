@@ -537,7 +537,7 @@ class BBT_WP_Import extends WP_Importer {
 			$post = apply_filters( 'wp_import_post_data_raw', $post );
 
 			if ( ! post_type_exists( $post['post_type'] ) ) {
-				printf( __( 'Failed to import &#8220;%s&#8221;: Invalid post type %s', 'bbt_fw_plugin' ),
+				printf( __( 'Failed to import &#8220;%s&#8221;: Invalid post type %s', 'wordpress-importer' ),
 					esc_html($post['post_title']), esc_html($post['post_type']) );
 				echo '<br />';
 				do_action( 'wp_import_post_exists', $post );
@@ -558,23 +558,38 @@ class BBT_WP_Import extends WP_Importer {
 			$post_type_object = get_post_type_object( $post['post_type'] );
 
 			$post_exists = post_exists( $post['post_title'], '', $post['post_date'] );
+
+			/**
+			 * Filter ID of the existing post corresponding to post currently importing.
+			 *
+			 * Return 0 to force the post to be imported. Filter the ID to be something else
+			 * to override which existing post is mapped to the imported post.
+			 *
+			 * @see post_exists()
+			 * @since 0.6.2
+			 *
+			 * @param int   $post_exists  Post ID, or 0 if post did not exist.
+			 * @param array $post         The post array to be inserted.
+			 */
+			$post_exists = apply_filters( 'wp_import_existing_post', $post_exists, $post );
+
 			if ( $post_exists && get_post_type( $post_exists ) == $post['post_type'] ) {
-				printf( __('%s &#8220;%s&#8221; already exists.', 'bbt_fw_plugin'), $post_type_object->labels->singular_name, esc_html($post['post_title']) );
+				printf( __('%s &#8220;%s&#8221; already exists.', 'wordpress-importer'), $post_type_object->labels->singular_name, esc_html($post['post_title']) );
 				echo '<br />';
 				$comment_post_ID = $post_id = $post_exists;
+				$this->processed_posts[ intval( $post['post_id'] ) ] = intval( $post_exists );
 			} else {
 				$post_parent = (int) $post['post_parent'];
 				if ( $post_parent ) {
 					// if we already know the parent, map it to the new local ID
 					if ( isset( $this->processed_posts[$post_parent] ) ) {
 						$post_parent = $this->processed_posts[$post_parent];
-					// otherwise record the parent for later
+						// otherwise record the parent for later
 					} else {
 						$this->post_orphans[intval($post['post_id'])] = $post_parent;
 						$post_parent = 0;
 					}
 				}
-
 				// map the post author
 				$author = sanitize_user( $post['post_author'], true );
 				if ( isset( $this->author_mapping[$author] ) )
@@ -595,7 +610,11 @@ class BBT_WP_Import extends WP_Importer {
 				$original_post_ID = $post['post_id'];
 				$postdata = apply_filters( 'wp_import_post_data_processed', $postdata, $post );
 
+				$postdata = wp_slash( $postdata );
+
 				if ( 'attachment' == $postdata['post_type'] ) {
+
+
 					$remote_url = ! empty($post['attachment_url']) ? $post['attachment_url'] : $post['guid'];
 
 					// try to use _wp_attached file for upload folder placement to ensure the same location as the export site
@@ -612,13 +631,14 @@ class BBT_WP_Import extends WP_Importer {
 					}
 
 					$comment_post_ID = $post_id = $this->process_attachment( $postdata, $remote_url );
+
 				} else {
 					$comment_post_ID = $post_id = wp_insert_post( $postdata, true );
 					do_action( 'wp_import_insert_post', $post_id, $original_post_ID, $postdata, $post );
 				}
 
 				if ( is_wp_error( $post_id ) ) {
-					printf( __( 'Failed to import %s &#8220;%s&#8221;', 'bbt_fw_plugin' ),
+					printf( __( 'Failed to import %s &#8220;%s&#8221;', 'wordpress-importer' ),
 						$post_type_object->labels->singular_name, esc_html($post['post_title']) );
 					if ( defined('IMPORT_DEBUG') && IMPORT_DEBUG )
 						echo ': ' . $post_id->get_error_message();
@@ -652,7 +672,7 @@ class BBT_WP_Import extends WP_Importer {
 							$term_id = $t['term_id'];
 							do_action( 'wp_import_insert_term', $t, $term, $post_id, $post );
 						} else {
-							printf( __( 'Failed to import %s %s', 'bbt_fw_plugin' ), esc_html($taxonomy), esc_html($term['name']) );
+							printf( __( 'Failed to import %s %s', 'wordpress-importer' ), esc_html($taxonomy), esc_html($term['name']) );
 							if ( defined('IMPORT_DEBUG') && IMPORT_DEBUG )
 								echo ': ' . $t->get_error_message();
 							echo '<br />';
@@ -754,6 +774,8 @@ class BBT_WP_Import extends WP_Importer {
 
 		unset( $this->posts );
 	}
+
+
 
 	/**
 	 * Attempt to create a new menu item from import data
@@ -869,7 +891,6 @@ class BBT_WP_Import extends WP_Importer {
 			return new WP_Error( 'attachment_processing_error', __('Invalid file type', 'bbt_fw_plugin') );
 
 		$post['guid'] = $upload['url'];
-
 		// as per wp-admin/includes/upload.php
 		$post_id = wp_insert_attachment( $post, $upload['file'] );
 		wp_update_attachment_metadata( $post_id, wp_generate_attachment_metadata( $post_id, $upload['file'] ) );
@@ -914,23 +935,21 @@ class BBT_WP_Import extends WP_Importer {
 		              'blocking' => true);
 		$response = wp_remote_get($url, $args);
 
-		//print_r($response);
-
 		// request failed
-		if ( isset($response['headers']) && !$response['headers'] ) {
+		if ( is_array($response) && isset($response['headers']) && !$response['headers'] ) {
 			@unlink( $upload['file'] );
 			return new WP_Error( 'import_file_error', __('Remote server did not respond', 'bbt_fw_plugin') );
 		}
 
 		// make sure the fetch was successful
-		if ( $response['response']['code'] != '200' ) {
+		if ( is_array($response) && $response['response']['code'] != '200' ) {
 			@unlink( $upload['file'] );
 			return new WP_Error( 'import_file_error', sprintf( __('Remote server returned error response %1$d %2$s', 'bbt_fw_plugin'), esc_html($response['response']['code']), $response['response']['message']) );
 		}
 
 		$filesize = filesize( $upload['file'] );
 
-		if ( isset( $response['headers']['content-length'] ) && $filesize != $response['headers']['content-length'] ) {
+		if ( is_array($response) && isset( $response['headers']['content-length'] ) && $filesize != $response['headers']['content-length'] ) {
 			@unlink( $upload['file'] );
 			return new WP_Error( 'import_file_error', __('Remote file is incorrect size', 'bbt_fw_plugin') );
 		}
@@ -950,7 +969,7 @@ class BBT_WP_Import extends WP_Importer {
 		$this->url_remap[$url] = $upload['url'];
 		$this->url_remap[$post['guid']] = $upload['url']; // r13735, really needed?
 		// keep track of the destination if the remote url is redirected somewhere else
-		if ( isset($response['headers']['x-final-location']) && $response['headers']['x-final-location'] != $url )
+		if ( is_array($response) &&  isset($response['headers']['x-final-location']) && $response['headers']['x-final-location'] != $url )
 			$this->url_remap[$response['headers']['x-final-location']] = $upload['url'];
 
 		return $upload;

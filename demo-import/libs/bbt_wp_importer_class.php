@@ -83,6 +83,7 @@ class BBT_WP_IMPORTER extends BBT_WP_Import {
         add_filter( 'http_request_timeout', array( &$this, 'bump_request_timeout' ) );
 
         $info_star = $this->import_start( $file );
+
 	    //if error display it
 	    if ( is_wp_error( $info_star ) ) {
 		    return  new WP_Error('import_error', $info_star->get_error_message() );

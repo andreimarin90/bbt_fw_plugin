@@ -44,6 +44,7 @@ jQuery(document).ready(function($){
                 beforeSend: function(){
                     $('#bbt_popup_action').empty().html('<div>' + $('#bbt_popup_action').data('begin') + '<div>');
                     $('#bbt_popup_action').append('<div class="bbt_time_text">' + $('#bbt_popup_action').data('time') + '<div>');
+                    $('#bbt_popup_action').append('<div class="bbt_time_text">' + $('#bbt_popup_action').data('estimated-time') + '<div>');
                     $('#bbt_popup_action').append('<div class="bbt_time_text">' + $('#bbt_popup_action').data('timer') + '<span></span><div>');
                     $mainThis.showTimer();
                 },
