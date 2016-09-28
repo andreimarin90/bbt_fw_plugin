@@ -108,15 +108,16 @@ class BBT_Custom_Posts{
 
 			$ajax_string .= $slider_id.':{';
 
-			foreach($slider['output'] as $output_id => $output){
+			if(isset($slider['output']))
+				foreach($slider['output'] as $output_id => $output){
 
-				if(isset($output['ajax_javascript']))
-					$ajax_string .= $output['ajax_javascript'].':
-						function(offset,nr,callback,category){
-							jQuery.post(bbt_ajax.url, {action:"bbt_slider",id:"'.$slider_id.'",view:"'.$output_id.'","offset":offset,"nr":nr,"category":category===undefined?"":category,nonce:bbt_ajax.nonce}, callback);
-						},'."\n";
+					if(isset($output['ajax_javascript']))
+						$ajax_string .= $output['ajax_javascript'].':
+							function(offset,nr,callback,category){
+								jQuery.post(bbt_ajax.url, {action:"bbt_slider",id:"'.$slider_id.'",view:"'.$output_id.'","offset":offset,"nr":nr,"category":category===undefined?"":category,nonce:bbt_ajax.nonce}, callback);
+							},'."\n";
 
-			}
+				}
 
 			$ajax_string .= '},'."\n";
 
