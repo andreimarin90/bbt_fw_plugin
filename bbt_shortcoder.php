@@ -265,14 +265,13 @@ class BBT_Shortcoder{
 						}
 						$container_array = (!isset($shortcode['container']) || ($shortcode['container'] == false) || ($shortcode['container'] == '') ) ? array('content_element' => false, "is_container"	=>	false ) : array("content_element"	=>	$shortcode['container'] , "is_container"	=>	$shortcode['container'] );
 						$vc_description = isset($shortcode['vc_desc']) ? $shortcode['vc_desc'] : $shortcode['description'];
-
 						vc_map( array(
 							"name" => $shortcode['title'],
 							"description" => $vc_description,
 							"base" => BBT_PREFIX . $shortcode_id,
 							$container_array,
 							"show_settings_on_create"	=>	isset($shortcode['show_settings']) ? $shortcode['show_settings'] : '',
-							"category" => BBT_THEME_PRETTY_NAME . " - " . $group['title'],
+							"category" => BBT_THEME_PRETTY_NAME . " - " . (file_exists(get_template_directory() . '/theme_config/bbt_map.php') ? "Deprecated" : $group['title']),
 							"params" => $params,
 							"icon" => !empty($shortcode['vc_icon']) ? $shortcode['vc_icon'] : BBT_FW . '/static/img/bbt.png',
 						) );
