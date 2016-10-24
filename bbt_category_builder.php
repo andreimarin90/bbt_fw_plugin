@@ -244,7 +244,8 @@ class BBT_Category_Builder{
             {
                 $list = array(
                     'bbt_category_builder',
-                    'page'
+                    'page',
+					'post'
                 );
                 vc_set_default_editor_post_types( $list );
             }
