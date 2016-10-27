@@ -79,8 +79,17 @@ class BBT_Demo_Import{
 	public function bbt_register_import_page() {
 		//$parent_page = defined('THEME_SMALL_NAME') ? THEME_SMALL_NAME . '_settings' : 'bigbangthemes_settings';
 
-		if(defined('BBT_PL_DIR'))
-			add_theme_page( 'BBT Demo Content', esc_html__('BBT Demo Content','bbt_fw_plugin'), 'manage_options' , $this->pageID, array(&$this, 'bbt_main_view_page') );
+		if(defined('BBT_PL_DIR')) {
+			add_submenu_page(
+				'bbt_welcome_theme',
+				esc_html__('BBT Demo Content', 'BigBangThemesFramework'),
+				esc_html__('BBT Demo Content', 'BigBangThemesFramework'),
+				'administrator',
+				$this->pageID,
+				array(&$this, 'bbt_main_view_page')
+			);
+			//add_theme_page('BBT Demo Content', esc_html__('BBT Demo Content', 'bbt_fw_plugin'), 'manage_options', $this->pageID, array(&$this, 'bbt_main_view_page'));
+		}
 	}
 
 	/**
@@ -89,9 +98,9 @@ class BBT_Demo_Import{
 	 * @access public
 	 */
 	public function bbt_main_view_page(){
-		if($this->load->view_exists('demo-import', NULL))
+		if(file_exists( BBT_PL_DIR . '/demo-import/views/demo-import.php' ))
 		{
-			echo $this->load->view('demo-import', array('configs' => $this->demoConfigs), TRUE, NULL);
+			echo bbt_plugin_view('demo-import', 'demo-import', array('configs' => $this->demoConfigs), TRUE, NULL);
 		}
 
 	}
@@ -105,11 +114,9 @@ class BBT_Demo_Import{
 	public function load_scripts_styles() {
 		// Get Plugin Path
 		$plugin_path = plugin_dir_url( __FILE__ );
-		//get current screen page settings
-		$current_screen = get_current_screen();
 
 		//check if current page is demo content import
-		if ($current_screen->base == 'appearance_page_' . $this->pageID){
+		if ($this->pageID == 'bbt_demo_content'){
 
 			// Enqueue Main Style
 			wp_enqueue_style( 'bbt-demo-import-style', $plugin_path . '/css/demo-import-style.css' );

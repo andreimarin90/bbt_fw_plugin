@@ -47,31 +47,31 @@ function bbt_category_builder_ids($builder_posts)
     return array_unique($builder_categories);
 }
 
+/**
+ * Includes a view file from plugins extensions root/views/
+ * @param  string  $_name    name of the view file
+ * @param  string  $_name    name of the view file
+ * @param  array  $_data    array of the variables to be sent to the view
+ * @param  boolean $__return if false will echo the view else will return it (f or shortcodes use TRUE !!! )
+ * @return html            If $__return is set to true , returns the view content
+ */
+function bbt_plugin_view( $_name, $extension = NULL ,$_data = NULL, $__return = FALSE) {
+    $_name = strtolower( $_name );
+    if ( !file_exists( BBT_PL_DIR . '/'.$extension.'/views/'.$_name.'.php' ) )
+        exit( 'View not found: ' . $_name );
+    if ( $_data !== NULL && count( $_data ) > 0 )
+        foreach ( $_data as $_name_var => $_value )
+            ${$_name_var} = $_value;
+    ob_start();
 
-/* =====================
-Add php code in Toco custom Code area like this: [bbt_insert_php] bla bla [/bbt_insert_php]
-======================== */
+    if($extension == NULL)
+        require (BBT_PL_DIR . '/views/'.$_name.'.php') ;
+    else
+        require (BBT_PL_DIR . '/'.$extension.'/views/'.$_name.'.php') ;
 
-if( ! function_exists('bbt_insert_php_code') )
-{
-
-    function bbt_insert_php_code($content)
-    {
-        $will_bontrager_content = $content;
-        preg_match_all('!\[bbt_insert_php[^\]]*\](.*?)\[/bbt_insert_php[^\]]*\]!is',$will_bontrager_content,$will_bontrager_matches);
-        $will_bontrager_nummatches = count($will_bontrager_matches[0]);
-        for( $will_bontrager_i=0; $will_bontrager_i<$will_bontrager_nummatches; $will_bontrager_i++ )
-        {
-            ob_start();
-            eval($will_bontrager_matches[1][$will_bontrager_i]);
-            $will_bontrager_replacement = ob_get_contents();
-            ob_clean();
-            ob_end_flush();
-            $will_bontrager_content = preg_replace('/'.preg_quote($will_bontrager_matches[0][$will_bontrager_i],'/').'/',$will_bontrager_replacement,$will_bontrager_content,1);
-        }
-        return $will_bontrager_content;
-    } # function will_bontrager_insert_php()
-
-    add_filter( 'the_content', 'bbt_insert_php_code', 9 );
-
+    $buffer = ob_get_clean();
+    if ( $__return === TRUE )
+        return $buffer;
+    else
+        print $buffer;
 }
