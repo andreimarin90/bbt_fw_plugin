@@ -45,7 +45,7 @@ $installed_plugins = get_plugins();
 					<div class="theme-screenshot">
 						<!--de comendat-->
 						<?php echo esc_html($plugin['name']);?>
-						<img src="<?php echo esc_url($plugin['external_image']); ?>" alt="<?php echo esc_attr($plugin['name']);?>" />
+						<img src="<?php echo isset($plugin['external_image']) ? esc_url($plugin['external_image']) : ''; ?>" alt="<?php echo esc_attr($plugin['name']);?>" />
 					</div>
 
 					<?php if (isset($installed_plugins[$plugin['file_path']]['Version'])): ?>
@@ -90,7 +90,7 @@ $installed_plugins = get_plugins();
 					<div class="theme-screenshot">
 						<!--de comentat-->
 						<?php echo esc_html($plugin['name']);?>
-						<img src="<?php echo esc_url($plugin['external_image']); ?>" alt="<?php echo esc_attr($plugin['name']);?>" />
+						<img src="<?php echo isset($plugin['external_image']) ? esc_url($plugin['external_image']) : ''; ?>" alt="<?php echo esc_attr($plugin['name']);?>" />
 					</div>
 
 					<?php if (isset($installed_plugins[$plugin['file_path']]['Version'])): ?>

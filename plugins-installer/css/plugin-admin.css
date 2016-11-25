@@ -445,6 +445,13 @@ a.button.bbt-deactivate-update {
     margin-left: 5px;
 }
 
-.about-wrap div.error.bbt_admin_notices.notice_product_key{
+.about-wrap div.error.bbt_admin_notices.notice_product_key,
+.about-wrap div.error.bbt_update_notices.notice_product_key,
+.about-wrap div.error.bbt_update_notices.bbt_update_notices_yes.notice_product_key
+{
     display: block !important;
+}
+
+div.error.bbt_update_notices.notice_product_key{
+    display:none !important;
 }

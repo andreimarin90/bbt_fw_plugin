@@ -47,6 +47,21 @@ function bbt_category_builder_ids($builder_posts)
     return array_unique($builder_categories);
 }
 
+if ( ! function_exists( 'bbt_parent_theme_name' ) ) :
+    function bbt_parent_theme_name()
+    {
+        $theme = wp_get_theme();
+        if ($theme->parent()):
+            $theme_name = $theme->parent()->get('Name');
+        else:
+            $theme_name = $theme->get('Name');
+        endif;
+
+        return $theme_name;
+    }
+endif;
+
+
 /**
  * Includes a view file from plugins extensions root/views/
  * @param  string  $_name    name of the view file
@@ -75,3 +90,23 @@ function bbt_plugin_view( $_name, $extension = NULL ,$_data = NULL, $__return = 
     else
         print $buffer;
 }
+
+if ( ! function_exists( 'bbt_get_view' ) ) :
+function bbt_get_view( $_name, $folder = '' ,$_data = NULL, $__return = FALSE) {
+    $_name = strtolower( $_name );
+    if ( !file_exists( get_stylesheet_directory() . '/'.$folder.'/'.$_name.'.php' ) )
+        exit( 'View not found: ' . $_name );
+    if ( $_data !== NULL && count( $_data ) > 0 )
+        foreach ( $_data as $_name_var => $_value )
+            ${$_name_var} = $_value;
+    ob_start();
+
+    require (get_stylesheet_directory() . '/'.$folder.'/'.$_name.'.php') ;
+
+    $buffer = ob_get_clean();
+    if ( $__return === TRUE )
+        return $buffer;
+    else
+        print $buffer;
+}
+endif;

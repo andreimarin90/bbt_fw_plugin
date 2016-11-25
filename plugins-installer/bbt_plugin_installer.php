@@ -1,6 +1,9 @@
 <?php
 class BBT_Plugin_Installer{
-    static public $bbt_api_url = 'http://localhost/bigbang/showoff/user/';
+    //static public $bbt_api_url = 'http://localhost/bigbang/showoff/user/';
+    //private $api_url = "http://localhost/bigbang/showoff/api-listener/";
+    static public $bbt_api_url = 'http://bigbangthemes.net/user/';
+    private $api_url = "http://bigbangthemes.net/api-listener/";
 
     function __construct(){
         if(defined('BBT_THEME_PRODUCT_KEY') && BBT_THEME_PRODUCT_KEY) {
@@ -8,8 +11,9 @@ class BBT_Plugin_Installer{
             add_action('admin_menu', array($this, 'bbt_theme_admin_menu'));
             add_action('admin_menu', array($this, 'bbt_theme_admin_product_key_submenu'));
             add_action('admin_menu', array($this, 'bbt_edit_admin_menus'));
+            add_action('admin_init', array( $this, 'bbt_theme_update'));
             add_action('admin_enqueue_scripts', array($this, 'bbt_theme_admin_pages'));
-            add_action('admin_notices', array($this, 'bbt_admin_notices'));
+            add_action('admin_notices', array($this, 'bbt_admin_notices'), 99);
             add_action('admin_notices', array($this, 'bbt_update_notice'));
         }
     }
@@ -295,7 +299,7 @@ class BBT_Plugin_Installer{
     {
         global $wp_filesystem;
 
-        if (get_option("bbt_".THEME_FOLDER_NAME."_license") && (get_option("bbt_".THEME_FOLDER_NAME."_license_expired") == 0))
+        if (get_option("bbt_".THEME_FOLDER_NAME."_license") && get_option("bbt_". THEME_FOLDER_NAME ."_valid_key"))
         {
             $license_key = get_option("bbt_".THEME_FOLDER_NAME."_license");
         }
@@ -304,32 +308,32 @@ class BBT_Plugin_Installer{
             $license_key = '';
         }
 
-        require_once( BBT_PL_DIR . '/plugins-installer/bbt_class-updater.php' );
+        if(!empty($license_key)) {
+            require_once(BBT_PL_DIR . '/plugins-installer/bbt_class-updater.php');
 
-        $theme_update = new GetBowtiedUpdater( $license_key );
+            $theme_update = new BBT_Updater($license_key, self::bbt_theme_version());
+        }
     }
 
     function bbt_admin_notices() {
-
         $remote_ver = get_option("bbt_".THEME_FOLDER_NAME."_remote_ver") ? get_option("bbt_".THEME_FOLDER_NAME."_remote_ver") : self::bbt_theme_version();
         $local_ver = self::bbt_theme_version();
 
         if(!version_compare($local_ver, $remote_ver, '<'))
         {
-            if ( (!get_option("bbt_".THEME_FOLDER_NAME."_license") && ( get_option("bbt_".THEME_FOLDER_NAME."_license_expired") == 0 ) )
-                || (get_option("bbt_".THEME_FOLDER_NAME."_license") && ( get_option("bbt_".THEME_FOLDER_NAME."_license_expired") == 1 )) ){
+            $valid_key = get_option("bbt_". THEME_FOLDER_NAME ."_valid_key");
+            if ( !$valid_key || empty($valid_key)){
 
                 if ( ! isset($_COOKIE["notice_product_key"]) || $_COOKIE["notice_product_key"] != "1" ) {
                     $message = sprintf(
-                        esc_html__('Enter your product key to start receiving automatic updates and support. Go to %1$sProduct Activation%2$s','BigBangThemesFramework'),
-                        '<a href="' . admin_url( 'admin.php?page=bbt_product_key_page' ) . '">', '</a>'
+                        esc_html__('Enter your product key to start receiving automatic updates and support. Go to %1$sProduct Activation%2$s', 'BigBangThemesFramework'),
+                        '<a href="' . admin_url('admin.php?page=bbt_product_key_page') . '">', '</a>'
                     );
 
                     echo '<div class="notice is-dismissible error bbt_admin_notices notice_product_key">
-						<p><b>' . bbt_parent_theme_name() . '</b> - '.$message.'.</p>
-						</div>';
+                    <p><b>' . bbt_parent_theme_name() . '</b> - ' . $message . '.</p>
+                    </div>';
                 }
-
             }
         }
     }
@@ -342,7 +346,7 @@ class BBT_Plugin_Installer{
         }
         else
         {
-            $api_url = "http://localhost/bigbang/showoff/api-listener/";
+            $api_url = $this->api_url;
             $theme = wp_get_theme();
             $args = array(
                 'method' => 'POST',
@@ -351,8 +355,6 @@ class BBT_Plugin_Installer{
             );
 
             $response = wp_remote_post( $api_url, $args );
-
-            //bbt_print_r($response['body']);
 
             if ( is_wp_error( $response ) ) {
                 $error_message = $response->get_error_message();
@@ -370,6 +372,7 @@ class BBT_Plugin_Installer{
 
                     case '1':
                         update_option("bbt_".THEME_FOLDER_NAME."_license", $license_key);
+                        update_option("bbt_". THEME_FOLDER_NAME ."_valid_key", true);
                         break;
 
                     case '2':
@@ -401,26 +404,28 @@ class BBT_Plugin_Installer{
                 $theme_name = '<strong>'. wp_get_theme(get_template()) .'</strong>';
             }
 
-            if ( ( !get_option("bbt_".THEME_FOLDER_NAME."_license") && ( get_option("bbt_".THEME_FOLDER_NAME."_license_expired") == 0 ) )
-                || (get_option("bbt_".THEME_FOLDER_NAME."_license") && ( get_option("bbt_".THEME_FOLDER_NAME."_license_expired") == 1 )) ) {
+            $remove_key = ($_SERVER['REQUEST_METHOD'] == 'POST' && (isset($_POST['action']) && $_POST['action'] == 'bbt-delkey')) ? true : false;
+            $valid_key = get_option("bbt_". THEME_FOLDER_NAME ."_valid_key");
+
+            if ( (!$valid_key || empty($valid_key)) || $remove_key ) {
                 $message1 = sprintf(
                     esc_html__('There is an update available for the %1$s theme. Go to %2$sProduct Activation%3$s to enable theme updates','BigBangThemesFramework'),
                     $theme_name, '<a href="' . admin_url( 'admin.php?page=bbt_product_key_page' ) . '">', '</a>'
                 );
 
-                echo '<div class="notice is-dismissible error bbt_admin_notices">
+                echo '<div class="notice is-dismissible error bbt_update_notices notice_product_key">
 					<p>'.$message1.'.</p>
 					</div>';
 
             }
 
-            if ( get_option("bbt_".THEME_FOLDER_NAME."_license") && ( get_option("bbt_".THEME_FOLDER_NAME."_license_expired") == 0 ) ) {
+            if ( $valid_key && !empty($valid_key) && !$remove_key ) {
                 $message2 = sprintf(
                     esc_html__('There is an update available for the %1$s theme. %2$sUpdate now%3$s','BigBangThemesFramework'),
                     $theme_name, '<a href="' . admin_url() . 'update-core.php">', '</a>'
                 );
 
-                echo '<div class="notice is-dismissible error bbt_admin_notices">
+                echo '<div class="notice is-dismissible error bbt_update_notices bbt_update_notices_yes notice_product_key">
 				<p>'.$message2.'.</p>
 				</div>';
 
