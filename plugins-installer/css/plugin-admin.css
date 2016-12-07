@@ -329,51 +329,6 @@
 .wrap.bbt-tools .bbt-plugin-browser.recommended {
   display: none;
 }
-.wrap.bbt-tools .bbt-plugin-browser .bbt-plugin {
-  float: left;
-  width: 48%;
-  position: relative;
-  margin-bottom: 4%;
-}
-.wrap.bbt-tools .bbt-plugin-browser .bbt-plugin:nth-child(2n+2) {
-  margin-left: 4%;
-}
-.wrap.bbt-tools .bbt-plugin-browser .bbt-plugin .theme-actions {
-  position: absolute;
-  right: 35px;
-  bottom: 35px;
-}
-.wrap.bbt-tools .bbt-plugin-browser .bbt-plugin .theme-actions .button-update {
-  background: #DE302B;
-  color: #FFF;
-  border-color: #851919;
-  box-shadow: 0 1px 0 #851919;
-}
-.wrap.bbt-tools .bbt-plugin-browser .bbt-plugin .plugin-version {
-  position: absolute;
-  left: 35px;
-  bottom: 35px;
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.5);
-}
-.wrap.bbt-tools .bbt-plugin-browser .bbt-plugin .plugin-update {
-  position: absolute;
-  top: 18px;
-  width: 100%;
-  left: 0px;
-  background: #DE302B;
-  font-size: 14px;
-  color: #FFF;
-  padding: 18px 30px 18px;
-  box-sizing: border-box;
-}
-.wrap.bbt-tools .bbt-plugin-browser .bbt-plugin .plugin-update .dashicons {
-  margin-top: -1px;
-  margin-right: 10px;
-}
-a.button.bbt-deactivate-update {
-  margin-left: 5px;
-}
 .about-wrap div.error.bbt_admin_notices.notice_product_key,
 .about-wrap div.error.bbt_update_notices.notice_product_key,
 .about-wrap div.error.bbt_update_notices.bbt_update_notices_yes.notice_product_key {
@@ -385,6 +340,14 @@ div.error.bbt_update_notices.notice_product_key {
 /* =========================================================================
    New Styles
  =========================================================================== */
+.clearfix:before,
+.clearfix:after {
+  content: '';
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
 .about-wrap {
   margin: 25px 40px 0 20px;
   max-width: none;
@@ -449,4 +412,84 @@ div.error.bbt_update_notices.notice_product_key {
 }
 .bbt-tools .version span {
   vertical-align: -24%;
+}
+.bbt-tools .bbt-plugin-browser .bbt-plugin {
+  float: left;
+  width: 22%;
+  position: relative;
+  margin-left: 4%;
+  margin-bottom: 4%;
+  background-color: #fff;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 3px;
+}
+.bbt-tools .bbt-plugin-browser .bbt-plugin:nth-child(4n + 1) {
+  margin-left: 0;
+  clear: left;
+}
+.bbt-tools .bbt-plugin-browser .bbt-plugin .plugin-content {
+  padding: 40px 30px 50px;
+}
+.bbt-tools .bbt-plugin-browser .bbt-plugin .label,
+.bbt-tools .bbt-plugin-browser .bbt-plugin .value {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.38);
+}
+.bbt-tools .bbt-plugin-browser .bbt-plugin .value {
+  color: rgba(0, 0, 0, 0.87);
+}
+.bbt-tools .bbt-plugin-browser .bbt-plugin .plugin-update {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #DE302B;
+  font-size: 14px;
+  color: #FFF;
+  padding: 18px 30px 18px;
+  border-radius: 3px 3px 0 0;
+}
+.bbt-tools .bbt-plugin-browser .bbt-plugin .plugin-image {
+  margin-bottom: 0;
+}
+.bbt-tools .bbt-plugin-browser .bbt-plugin .plugin-image img {
+  display: block;
+  width: 100%;
+  border-radius: 3px 3px 0 0;
+}
+.bbt-tools .bbt-plugin-browser .bbt-plugin .plugin-title {
+  font-size: 20px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.87);
+  margin: 0 0 .5em;
+}
+.bbt-tools .bbt-plugin-browser .bbt-plugin .plugin-version {
+  margin-bottom: 20px;
+}
+.bbt-tools .bbt-plugin-browser .bbt-plugin .button {
+  font-size: 14px;
+  font-weight: 500;
+  height: 36px;
+  line-height: 36px;
+  margin: 0 10px 10px 0;
+  padding: 0 2em;
+  border: none;
+  color: #fff;
+  text-transform: uppercase;
+  background: #3f51b5;
+  -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+  -webkit-transition: all .2s;
+  transition: all .2s;
+}
+.bbt-tools .bbt-plugin-browser .bbt-plugin .button:hover,
+.bbt-tools .bbt-plugin-browser .bbt-plugin .button:active {
+  background: #32408f;
+  -webkit-transform: none;
+  transform: none;
+}
+.bbt-tools .bbt-plugin-browser .bbt-plugin .button .dashicons {
+  display: none;
 }
