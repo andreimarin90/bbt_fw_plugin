@@ -100,11 +100,6 @@
   width: 100%;
   margin-top: 40px;
 }
-.bbt-registration-form .inner .center p {
-  font-size: 19px;
-  line-height: 30px;
-  color: #666666;
-}
 .bbt-registration-form .inner .left {
   float: left;
   display: block;
@@ -121,82 +116,6 @@
   display: block;
   max-width: 25%;
   margin-top: 19px;
-}
-.bbt-registration-form .inner.steps {
-  font-size: 16px;
-  color: #999999;
-}
-.bbt-registration-form .inner.steps.has-error .step-1:not(.step-error) {
-  display: none;
-}
-.bbt-registration-form .inner.steps.has-error .step-1.step-error {
-  display: block !important;
-}
-.bbt-registration-form .inner.steps.has-error .step-error {
-  background: #de302b;
-  font-size: 16px;
-  color: #FFF;
-  padding: 80px 70px 27px;
-  box-sizing: border-box;
-  text-align: left;
-  line-height: 22px;
-}
-.bbt-registration-form .inner.steps.has-error .step-error .button {
-  margin-top: 54px;
-  margin-bottom: 0;
-}
-.bbt-registration-form .inner.steps .step {
-  background: #FFF;
-  width: 48%;
-  padding: 80px 0;
-  display: block;
-}
-.bbt-registration-form .inner.steps .step img {
-  height: 180px;
-  display: block;
-  margin: 35px auto 35px auto;
-}
-.bbt-registration-form .inner.steps .step.step-1 {
-  float: left;
-}
-.bbt-registration-form .inner.steps .step.step-1.step-error {
-  display: none;
-}
-.bbt-registration-form .inner.steps .step.step-1 .generate {
-  color: #0073aa;
-  line-height: 51px;
-  height: 51px;
-  font-size: 16px;
-  font-weight: bold;
-  padding: 0 80px;
-  margin-bottom: 40px;
-}
-.bbt-registration-form .inner.steps .step.step-2 {
-  float: right;
-  padding: 80px 0 67px 0;
-}
-.bbt-registration-form .inner.steps .step.step-2 #bbt_product_key {
-  color: #333333;
-  font-weight: 700;
-  font-size: 16px;
-  height: 51px;
-  width: 370px;
-  border-color: #eeeeee;
-  text-align: center;
-  box-shadow: none;
-}
-.bbt-registration-form .inner.steps .step.step-2 #bbt_product_key:active,
-.bbt-registration-form .inner.steps .step.step-2 #bbt_product_key:focus {
-  border-color: #666666;
-}
-.bbt-registration-form .inner.steps .step.step-2 .bbt-register {
-  background: #0073aa;
-  width: 370px;
-  font-size: 16px;
-  font-weight: normal;
-  height: 51px;
-  line-height: 51px;
-  border-color: #0073aa;
 }
 .bbt-registration-form .key_error {
   border-left: solid 4px #dc3232;
@@ -353,15 +272,18 @@ div.error.bbt_update_notices.notice_product_key {
   max-width: none;
   font-size: 15px;
 }
-.bbt-tools {
+.bbt-tools,
+.bbt-registration-wrap {
   font-family: 'Roboto', sans-serif;
 }
-.bbt-tools h1 {
+.bbt-tools h1,
+.bbt-registration-wrap h1 {
   font-size: 36px;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.87);
 }
-.bbt-tools h1 .button {
+.bbt-tools h1 .button,
+.bbt-registration-wrap h1 .button {
   margin: 22px 0 0 10px !important;
   display: inline-block;
   text-decoration: none;
@@ -379,14 +301,17 @@ div.error.bbt_update_notices.notice_product_key {
   -webkit-transition: all .2s;
   transition: all .2s;
 }
-.bbt-tools h1 .button:focus {
+.bbt-tools h1 .button:focus,
+.bbt-registration-wrap h1 .button:focus {
   background: none;
   color: rgba(0, 0, 0, 0.54);
   -webkit-box-shadow: none;
   box-shadow: none;
 }
 .bbt-tools h1 .button:hover,
-.bbt-tools h1 .button:active {
+.bbt-registration-wrap h1 .button:hover,
+.bbt-tools h1 .button:active,
+.bbt-registration-wrap h1 .button:active {
   background: none;
   color: rgba(0, 0, 0, 0.87);
   -webkit-box-shadow: none;
@@ -395,52 +320,63 @@ div.error.bbt_update_notices.notice_product_key {
   -ms-transform: none;
   transform: none;
 }
-.bbt-tools .version {
+.bbt-tools .version,
+.bbt-registration-wrap .version {
   font-size: 16px;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.54);
   margin: 2px 0 14px 0;
 }
-.bbt-tools .version a {
+.bbt-tools .version a,
+.bbt-registration-wrap .version a {
   font-size: 16px;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.54);
 }
-.bbt-tools .version a:focus {
+.bbt-tools .version a:focus,
+.bbt-registration-wrap .version a:focus {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-.bbt-tools .version span {
+.bbt-tools .version span,
+.bbt-registration-wrap .version span {
   vertical-align: -24%;
 }
-.bbt-tools .bbt-plugin-browser .bbt-plugin {
+.bbt-tools .bbt-plugin-browser .bbt-plugin,
+.bbt-registration-wrap .bbt-plugin-browser .bbt-plugin {
   float: left;
-  width: 22%;
+  width: 24%;
   position: relative;
-  margin-left: 4%;
-  margin-bottom: 4%;
+  margin-left: 1.33%;
+  margin-bottom: 3%;
   background-color: #fff;
   -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
   border-radius: 3px;
 }
-.bbt-tools .bbt-plugin-browser .bbt-plugin:nth-child(4n + 1) {
+.bbt-tools .bbt-plugin-browser .bbt-plugin:nth-child(4n + 1),
+.bbt-registration-wrap .bbt-plugin-browser .bbt-plugin:nth-child(4n + 1) {
   margin-left: 0;
   clear: left;
 }
-.bbt-tools .bbt-plugin-browser .bbt-plugin .plugin-content {
-  padding: 40px 30px 50px;
+.bbt-tools .bbt-plugin-browser .bbt-plugin .plugin-content,
+.bbt-registration-wrap .bbt-plugin-browser .bbt-plugin .plugin-content {
+  padding: 40px 30px;
 }
 .bbt-tools .bbt-plugin-browser .bbt-plugin .label,
-.bbt-tools .bbt-plugin-browser .bbt-plugin .value {
+.bbt-registration-wrap .bbt-plugin-browser .bbt-plugin .label,
+.bbt-tools .bbt-plugin-browser .bbt-plugin .value,
+.bbt-registration-wrap .bbt-plugin-browser .bbt-plugin .value {
   font-size: 14px;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.38);
 }
-.bbt-tools .bbt-plugin-browser .bbt-plugin .value {
+.bbt-tools .bbt-plugin-browser .bbt-plugin .value,
+.bbt-registration-wrap .bbt-plugin-browser .bbt-plugin .value {
   color: rgba(0, 0, 0, 0.87);
 }
-.bbt-tools .bbt-plugin-browser .bbt-plugin .plugin-update {
+.bbt-tools .bbt-plugin-browser .bbt-plugin .plugin-update,
+.bbt-registration-wrap .bbt-plugin-browser .bbt-plugin .plugin-update {
   position: absolute;
   top: 0;
   left: 0;
@@ -451,24 +387,29 @@ div.error.bbt_update_notices.notice_product_key {
   padding: 18px 30px 18px;
   border-radius: 3px 3px 0 0;
 }
-.bbt-tools .bbt-plugin-browser .bbt-plugin .plugin-image {
+.bbt-tools .bbt-plugin-browser .bbt-plugin .plugin-image,
+.bbt-registration-wrap .bbt-plugin-browser .bbt-plugin .plugin-image {
   margin-bottom: 0;
 }
-.bbt-tools .bbt-plugin-browser .bbt-plugin .plugin-image img {
+.bbt-tools .bbt-plugin-browser .bbt-plugin .plugin-image img,
+.bbt-registration-wrap .bbt-plugin-browser .bbt-plugin .plugin-image img {
   display: block;
   width: 100%;
   border-radius: 3px 3px 0 0;
 }
-.bbt-tools .bbt-plugin-browser .bbt-plugin .plugin-title {
+.bbt-tools .bbt-plugin-browser .bbt-plugin .plugin-title,
+.bbt-registration-wrap .bbt-plugin-browser .bbt-plugin .plugin-title {
   font-size: 20px;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.87);
   margin: 0 0 .5em;
 }
-.bbt-tools .bbt-plugin-browser .bbt-plugin .plugin-version {
+.bbt-tools .bbt-plugin-browser .bbt-plugin .plugin-version,
+.bbt-registration-wrap .bbt-plugin-browser .bbt-plugin .plugin-version {
   margin-bottom: 20px;
 }
-.bbt-tools .bbt-plugin-browser .bbt-plugin .button {
+.bbt-tools .bbt-plugin-browser .bbt-plugin .button,
+.bbt-registration-wrap .bbt-plugin-browser .bbt-plugin .button {
   font-size: 14px;
   font-weight: 500;
   height: 36px;
@@ -485,11 +426,142 @@ div.error.bbt_update_notices.notice_product_key {
   transition: all .2s;
 }
 .bbt-tools .bbt-plugin-browser .bbt-plugin .button:hover,
-.bbt-tools .bbt-plugin-browser .bbt-plugin .button:active {
+.bbt-registration-wrap .bbt-plugin-browser .bbt-plugin .button:hover,
+.bbt-tools .bbt-plugin-browser .bbt-plugin .button:active,
+.bbt-registration-wrap .bbt-plugin-browser .bbt-plugin .button:active {
   background: #32408f;
   -webkit-transform: none;
   transform: none;
 }
-.bbt-tools .bbt-plugin-browser .bbt-plugin .button .dashicons {
+.bbt-tools .bbt-plugin-browser .bbt-plugin .button .dashicons,
+.bbt-registration-wrap .bbt-plugin-browser .bbt-plugin .button .dashicons {
   display: none;
+}
+/* =========================================================================
+   Registration Form
+ =========================================================================== */
+.bbt-registration-form .inner.steps .step {
+  float: left;
+  width: 24%;
+  position: relative;
+  margin-left: 1.33%;
+  margin-bottom: 3%;
+  background-color: #fff;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 3px;
+  padding: 60px 50px 50px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.bbt-registration-form .inner.steps .step:nth-child(4n + 1) {
+  margin-left: 0;
+  clear: left;
+}
+.bbt-registration-form .inner.steps .step img {
+  display: block;
+  margin: 0 auto 50px;
+}
+.bbt-registration-form .inner.steps .step .title {
+  font-size: 20px;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.87);
+  text-transform: uppercase;
+  margin-bottom: 2em;
+}
+.bbt-registration-form .inner.steps .step.step-1.step-error {
+  display: none;
+}
+.bbt-registration-form .inner.steps.has-error .step-1:not(.step-error) {
+  display: none;
+}
+.bbt-registration-form .inner.steps.has-error .step-1.step-error {
+  display: block !important;
+}
+.bbt-registration-form .inner.steps.has-error .step-error {
+  background: #de302b;
+  font-size: 16px;
+  color: #FFF;
+  padding: 80px 70px 27px;
+  box-sizing: border-box;
+  text-align: left;
+  line-height: 22px;
+}
+.bbt-registration-form .inner.steps.has-error .step-error .button {
+  margin-top: 54px;
+  margin-bottom: 0;
+}
+.bbt-registration-form .inner.steps .button {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  width: 100%;
+  height: 46px;
+  line-height: 46px;
+  margin: 0 0 10px;
+  padding: 0 10px;
+  border: none;
+  color: #fff;
+  text-transform: uppercase;
+  background: #3f51b5;
+  -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+  -webkit-transition: all .2s;
+  transition: all .2s;
+}
+.bbt-registration-form .inner.steps .button:hover,
+.bbt-registration-form .inner.steps .button:active {
+  background: #32408f;
+  -webkit-transform: none;
+  transform: none;
+}
+.bbt-registration-form .inner.steps .button .dashicons {
+  display: none;
+}
+.bbt-registration-form .inner.steps #bbt_product_key {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.87);
+  height: 46px;
+  width: 100%;
+  border-color: #dcdcdc;
+  text-align: center;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  -webkit-transition: all .2s;
+  transition: all .2s;
+  border-radius: 3px;
+  margin: 0 0 28px;
+  display: block;
+}
+.bbt-registration-form .inner.steps #bbt_product_key::-webkit-input-placeholder {
+  color: rgba(0, 0, 0, 0.38);
+}
+.bbt-registration-form .inner.steps #bbt_product_key:-moz-placeholder {
+  color: rgba(0, 0, 0, 0.38);
+}
+.bbt-registration-form .inner.steps #bbt_product_key::-moz-placeholder {
+  color: rgba(0, 0, 0, 0.38);
+}
+.bbt-registration-form .inner.steps #bbt_product_key:-ms-input-placeholder {
+  color: rgba(0, 0, 0, 0.38);
+}
+.bbt-registration-form .inner.steps #bbt_product_key:focus {
+  border-color: rgba(0, 0, 0, 0.54);
+}
+.bbt-registration-form .inner.steps .note {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.54);
+  text-align: center;
+  max-width: 200px;
+  padding-top: 6px;
+  margin: 0 auto 32px;
+}
+.bbt-registration-form .inner .center p {
+  font-size: 16px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.87);
+  text-align: left;
 }

@@ -124,12 +124,6 @@
 	margin-top: 40px;
 }
 
-.bbt-registration-form .inner .center p {
-	font-size: 19px;
-	line-height: 30px;
-	color: #666666;
-}
-
 .bbt-registration-form .inner .left {
 	float: left;
 	display: block;
@@ -148,95 +142,6 @@
 	display: block;
 	max-width: 25%;
 	margin-top: 19px;
-}
-
-.bbt-registration-form .inner.steps {
-	font-size: 16px;
-	color: #999999;
-}
-
-.bbt-registration-form .inner.steps.has-error .step-1:not(.step-error) {
-	display: none;
-}
-
-.bbt-registration-form .inner.steps.has-error .step-1.step-error {
-	display: block !important;
-}
-
-.bbt-registration-form .inner.steps.has-error .step-error {
-	background: #de302b;
-	font-size: 16px;
-	color: #FFF;
-	padding: 80px 70px 27px;
-	box-sizing: border-box;
-	text-align: left;
-	line-height: 22px;
-}
-
-.bbt-registration-form .inner.steps.has-error .step-error .button {
-	margin-top: 54px;
-	margin-bottom: 0;
-}
-
-.bbt-registration-form .inner.steps .step {
-	background: #FFF;
-	width: 48%;
-	padding: 80px 0;
-	display: block;
-}
-
-.bbt-registration-form .inner.steps .step img {
-	height: 180px;
-	display: block;
-	margin: 35px auto 35px auto;
-}
-
-.bbt-registration-form .inner.steps .step.step-1 {
-	float: left;
-}
-
-.bbt-registration-form .inner.steps .step.step-1.step-error {
-	display: none;
-}
-
-.bbt-registration-form .inner.steps .step.step-1 .generate {
-	color: #0073aa;
-	line-height: 51px;
-	height: 51px;
-	font-size: 16px;
-	font-weight: bold;
-	padding: 0 80px;
-	margin-bottom: 40px;
-}
-
-.bbt-registration-form .inner.steps .step.step-2 {
-	float: right;
-	padding: 80px 0 67px 0;
-}
-
-.bbt-registration-form .inner.steps .step.step-2 #bbt_product_key {
-	color: #333333;
-	font-weight: 700;
-	font-size: 16px;
-	height: 51px;
-	width: 370px;
-	border-color: #eeeeee;
-	text-align: center;
-	box-shadow: none;
-}
-
-.bbt-registration-form .inner.steps .step.step-2 #bbt_product_key:active, .bbt-registration-form .inner.steps .step.step-2 #bbt_product_key:focus {
-	border-color: #666666;
-}
-
-.bbt-registration-form .inner.steps .step.step-2 .bbt-register {
-	background: #0073aa;
-	width: 370px;
-	font-size: 16px;
-	font-weight: normal;
-	height: 51px;
-	line-height: 51px;
-	border-color: #0073aa;
 }
 
 .bbt-registration-form .key_error {
@@ -423,7 +328,8 @@ div.error.bbt_update_notices.notice_product_key{
 	font-size: 15px;
 }
 
-.bbt-tools {
+.bbt-tools,
+.bbt-registration-wrap {
 	font-family: @font1;
 
 	h1 {
@@ -491,10 +397,10 @@ div.error.bbt_update_notices.notice_product_key{
 	.bbt-plugin-browser {
 		.bbt-plugin {
 			float: left;
-			width: 22%;
+			width: 24%;
 			position: relative;
-			margin-left: 4%;
-			margin-bottom: 4%;
+			margin-left: 1.33%;
+			margin-bottom: 3%;
 			background-color: #fff;
 			-webkit-box-shadow: 0 1px 4px fade(#000, 25%);
 			box-shadow: 0 1px 4px fade(#000, 25%);
@@ -506,7 +412,7 @@ div.error.bbt_update_notices.notice_product_key{
 			}
 
 			.plugin-content {
-				padding: 40px 30px 50px;
+				padding: 40px 30px;
 			}
 
 			.label,
@@ -575,73 +481,149 @@ div.error.bbt_update_notices.notice_product_key{
 
 				.dashicons {display: none;}
 			}
+		}
+	}
+}
 
+/* =========================================================================
+   Registration Form
+ =========================================================================== */
 
+.bbt-registration-form .inner.steps {
+	.step {
+		float: left;
+		width: 24%;
+		position: relative;
+		margin-left: 1.33%;
+		margin-bottom: 3%;
+		background-color: #fff;
+		-webkit-box-shadow: 0 1px 4px fade(#000, 25%);
+		box-shadow: 0 1px 4px fade(#000, 25%);
+		border-radius: 3px;
+		padding: 60px 50px 50px;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
 
+		&:nth-child(4n + 1) {
+			margin-left: 0;
+			clear: left;
+		}
 
+		img {
+			display: block;
+			margin: 0 auto 50px;
+		}
 
+		.title {
+			font-size: 20px;
+			font-weight: 700;
+			color: @color-dark;
+			text-transform: uppercase;
+			margin-bottom: 2em;
+		}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		&.step-1 {
+			&.step-error {
+				display: none;
+			}
 		}
 	}
 
+	&.has-error {
+		.step-1:not(.step-error) {
+			display: none;
+		}
+
+		.step-1.step-error {
+			display: block !important;
+		}
+
+		.step-error {
+			background: #de302b;
+			font-size: 16px;
+			color: #FFF;
+			padding: 80px 70px 27px;
+			box-sizing: border-box;
+			text-align: left;
+			line-height: 22px;
+
+			.button {
+				margin-top: 54px;
+				margin-bottom: 0;
+			}
+		}
+	}
+
+	.button {
+		display: block;
+		font-size: 14px;
+		font-weight: 500;
+		width: 100%;
+		height: 46px;
+		line-height: 46px;
+		margin: 0 0 10px;
+		padding: 0 10px;
+		border: none;
+		color: #fff;
+		text-transform: uppercase;
+		background: #3f51b5;
+		-webkit-box-shadow: 0 2px 3px fade(#000, 20%);
+		box-shadow: 0 2px 3px fade(#000, 20%);
+		-webkit-transition: all .2s;
+		transition: all .2s;
+
+		&:hover, &:active {
+			background: darken(#3f51b5, 10%);
+			-webkit-transform: none;
+			transform: none;
+		}
+
+		.dashicons {display: none;}
+	}
+
+	#bbt_product_key {
+		font-size: 14px;
+		font-weight: 500;
+		color: @color-dark;
+		height: 46px;
+		width: 100%;
+		border-color: #dcdcdc;
+		text-align: center;
+		-webkit-box-shadow: none;
+		box-shadow: none;
+		-webkit-transition: all .2s;
+		transition: all .2s;
+		border-radius: 3px;
+		margin: 0 0 28px;
+		display: block;
 
 
+		&::-webkit-input-placeholder  {color: @color-lightGray;}
+		&:-moz-placeholder            {color: @color-lightGray;}
+		&::-moz-placeholder           {color: @color-lightGray;}
+		&:-ms-input-placeholder       {color: @color-lightGray;}
 
+		&:focus {border-color: @color-gray;}
+	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	.note {
+		font-size: 14px;
+		font-weight: 500;
+		color: @color-gray;
+		text-align: center;
+		max-width: 200px;
+		padding-top: 6px;
+		margin: 0 auto 32px;
+	}
 }
 
-
-
-
-
+.bbt-registration-form .inner .center p {
+	font-size: 16px;
+	font-weight: 500;
+	color: @color-dark;
+	text-align: left;
+}
 
 
 
