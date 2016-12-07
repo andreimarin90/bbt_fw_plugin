@@ -454,3 +454,10 @@ class BBT_Plugin_Installer{
         endif;
     }
 }
+
+$query_args = array(
+    'family' => 'Roboto:400,500,700',
+    'subset' => 'latin,latin-ext'
+);
+
+wp_enqueue_style( 'bbt-welcome-roboto', add_query_arg( $query_args, "//fonts.googleapis.com/css" ));
