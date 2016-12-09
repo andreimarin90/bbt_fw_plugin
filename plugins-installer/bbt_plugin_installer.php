@@ -457,6 +457,13 @@ class BBT_Plugin_Installer{
 
         wp_enqueue_style(	"bbt_plugin-admin_css", $plugin_path . "css/plugin-admin.css", false, 1.1, "all" );
         wp_enqueue_script(	"bbt_plugin-admin_js", 	$plugin_path . "js/plugin-admin.js", 	array(), false, null );
+
+        $query_args = array(
+            'family' => 'Roboto:400,500,700',
+            'subset' => 'latin,latin-ext'
+        );
+
+        wp_enqueue_style( 'bbt-welcome-roboto', add_query_arg( $query_args, "//fonts.googleapis.com/css" ));
     }
 
     static function bbt_theme_version() {
@@ -469,9 +476,3 @@ class BBT_Plugin_Installer{
     }
 }
 
-$query_args = array(
-    'family' => 'Roboto:400,500,700',
-    'subset' => 'latin,latin-ext'
-);
-
-wp_enqueue_style( 'bbt-welcome-roboto', add_query_arg( $query_args, "//fonts.googleapis.com/css" ));
