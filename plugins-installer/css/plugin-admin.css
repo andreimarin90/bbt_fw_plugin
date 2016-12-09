@@ -527,13 +527,18 @@ div.error.bbt_update_notices.notice_product_key {
   margin-left: 0;
   clear: left;
 }
+@media (max-width: 1599px) {
+  .bbt-registration-form .inner.steps .step {
+    padding: 40px 20px 30px;
+  }
+}
 @media (max-width: 1439px) {
   .bbt-registration-form .inner.steps .step {
     width: 32%;
     margin-left: 2%;
   }
 }
-@media (max-width: 991px) {
+@media (max-width: 1199px) {
   .bbt-registration-form .inner.steps .step {
     width: 49%;
     margin-left: 2%;
@@ -713,6 +718,17 @@ div.error.bbt_update_notices.notice_product_key {
   border: none;
   border-bottom: 2px solid transparent;
   transition: all .2s;
+}
+@media (max-width: 767px) {
+  .bbt-about-wrap .bbt-tab-wrapper a.nav-tab {
+    padding: 15px 22px;
+  }
+}
+@media (max-width: 479px) {
+  .bbt-about-wrap .bbt-tab-wrapper a.nav-tab {
+    font-size: 13px;
+    padding: 15px 5px;
+  }
 }
 .bbt-about-wrap .bbt-tab-wrapper a.nav-tab:focus {
   -webkit-box-shadow: none;
