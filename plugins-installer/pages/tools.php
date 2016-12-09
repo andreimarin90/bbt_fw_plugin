@@ -39,27 +39,28 @@ $installed_plugins = get_plugins();
 			?>
 			
 				<div class="bbt-plugin <?php echo esc_attr($class); ?>">
-
-					<div class="theme-screenshot">
-						<!--de comendat-->
-						<?php echo esc_html($plugin['name']);?>
+                    <div class="plugin-image">
 						<img src="<?php echo isset($plugin['external_image']) ? esc_url($plugin['external_image']) : ''; ?>" alt="<?php echo esc_attr($plugin['name']);?>" />
 					</div>
 
-					<?php if (isset($installed_plugins[$plugin['file_path']]['Version'])): ?>
-					<div class="plugin-version">
-						<?php echo sprintf('V. %s', $installed_plugins[$plugin['file_path']]['Version'] ); ?>
-					</div>
-					<?php endif; ?>
+                    <div class="plugin-content">
+                        <h4 class="plugin-title"><?php echo esc_html($plugin['name']);?></h4>
 
-					<div class="theme-actions">
-						<?php foreach( $plugin_action as $action ) { bbt_print($action); } ?>
-					</div>
+                        <?php if (isset($installed_plugins[$plugin['file_path']]['Version'])): ?>
+                        <div class="plugin-version">
+                            <span class="label">Version:</span>
+                            <span class="value"><?php echo sprintf('V. %s', $installed_plugins[$plugin['file_path']]['Version'] ); ?></span>
+                        </div>
+                        <?php endif; ?>
 
-					<?php if( isset( $plugin_action['update'] ) && $plugin_action['update'] ): ?>
-					<div class="plugin-update"><span class="dashicons dashicons-update"></span> <?php esc_html_e("New Update Available: Version ", "BigBangThemesFramework"); ?> <?php echo esc_html($plugin['version']); ?></div>
-					<?php endif; ?>
+                        <div class="plugin-buttons">
+                            <?php foreach( $plugin_action as $action ) { bbt_print($action); } ?>
+                        </div>
 
+                        <?php if( isset( $plugin_action['update'] ) && $plugin_action['update'] ): ?>
+                        <div class="plugin-update"><?php esc_html_e("New Update Available: Version ", "BigBangThemesFramework"); ?> <?php echo esc_html($plugin['version']); ?></div>
+                        <?php endif; ?>
+                    </div>
 				</div>
 
 			<?php endforeach; ?>
