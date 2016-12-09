@@ -359,6 +359,68 @@ div.error.bbt_update_notices.notice_product_key {
   margin-left: 0;
   clear: left;
 }
+@media (max-width: 1439px) {
+  .bbt-tools .bbt-plugin-browser .bbt-plugin,
+  .bbt-registration-wrap .bbt-plugin-browser .bbt-plugin {
+    width: 32%;
+    margin-left: 2%;
+  }
+  .bbt-tools .bbt-plugin-browser .bbt-plugin:nth-child(4n + 1),
+  .bbt-registration-wrap .bbt-plugin-browser .bbt-plugin:nth-child(4n + 1) {
+    margin-left: 2%;
+    clear: none;
+  }
+  .bbt-tools .bbt-plugin-browser .bbt-plugin:nth-child(3n + 1),
+  .bbt-registration-wrap .bbt-plugin-browser .bbt-plugin:nth-child(3n + 1) {
+    margin-left: 0;
+    clear: left;
+  }
+}
+@media (max-width: 1439px) {
+  .bbt-tools .bbt-plugin-browser .bbt-plugin,
+  .bbt-registration-wrap .bbt-plugin-browser .bbt-plugin {
+    width: 32%;
+    margin-left: 2%;
+  }
+  .bbt-tools .bbt-plugin-browser .bbt-plugin:nth-child(4n + 1),
+  .bbt-registration-wrap .bbt-plugin-browser .bbt-plugin:nth-child(4n + 1) {
+    margin-left: 2%;
+    clear: none;
+  }
+  .bbt-tools .bbt-plugin-browser .bbt-plugin:nth-child(3n + 1),
+  .bbt-registration-wrap .bbt-plugin-browser .bbt-plugin:nth-child(3n + 1) {
+    margin-left: 0;
+    clear: left;
+  }
+}
+@media (max-width: 991px) {
+  .bbt-tools .bbt-plugin-browser .bbt-plugin,
+  .bbt-registration-wrap .bbt-plugin-browser .bbt-plugin {
+    width: 49%;
+    margin-left: 2%;
+  }
+  .bbt-tools .bbt-plugin-browser .bbt-plugin:nth-child(3n + 1),
+  .bbt-registration-wrap .bbt-plugin-browser .bbt-plugin:nth-child(3n + 1) {
+    margin-left: 2%;
+    clear: none;
+  }
+  .bbt-tools .bbt-plugin-browser .bbt-plugin:nth-child(2n + 1),
+  .bbt-registration-wrap .bbt-plugin-browser .bbt-plugin:nth-child(2n + 1) {
+    margin-left: 0;
+    clear: left;
+  }
+}
+@media (max-width: 767px) {
+  .bbt-tools .bbt-plugin-browser .bbt-plugin,
+  .bbt-registration-wrap .bbt-plugin-browser .bbt-plugin {
+    width: 100%;
+    margin-left: 0;
+  }
+  .bbt-tools .bbt-plugin-browser .bbt-plugin:nth-child(2n + 1),
+  .bbt-registration-wrap .bbt-plugin-browser .bbt-plugin:nth-child(2n + 1) {
+    margin-left: 0;
+  }
+}
 .bbt-tools .bbt-plugin-browser .bbt-plugin .plugin-content,
 .bbt-registration-wrap .bbt-plugin-browser .bbt-plugin .plugin-content {
   padding: 40px 30px;
@@ -458,6 +520,24 @@ div.error.bbt_update_notices.notice_product_key {
 .bbt-registration-form .inner.steps .step:nth-child(4n + 1) {
   margin-left: 0;
   clear: left;
+}
+@media (max-width: 1439px) {
+  .bbt-registration-form .inner.steps .step {
+    width: 32%;
+    margin-left: 2%;
+  }
+}
+@media (max-width: 991px) {
+  .bbt-registration-form .inner.steps .step {
+    width: 49%;
+    margin-left: 2%;
+  }
+}
+@media (max-width: 767px) {
+  .bbt-registration-form .inner.steps .step {
+    width: 100%;
+    margin-left: 0;
+  }
 }
 .bbt-registration-form .inner.steps .step img {
   display: block;
