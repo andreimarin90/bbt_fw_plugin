@@ -41,6 +41,15 @@ class BBT_Plugin_Installer{
             '',
             3
         );
+
+        $bbt_required_plugins = add_submenu_page(
+            'bbt_welcome_theme',
+            esc_html__( 'Required Plugins', 'BigBangThemesFramework' ),
+            esc_html__( 'Required Plugins', 'BigBangThemesFramework' ),
+            'administrator',
+            'bbt_required_plugins',
+            array( $this, 'bbt_theme_required_plugins_page' )
+        );
     }
 
     function bbt_theme_admin_product_key_submenu() {
@@ -66,6 +75,11 @@ class BBT_Plugin_Installer{
     function bbt_theme_key_page()
     {
         require_once BBT_PL_DIR . 'plugins-installer/pages/registration.php';
+    }
+
+    function bbt_theme_required_plugins_page()
+    {
+        require_once BBT_PL_DIR . 'plugins-installer/pages/required_plugins.php';
     }
 
     function bbt_theme_tools_page()
