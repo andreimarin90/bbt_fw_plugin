@@ -11,16 +11,17 @@ $installed_plugins = get_plugins();
 
     <!-- PLUGINS -->
 	<div class="bbt-install-plugins">
-		<div class="header-section">
-			<h2> <?php esc_html_e("Plugins", "BigBangThemesFramework"); ?> </h2>
+		<!--<div class="header-section">
+			<h2> <?php /*esc_html_e("Plugins", "BigBangThemesFramework"); */?> </h2>
 			<a href="#" target="_blank" class="video-guide"><span class="dashicons dashicons-video-alt3"></span>
-				<?php echo sprintf(
+				<?php /*echo sprintf(
 				esc_html__('Installation & Setup %1$s Video Guide','BigBangThemesFramework'),
-				'<span class=\'dashicons dashicons-minus\'></span>'); ?>
+				'<span class=\'dashicons dashicons-minus\'></span>'); */?>
 			</a>
 			<div class="clear"></div>
-		</div>		
-		<div class="bbt-plugin-browser rendered">
+		</div>-->
+
+		<div class="bbt-plugin-browser rendered clearfix">
 			
 			<?php
 			foreach( $plugins as $plugin ):

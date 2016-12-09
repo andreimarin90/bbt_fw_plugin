@@ -65,7 +65,7 @@
                     <strong><?php echo get_site_url(); ?></strong><br/><br/>
                     <?php esc_html_e("It's the same thing when you type it in your browser because you're being redirected but for the Product Keys system, it's a different URL.", "BigBangThemesFramework"); ?>
                     <br/><br/><?php esc_html_e("Go back to Generate A New Product Key and if you won't be able to figure it out, reach out to the support team.", "BigBangThemesFramework"); ?>
-                    <a class="button generate" href="<?php echo esc_url(BBT_Plugin_Installer::$bbt_api_url); ?>" target="_blank"><?php esc_html_e('Generate a Product Key', "BigBangThemesFramework"); ?></a>
+                    <br/><br/><a class="button generate" href="<?php echo esc_url(BBT_Plugin_Installer::$bbt_api_url); ?>" target="_blank"><?php esc_html_e('Generate a Product Key', "BigBangThemesFramework"); ?></a>
                 </div>
 
                 <div class="step step-2">
@@ -153,9 +153,9 @@
     <?php endif; ?>
 
     <div class="bbt_footer">
-    <a href="#" target="_blank"><span class="dashicons dashicons-info"></span> <?php esc_html_e("Product Key — Common Issues & FAQs", "BigBangThemesFramework"); ?></a>
-    <a href="#" target="_blank"><span class="dashicons dashicons-info"></span> <?php esc_html_e("Can I change the domain name later?", "BigBangThemesFramework"); ?></a>
-    <a href="#" target="_blank"><span class="dashicons dashicons-info"></span> <?php esc_html_e("Can I activate a local / development site?", "BigBangThemesFramework"); ?></a>
+        <a href="#" target="_blank"><span class="dashicons dashicons-info"></span><?php esc_html_e("Product Key — Common Issues & FAQs", "BigBangThemesFramework"); ?></a>
+        <a href="#" target="_blank"><span class="dashicons dashicons-info"></span><?php esc_html_e("Can I change the domain name later?", "BigBangThemesFramework"); ?></a>
+        <a href="#" target="_blank"><span class="dashicons dashicons-info"></span><?php esc_html_e("Can I activate a local / development site?", "BigBangThemesFramework"); ?></a>
     </div>
 
     <!-- <i> TESTING BUTTON </i>

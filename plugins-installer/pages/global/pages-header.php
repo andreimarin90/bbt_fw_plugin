@@ -24,10 +24,10 @@
 	</a>
 </p>
 
-<h2 class="nav-tab-wrapper bbt-tab-wrapper">
+<div class="nav-tab-wrapper bbt-tab-wrapper">
 	<?php
 	printf( '<a href="%s" class="nav-tab ' . ($active_page == $plugins_page ? 		'nav-tab-active' : '') . '"><span class="dashicons dashicons-admin-settings"></span> %s</a>', admin_url( 'admin.php?page=' . $plugins_page ), 		esc_html__( "Plugins", "BigBangThemesFramework" ) );
 	printf( '<a href="%s" class="nav-tab ' . ($active_page == $required_plugins_page ? 		'nav-tab-active' : '') . '"><span class="dashicons dashicons-admin-settings"></span> %s</a>', admin_url( 'admin.php?page=' . $required_plugins_page ), 		esc_html__( "Required Plugins", "BigBangThemesFramework" ) );
 	printf( '<a href="%s" class="nav-tab ' . ($active_page == $registration_page ? 	'nav-tab-active' : '') . '"><span class="dashicons dashicons-admin-network"></span> %s</a>', admin_url( 'admin.php?page=' . $registration_page ), 	esc_html__( "Product Key", "BigBangThemesFramework" ) );
 	?>
-</h2>
+</div>
