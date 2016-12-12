@@ -452,18 +452,19 @@ div.error.bbt_update_notices.notice_product_key {
   background: #DE302B;
   font-size: 14px;
   color: #FFF;
-  padding: 18px 30px 18px;
+  padding: 10px 30px;
   border-radius: 3px 3px 0 0;
 }
 .bbt-tools .bbt-plugin-browser .bbt-plugin .plugin-image,
 .bbt-registration-wrap .bbt-plugin-browser .bbt-plugin .plugin-image {
+  background-color: #fafafa;
+  padding: 40px 30px;
   margin-bottom: 0;
+  border-radius: 3px 3px 0 0;
 }
 .bbt-tools .bbt-plugin-browser .bbt-plugin .plugin-image img,
 .bbt-registration-wrap .bbt-plugin-browser .bbt-plugin .plugin-image img {
   display: block;
-  width: 100%;
-  border-radius: 3px 3px 0 0;
 }
 .bbt-tools .bbt-plugin-browser .bbt-plugin .plugin-title,
 .bbt-registration-wrap .bbt-plugin-browser .bbt-plugin .plugin-title {
@@ -475,6 +476,18 @@ div.error.bbt_update_notices.notice_product_key {
 .bbt-tools .bbt-plugin-browser .bbt-plugin .plugin-version,
 .bbt-registration-wrap .bbt-plugin-browser .bbt-plugin .plugin-version {
   margin-bottom: 20px;
+}
+.bbt-tools .bbt-plugin-browser .bbt-plugin .plugin-description,
+.bbt-registration-wrap .bbt-plugin-browser .bbt-plugin .plugin-description {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.54);
+  line-height: 1.6;
+  margin-bottom: 1em;
+}
+.bbt-tools .bbt-plugin-browser .bbt-plugin .plugin-author,
+.bbt-registration-wrap .bbt-plugin-browser .bbt-plugin .plugin-author {
+  margin-bottom: 2.4em;
 }
 .bbt-tools .bbt-plugin-browser .bbt-plugin .button,
 .bbt-registration-wrap .bbt-plugin-browser .bbt-plugin .button {
