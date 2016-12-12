@@ -42,7 +42,7 @@ $installed_plugins = get_plugins();
 				<div class="bbt-plugin <?php echo esc_attr($class); ?>">
                     <div class="plugin-image">
 						<!--<img src="<?php /*echo isset($plugin['external_image']) ? esc_url($plugin['external_image']) : ''; */?>" alt="<?php /*echo esc_attr($plugin['name']);*/?>" />-->
-						<img src="<?php echo BBT_PL_URL . '/plugins-installer/img/logo-dummy.png'; ?>" alt="" />
+						<img src="<?php echo esc_url($plugin['external_image']); ?>" alt="<?php echo esc_attr($plugin['name']);?>" />
 					</div>
 
                     <div class="plugin-content">
@@ -56,13 +56,12 @@ $installed_plugins = get_plugins();
                         <?php endif; ?>
 
                         <div class="plugin-description">
-                            With Visual Composer for PrestaShop you can work with any PrestaShop theme and see how easy it is to add and manage content.
-                            But don’t take our words for granted – see Visual Composer for PrestaShop in real action before purchase.
+                            <?php echo esc_html($plugin['description']);?>
                         </div>
 
                         <div class="plugin-author">
                             <span class="label">Author:</span>
-                            <span class="value">Smartdatasoft</span>
+                            <span class="value"><?php echo esc_html($plugin['author']);?></span>
                         </div>
 
                         <div class="plugin-buttons">
