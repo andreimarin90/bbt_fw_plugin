@@ -425,6 +425,12 @@ div.error.bbt_update_notices.notice_product_key {
 .bbt-registration-wrap .bbt-plugin-browser .bbt-plugin .plugin-content {
   padding: 40px 30px;
 }
+@media (max-width: 1599px) {
+  .bbt-tools .bbt-plugin-browser .bbt-plugin .plugin-content,
+  .bbt-registration-wrap .bbt-plugin-browser .bbt-plugin .plugin-content {
+    padding: 30px 20px;
+  }
+}
 .bbt-tools .bbt-plugin-browser .bbt-plugin .label,
 .bbt-registration-wrap .bbt-plugin-browser .bbt-plugin .label,
 .bbt-tools .bbt-plugin-browser .bbt-plugin .value,
@@ -446,18 +452,19 @@ div.error.bbt_update_notices.notice_product_key {
   background: #DE302B;
   font-size: 14px;
   color: #FFF;
-  padding: 18px 30px 18px;
+  padding: 10px 30px;
   border-radius: 3px 3px 0 0;
 }
 .bbt-tools .bbt-plugin-browser .bbt-plugin .plugin-image,
 .bbt-registration-wrap .bbt-plugin-browser .bbt-plugin .plugin-image {
+  background-color: #fafafa;
+  padding: 40px 30px;
   margin-bottom: 0;
+  border-radius: 3px 3px 0 0;
 }
 .bbt-tools .bbt-plugin-browser .bbt-plugin .plugin-image img,
 .bbt-registration-wrap .bbt-plugin-browser .bbt-plugin .plugin-image img {
   display: block;
-  width: 100%;
-  border-radius: 3px 3px 0 0;
 }
 .bbt-tools .bbt-plugin-browser .bbt-plugin .plugin-title,
 .bbt-registration-wrap .bbt-plugin-browser .bbt-plugin .plugin-title {
@@ -469,6 +476,18 @@ div.error.bbt_update_notices.notice_product_key {
 .bbt-tools .bbt-plugin-browser .bbt-plugin .plugin-version,
 .bbt-registration-wrap .bbt-plugin-browser .bbt-plugin .plugin-version {
   margin-bottom: 20px;
+}
+.bbt-tools .bbt-plugin-browser .bbt-plugin .plugin-description,
+.bbt-registration-wrap .bbt-plugin-browser .bbt-plugin .plugin-description {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.54);
+  line-height: 1.6;
+  margin-bottom: 1em;
+}
+.bbt-tools .bbt-plugin-browser .bbt-plugin .plugin-author,
+.bbt-registration-wrap .bbt-plugin-browser .bbt-plugin .plugin-author {
+  margin-bottom: 2.4em;
 }
 .bbt-tools .bbt-plugin-browser .bbt-plugin .button,
 .bbt-registration-wrap .bbt-plugin-browser .bbt-plugin .button {
@@ -521,13 +540,18 @@ div.error.bbt_update_notices.notice_product_key {
   margin-left: 0;
   clear: left;
 }
+@media (max-width: 1599px) {
+  .bbt-registration-form .inner.steps .step {
+    padding: 40px 20px 30px;
+  }
+}
 @media (max-width: 1439px) {
   .bbt-registration-form .inner.steps .step {
     width: 32%;
     margin-left: 2%;
   }
 }
-@media (max-width: 991px) {
+@media (max-width: 1199px) {
   .bbt-registration-form .inner.steps .step {
     width: 49%;
     margin-left: 2%;
@@ -579,7 +603,7 @@ div.error.bbt_update_notices.notice_product_key {
   width: 100%;
   height: 46px;
   line-height: 46px;
-  margin: 0 0 10px;
+  margin: 10px 0;
   padding: 0 10px;
   border: none;
   color: #fff;
@@ -644,4 +668,93 @@ div.error.bbt_update_notices.notice_product_key {
   font-weight: 500;
   color: rgba(0, 0, 0, 0.87);
   text-align: left;
+}
+.bbt-registration-form .bbt_footer {
+  font-size: 14px;
+  color: #999999;
+  text-align: left;
+  margin-top: 30px;
+  padding-top: 24px;
+  border-top: solid 1px #cccccc;
+}
+.bbt-registration-form .bbt_footer a {
+  margin-right: 20px;
+  display: inline-block;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 0;
+  white-space: nowrap;
+  color: rgba(0, 0, 0, 0.54);
+  border: none;
+  border-radius: 0;
+  background: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  vertical-align: top;
+  -webkit-transition: all .2s;
+  transition: all .2s;
+}
+.bbt-registration-form .bbt_footer a .dashicons {
+  color: inherit;
+  margin-right: 4px;
+}
+.bbt-registration-form .bbt_footer a:focus {
+  background: none;
+  color: rgba(0, 0, 0, 0.54);
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.bbt-registration-form .bbt_footer a:hover,
+.bbt-registration-form .bbt_footer a:active {
+  background: none;
+  color: rgba(0, 0, 0, 0.87);
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  -webkit-transform: none;
+  -ms-transform: none;
+  transform: none;
+}
+/* =========================================================================
+   Tabs
+ =========================================================================== */
+.bbt-about-wrap .bbt-tab-wrapper {
+  margin-bottom: 40px;
+}
+.bbt-about-wrap .bbt-tab-wrapper a.nav-tab {
+  font-size: 16px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.54);
+  padding: 15px 42px;
+  margin: 0;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  transition: all .2s;
+}
+@media (max-width: 767px) {
+  .bbt-about-wrap .bbt-tab-wrapper a.nav-tab {
+    padding: 15px 22px;
+  }
+}
+@media (max-width: 479px) {
+  .bbt-about-wrap .bbt-tab-wrapper a.nav-tab {
+    font-size: 13px;
+    padding: 15px 5px;
+  }
+}
+.bbt-about-wrap .bbt-tab-wrapper a.nav-tab:focus {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.bbt-about-wrap .bbt-tab-wrapper a.nav-tab:hover,
+.bbt-about-wrap .bbt-tab-wrapper a.nav-tab:active {
+  color: rgba(0, 0, 0, 0.87);
+}
+.bbt-about-wrap .bbt-tab-wrapper a.nav-tab.nav-tab-active {
+  color: rgba(0, 0, 0, 0.87);
+  border-color: #3f51b5;
+}
+.bbt-about-wrap .bbt-tab-wrapper a.nav-tab .dashicons {
+  display: none;
 }
