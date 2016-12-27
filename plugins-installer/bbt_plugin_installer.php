@@ -8,9 +8,9 @@ class BBT_Plugin_Installer{
     function __construct(){
         if(defined('BBT_THEME_PRODUCT_KEY') && BBT_THEME_PRODUCT_KEY) {
             add_action('register_sidebar', array($this, 'bbt_theme_admin_init'));
-            add_action('admin_menu', array($this, 'bbt_theme_admin_menu'));
-            add_action('admin_menu', array($this, 'bbt_theme_admin_product_key_submenu'));
-            add_action('admin_menu', array($this, 'bbt_edit_admin_menus'));
+            add_action('admin_menu', array($this, 'bbt_theme_admin_menu'), 1);
+            add_action('admin_menu', array($this, 'bbt_theme_admin_product_key_submenu'), 1);
+            add_action('admin_menu', array($this, 'bbt_edit_admin_menus'), 1);
             add_action('admin_init', array( $this, 'bbt_theme_update'));
             add_action('admin_enqueue_scripts', array($this, 'bbt_theme_admin_pages'));
             add_action('admin_notices', array($this, 'bbt_admin_notices'), 99);
@@ -32,8 +32,8 @@ class BBT_Plugin_Installer{
         endif;
 
         $bbt_menu_welcome = add_menu_page(
-            bbt_parent_theme_name(),
-            bbt_parent_theme_name(),
+            'BigBangThemes',
+            'BigBangThemes',
             //esc_html__( 'Tools', 'BigBangThemesFramework' ),
             'administrator',
             'bbt_welcome_theme',

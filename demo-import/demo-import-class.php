@@ -80,15 +80,19 @@ class BBT_Demo_Import{
 		//$parent_page = defined('THEME_SMALL_NAME') ? THEME_SMALL_NAME . '_settings' : 'bigbangthemes_settings';
 
 		if(defined('BBT_PL_DIR')) {
-			add_submenu_page(
-				'bbt_welcome_theme',
-				esc_html__('BBT Demo Content', 'BigBangThemesFramework'),
-				esc_html__('BBT Demo Content', 'BigBangThemesFramework'),
-				'administrator',
-				$this->pageID,
-				array(&$this, 'bbt_main_view_page')
-			);
-			//add_theme_page('BBT Demo Content', esc_html__('BBT Demo Content', 'bbt_fw_plugin'), 'manage_options', $this->pageID, array(&$this, 'bbt_main_view_page'));
+			if(defined('BBT_THEME_PRODUCT_KEY') && BBT_THEME_PRODUCT_KEY) {
+				add_submenu_page(
+					'bbt_welcome_theme',
+					esc_html__('BBT Demo Content', 'BigBangThemesFramework'),
+					esc_html__('BBT Demo Content', 'BigBangThemesFramework'),
+					'administrator',
+					$this->pageID,
+					array(&$this, 'bbt_main_view_page')
+				);
+			}
+			else {
+				add_theme_page('BBT Demo Content', esc_html__('BBT Demo Content', 'bbt_fw_plugin'), 'manage_options', $this->pageID, array(&$this, 'bbt_main_view_page'));
+			}
 		}
 	}
 
