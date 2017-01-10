@@ -1,9 +1,16 @@
 <div class="stripe_top" style="background-color: #0085ba;"></div>
 <div class="wrap about-wrap bbt-about-wrap bbt-registration-wrap">
+<<<<<<< HEAD
+	
+    <?php require_once('global/pages-header.php'); ?>
+
+    <?php 
+=======
 
     <?php require_once('global/pages-header.php'); ?>
 
     <?php
+>>>>>>> a5606e3c4d920fa7d360c6ba2d6010efa0f4f74a
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['bbt_product_key']))
         {
@@ -16,23 +23,34 @@
         elseif ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'bbt-delkey')
         {
             delete_option("bbt_".THEME_FOLDER_NAME."_license");
+<<<<<<< HEAD
+=======
             delete_option("bbt_". THEME_FOLDER_NAME ."_valid_key");
+>>>>>>> a5606e3c4d920fa7d360c6ba2d6010efa0f4f74a
         }
 
     $activated = get_option("bbt_".THEME_FOLDER_NAME."_license");
 
     if ($activated == ''):
     ?>
+<<<<<<< HEAD
+
+=======
+>>>>>>> a5606e3c4d920fa7d360c6ba2d6010efa0f4f74a
     	<div class="bbt-registration-form">
             <div class="inner">
                 <div class="center">
                     <p>
+<<<<<<< HEAD
+                        <?php esc_html_e("Connect this domain name to your license to receive updates for both the theme and related plugins.", "BigBangThemesFramework"); ?>
+=======
                         <?php echo sprintf(
                             esc_html__('Follow the steps below to validate your product. This will unlock automatic updates for your theme and %1$s all plugins included with the theme%2$s, additional Extensions, and full theme features.', 'BigBangThemesFramework'),
                             '<b>',
                             '</b>'
                         );
                         ?>
+>>>>>>> a5606e3c4d920fa7d360c6ba2d6010efa0f4f74a
                     </p>
                 </div>
 
@@ -43,13 +61,57 @@
                 <div class="clear"></div>
             </div>
 
+<<<<<<< HEAD
+            <?php 
+=======
             <?php
+>>>>>>> a5606e3c4d920fa7d360c6ba2d6010efa0f4f74a
                 if ( ! empty( $rsp['text'] ))
                 {
                     echo '<div class="key_error">'.$rsp['text'].'</div>';
                 }
             ?>
 
+<<<<<<< HEAD
+            <div class="inner steps <?php if (!empty($rsp['domain'])) echo "has-error"; ?>">
+
+                <div class="step step-1">
+                    <?php esc_html_e('Step 1', "BigBangThemesFramework"); ?><br/>
+                    <img src="<?php echo BBT_PL_URL . '/plugins-installer/img/hand-key.svg'; ?>" />
+                    <a class="button generate" href="<?php echo esc_url(BBT_Plugin_Installer::$bbt_api_url); ?>?page=license&ref=<?php echo urlencode(site_url()); ?>" target="_blank"><?php echo __('Generate a Product Key', "BigBangThemesFramework"); ?></a>
+                    <br/><?php esc_html_e('for this domain name', "BigBangThemesFramework"); ?>
+                </div>
+
+                <div class="step step-1 step-error">
+                <?php esc_html_e("Site URL Mismatch. You generated a key for:", "BigBangThemesFramework"); ?><br/>
+                <strong><?php echo $rsp['domain']; ?></strong><br/><br/>
+                <?php esc_html_e("but the correct domain name is:", "BigBangThemesFramework"); ?><br/>
+                <strong><?php echo get_site_url(); ?></strong><br/><br/>
+                <?php esc_html_e("It's the same thing when you type it in your browser because you're being redirected but for the Product Keys system, it's a different URL.", "BigBangThemesFramework"); ?>
+                <br/><br/><?php esc_html_e("Go back to Generate A New Product Key and if you won't be able to figure it out, reach out to the support team.", "BigBangThemesFramework"); ?>
+                <a class="button generate" href="<?php echo esc_url(BBT_Plugin_Installer::$bbt_api_url); ?>" target="_blank"><?php esc_html_e('Generate a Product Key', "BigBangThemesFramework"); ?></a>
+                    
+                </div>
+
+                <div class="step step-2">
+                    <?php esc_html_e('Step 2', "BigBangThemesFramework"); ?><br/>
+                    <img src="<?php echo BBT_PL_URL . '/plugins-installer/img/hand-down.svg'; ?>" />
+                    <form id="bbt_product_registration" action="" method="POST">
+                        <input type="hidden" name="register" value="true" />
+                        <input type="text" name="bbt_product_key" id="bbt_product_key" placeholder="<?php esc_html_e('Paste your Product Key Here', "BigBangThemesFramework");?>" value="" />
+                        <br /><br />
+                        <button class="button button-primary bbt-register" type="submit"><?php esc_html_e( "Activate Product Key", "BigBangThemesFramework" ); ?></button>
+                    </form>
+                </div>
+
+                <div class="clear"></div>
+        </div>
+
+    <?php elseif ($activated && $activated != ''): ?>
+
+        <div class="bbt-registration-done">
+                
+=======
             <div class="inner steps clearfix <?php if (!empty($rsp['domain'])) echo "has-error"; ?>">
                 <div class="step step-1">
                     <img src="<?php echo BBT_PL_URL . '/plugins-installer/img/step-1.png'; ?>" />
@@ -83,6 +145,7 @@
         <style>.about-wrap div.error.bbt_update_notices.notice_product_key{display:none !important;}</style>
         <div class="bbt-registration-done">
 
+>>>>>>> a5606e3c4d920fa7d360c6ba2d6010efa0f4f74a
             <img src="<?php echo BBT_PL_URL . '/plugins-installer/img/hand-ok.svg'; ?>" />
             <h2><?php esc_html_e("Product Key Active!", "BigBangThemesFramework"); ?></h2>
 
@@ -113,7 +176,11 @@
 
             <div class="inner steps has-error">
 
+<<<<<<< HEAD
+            <?php 
+=======
             <?php
+>>>>>>> a5606e3c4d920fa7d360c6ba2d6010efa0f4f74a
                 if ( ! empty( $rsp['text'] ))
                 {
                     echo '<div class="key_error">'.$rsp['text'].'</div><br/><br/>';
@@ -131,7 +198,11 @@
                 ?>
                 <br/><br/><br/><br/><br/><br/><br/><br/>
                 <a class="button generate" href="<?php echo esc_url(BBT_Plugin_Installer::$bbt_api_url); ?>" target="_blank"><?php esc_html_e('Generate a New Product Key', "BigBangThemesFramework"); ?></a>
+<<<<<<< HEAD
+                    
+=======
 
+>>>>>>> a5606e3c4d920fa7d360c6ba2d6010efa0f4f74a
                 </div>
 
                 <div class="step step-2">
@@ -153,9 +224,15 @@
     <?php endif; ?>
 
     <div class="bbt_footer">
+<<<<<<< HEAD
+    <a href="#" target="_blank"><span class="dashicons dashicons-info"></span> <?php esc_html_e("Product Key — Common Issues & FAQs", "BigBangThemesFramework"); ?></a>
+    <a href="#" target="_blank"><span class="dashicons dashicons-info"></span> <?php esc_html_e("Can I change the domain name later?", "BigBangThemesFramework"); ?></a>
+    <a href="#" target="_blank"><span class="dashicons dashicons-info"></span> <?php esc_html_e("Can I activate a local / development site?", "BigBangThemesFramework"); ?></a>
+=======
         <a href="#" target="_blank"><span class="dashicons dashicons-info"></span><?php esc_html_e("Product Key — Common Issues & FAQs", "BigBangThemesFramework"); ?></a>
         <a href="#" target="_blank"><span class="dashicons dashicons-info"></span><?php esc_html_e("Can I change the domain name later?", "BigBangThemesFramework"); ?></a>
         <a href="#" target="_blank"><span class="dashicons dashicons-info"></span><?php esc_html_e("Can I activate a local / development site?", "BigBangThemesFramework"); ?></a>
+>>>>>>> a5606e3c4d920fa7d360c6ba2d6010efa0f4f74a
     </div>
 
     <!-- <i> TESTING BUTTON </i>
