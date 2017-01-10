@@ -70,6 +70,7 @@ jQuery(document).ready(function($){
                         $mainThis.hidePopup();
                     }
                     else if(obj['install'] == 'yes'){
+
                         //show import status messages
                         jQuery('#bbt_popup_action').empty().html('<span style="color:green;">' + obj['message'] + '</span>');
                         $('#bbt_popup .bbt_close_icon , #bbt_popup .bbt_popup_title .dashicons.dashicons-yes').show();
@@ -79,7 +80,7 @@ jQuery(document).ready(function($){
                         $mainThis.hidePopup();
 
                         //redirect to homepage
-                        window.location = obj['home_url'];
+                        //window.location = obj['home_url'];
                     }
                     else{
                        // setTimeout(function(){ $mainThis.hidePopup(); }, 5000);

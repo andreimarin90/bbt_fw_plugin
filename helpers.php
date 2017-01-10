@@ -47,6 +47,7 @@ function bbt_category_builder_ids($builder_posts)
     return array_unique($builder_categories);
 }
 
+<<<<<<< HEAD
 /**
  * Includes a view file from plugins extensions root/views/
  * @param  string  $_name    name of the view file
@@ -64,10 +65,46 @@ function bbt_plugin_view( $_name, $extension = NULL ,$_data = NULL, $__return = 
             ${$_name_var} = $_value;
     ob_start();
 
+=======
+if ( ! function_exists( 'bbt_parent_theme_name' ) ) :
+    function bbt_parent_theme_name()
+    {
+        $theme = wp_get_theme();
+        if ($theme->parent()):
+            $theme_name = $theme->parent()->get('Name');
+        else:
+            $theme_name = $theme->get('Name');
+        endif;
+
+        return $theme_name;
+    }
+endif;
+
+
+/**
+ * Includes a view file from plugins extensions root/views/
+ * @param  string  $_name    name of the view file
+ * @param  string  $_name    name of the view file
+ * @param  array  $_data    array of the variables to be sent to the view
+ * @param  boolean $__return if false will echo the view else will return it (f or shortcodes use TRUE !!! )
+ * @return html            If $__return is set to true , returns the view content
+ */
+function bbt_plugin_view( $_name, $extension = NULL ,$_data = NULL, $__return = FALSE) {
+    $_name = strtolower( $_name );
+    if ( !file_exists( BBT_PL_DIR . '/'.$extension.'/views/'.$_name.'.php' ) )
+        exit( 'View not found: ' . $_name );
+    if ( $_data !== NULL && count( $_data ) > 0 )
+        foreach ( $_data as $_name_var => $_value )
+            ${$_name_var} = $_value;
+    ob_start();
+
+>>>>>>> a5606e3c4d920fa7d360c6ba2d6010efa0f4f74a
     if($extension == NULL)
         require (BBT_PL_DIR . '/views/'.$_name.'.php') ;
     else
         require (BBT_PL_DIR . '/'.$extension.'/views/'.$_name.'.php') ;
+<<<<<<< HEAD
+=======
 
     $buffer = ob_get_clean();
     if ( $__return === TRUE )
@@ -75,3 +112,28 @@ function bbt_plugin_view( $_name, $extension = NULL ,$_data = NULL, $__return = 
     else
         print $buffer;
 }
+
+if ( ! function_exists( 'bbt_get_view' ) ) :
+function bbt_get_view( $_name, $folder = '' ,$_data = NULL, $__return = FALSE) {
+    $_name = strtolower( $_name );
+    if ( !file_exists( get_stylesheet_directory() . '/'.$folder.'/'.$_name.'.php' ) )
+        exit( 'View not found: ' . $_name );
+    if ( $_data !== NULL && count( $_data ) > 0 )
+        foreach ( $_data as $_name_var => $_value )
+            ${$_name_var} = $_value;
+    ob_start();
+
+    require (get_stylesheet_directory() . '/'.$folder.'/'.$_name.'.php') ;
+>>>>>>> a5606e3c4d920fa7d360c6ba2d6010efa0f4f74a
+
+    $buffer = ob_get_clean();
+    if ( $__return === TRUE )
+        return $buffer;
+    else
+        print $buffer;
+<<<<<<< HEAD
+}
+=======
+}
+endif;
+>>>>>>> a5606e3c4d920fa7d360c6ba2d6010efa0f4f74a
