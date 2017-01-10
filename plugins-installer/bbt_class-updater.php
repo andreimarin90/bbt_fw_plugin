@@ -1,13 +1,13 @@
 <?php
 if( ! class_exists( 'BBT_Updater' ) ) {
-	
+
 	class BBT_Updater {
-		
+
 		//var $api_url = "http://localhost/bigbang/showoff/update-theme/";
 		var $api_url = "http://bigbangthemes.net/update-theme/";
-	
+
 		function __construct( $license_key, $theme_version ) {
-	
+
 			$this->license_key = $license_key;
 			$this->theme_version = $theme_version;
 
@@ -16,7 +16,7 @@ if( ! class_exists( 'BBT_Updater' ) ) {
 
 			//set_site_transient('update_themes', null);
 		}
-		
+
 		function check_for_update( $transient ) {
 			global $wp_filesystem;
 
@@ -36,31 +36,31 @@ if( ! class_exists( 'BBT_Updater' ) ) {
 
 			$request = wp_remote_post( $url, $args);
 
-			if ( is_wp_error( $request ) ) 
+			if ( is_wp_error( $request ) )
 			{
-		    	return $transient;
-		    }
+				return $transient;
+			}
 
-		    if ( $request['response']['code'] == 200 )
-		    {
-		    	$data = json_decode( $request['body'] );
+			if ( $request['response']['code'] == 200 )
+			{
+				$data = json_decode( $request['body'] );
 
-		    	if (!empty($data->error) && $data->error == 1)
-		    	{
+				if (!empty($data->error) && $data->error == 1)
+				{
 					delete_option("bbt_".THEME_FOLDER_NAME."_license");
 					delete_option("bbt_". THEME_FOLDER_NAME ."_valid_key");
-		    	}
+				}
 				else{
 					if(version_compare($curr_ver, $data->version, '<'))
 					{
 						$transient->response[$curr_theme->get_template()] = array(
-                            "new_version"	=> 		$data->version,
-                            "package"		=>	    $data->download_url,
-                            "url"			=>		'http://bigbangthemes.net'
-                        );
-    
-                        // add_action( 'admin_notices', array(&$this, 'update_notice') );
-                        update_option("bbt_".THEME_FOLDER_NAME."_remote_ver", $data->version);
+							"new_version"	=> 		$data->version,
+							"package"		=>	    $data->download_url,
+							"url"			=>		'http://bigbangthemes.net'
+						);
+
+						// add_action( 'admin_notices', array(&$this, 'update_notice') );
+						update_option("bbt_".THEME_FOLDER_NAME."_remote_ver", $data->version);
 					}
 					else
 					{
@@ -85,7 +85,7 @@ if( ! class_exists( 'BBT_Updater' ) ) {
 			$theme = wp_get_theme();
 
 			$condition = isset( $updater->skin->theme_info ) && $updater->skin->theme_info['Name'] === $theme['Name'];
-			if (  $condition ) 
+			if (  $condition )
 			{
 				$license = get_option ("bbt_".THEME_FOLDER_NAME."_license");
 				if ( !$license && empty($license) )

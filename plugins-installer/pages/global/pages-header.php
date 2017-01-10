@@ -1,11 +1,11 @@
-<?php 
-	$active_page 		= isset($_GET["page"]) ? $_GET["page"] : 'bbt_welcome_theme';
+<?php
+$active_page 		= isset($_GET["page"]) ? $_GET["page"] : 'bbt_welcome_theme';
 
-	$registration_page 	= "bbt_product_key_page";
-	$plugins_page 		= "bbt_welcome_theme";
-	$required_plugins_page = "bbt_required_plugins";
-	
-	$getbowtied_settings = array('theme_docs','customize_link','release_notes')//Getbowtied_Admin_Pages::settings();
+$registration_page 	= "bbt_product_key_page";
+$plugins_page 		= "bbt_welcome_theme";
+$required_plugins_page = "bbt_required_plugins";
+
+$getbowtied_settings = array('theme_docs','customize_link','release_notes')//Getbowtied_Admin_Pages::settings();
 
 ?>
 <h1>
@@ -13,13 +13,13 @@
 	<?php if(defined('BBT_THEME_DOCS')):?>
 		<a class="button" href="<?php echo esc_url(BBT_THEME_DOCS); ?>" target="_blank"><span class="dashicons dashicons-info"></span> <?php esc_html_e("Documentation", "BigBangThemesFramework"); ?></a>
 	<?php endif;?>
-	<?php //if ( is_plugin_active( 'toco/toco.php' )): ?>
+	<?php// if ( is_plugin_active( 'toco/toco.php' )): ?>
 <!--		<a class="button" href="<?php /*echo esc_url(admin_url( 'admin.php?page=bigbangthemes_settings' )); */?>"><span class="dashicons dashicons-admin-appearance"></span> <?php /*esc_html_e("Customize", "BigBangThemesFramework"); */?></a>
 -->	<?php //endif;?>
 </h1>
 <p class="version">
 	<a href="<?php echo ''; ?>" target="_blank">
-		<span class="dashicons dashicons-update"></span> 
+		<span class="dashicons dashicons-update"></span>
 		<?php esc_html_e( "Version", "BigBangThemesFramework" ); ?> <?php bbt_print(BBT_Plugin_Installer::bbt_theme_version()); ?>
 	</a>
 </p>

@@ -112,7 +112,7 @@ class BBT_Plugin_Installer{
         if ( ! function_exists( 'get_plugins' ) ) {
             require_once ABSPATH . 'wp-admin/includes/plugin.php';
         }
-        
+
         $installed_plugins = get_plugins();
 
         $item['sanitized_plugin'] = $item['name'];
@@ -336,8 +336,7 @@ class BBT_Plugin_Installer{
         if(!version_compare($local_ver, $remote_ver, '<'))
         {
             $valid_key = get_option("bbt_". THEME_FOLDER_NAME ."_valid_key");
-
-            if ( $valid_key != '1' || empty($valid_key)){
+            if ( $valid_key !== '1' || empty($valid_key)){
 
                 if ( ! isset($_COOKIE["notice_product_key"]) || $_COOKIE["notice_product_key"] != "1" ) {
                     $message = sprintf(
@@ -422,7 +421,7 @@ class BBT_Plugin_Installer{
             $remove_key = ($_SERVER['REQUEST_METHOD'] == 'POST' && (isset($_POST['action']) && $_POST['action'] == 'bbt-delkey')) ? true : false;
             $valid_key = get_option("bbt_". THEME_FOLDER_NAME ."_valid_key");
 
-            if ( (!$valid_key || empty($valid_key)) || $remove_key ) {
+            if ( ($valid_key != '1'|| empty($valid_key)) || $remove_key ) {
                 $message1 = sprintf(
                     esc_html__('There is an update available for the %1$s theme. Go to %2$sProduct Activation%3$s to enable theme updates','BigBangThemesFramework'),
                     $theme_name, '<a href="' . admin_url( 'admin.php?page=bbt_product_key_page' ) . '">', '</a>'
@@ -434,7 +433,7 @@ class BBT_Plugin_Installer{
 
             }
 
-            if ( $valid_key && !empty($valid_key) && !$remove_key ) {
+            if ( $valid_key == '1' && !empty($valid_key) && !$remove_key ) {
                 $message2 = sprintf(
                     esc_html__('There is an update available for the %1$s theme. %2$sUpdate now%3$s','BigBangThemesFramework'),
                     $theme_name, '<a href="' . admin_url() . 'update-core.php">', '</a>'
@@ -476,4 +475,3 @@ class BBT_Plugin_Installer{
         endif;
     }
 }
-
