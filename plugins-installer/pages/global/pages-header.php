@@ -13,9 +13,9 @@
 	<?php if(defined('BBT_THEME_DOCS')):?>
 		<a class="button" href="<?php echo esc_url(BBT_THEME_DOCS); ?>" target="_blank"><span class="dashicons dashicons-info"></span> <?php esc_html_e("Documentation", "BigBangThemesFramework"); ?></a>
 	<?php endif;?>
-	<?php if ( is_plugin_active( 'toco/toco.php' )): ?>
-		<a class="button" href="<?php echo esc_url(admin_url( 'admin.php?page=bigbangthemes_settings' )); ?>"><span class="dashicons dashicons-admin-appearance"></span> <?php esc_html_e("Customize", "BigBangThemesFramework"); ?></a>
-	<?php endif;?>
+	<?php //if ( is_plugin_active( 'toco/toco.php' )): ?>
+<!--		<a class="button" href="<?php /*echo esc_url(admin_url( 'admin.php?page=bigbangthemes_settings' )); */?>"><span class="dashicons dashicons-admin-appearance"></span> <?php /*esc_html_e("Customize", "BigBangThemesFramework"); */?></a>
+-->	<?php //endif;?>
 </h1>
 <p class="version">
 	<a href="<?php echo ''; ?>" target="_blank">

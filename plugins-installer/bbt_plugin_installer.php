@@ -336,7 +336,8 @@ class BBT_Plugin_Installer{
         if(!version_compare($local_ver, $remote_ver, '<'))
         {
             $valid_key = get_option("bbt_". THEME_FOLDER_NAME ."_valid_key");
-            if ( !$valid_key || empty($valid_key)){
+
+            if ( $valid_key != '1' || empty($valid_key)){
 
                 if ( ! isset($_COOKIE["notice_product_key"]) || $_COOKIE["notice_product_key"] != "1" ) {
                     $message = sprintf(
