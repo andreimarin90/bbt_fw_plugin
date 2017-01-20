@@ -50,7 +50,6 @@ jQuery(document).ready(function($){
                 },
                 success: function(rsp) {
                     console.log(rsp);
-
                     var obj = {};
 
                     try {
