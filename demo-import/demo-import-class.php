@@ -137,32 +137,42 @@ class BBT_Demo_Import{
 	 * @return array - array of configurations
 	 */
 	protected  function bbt_get_demos_configurations(){
-		$demos_path = BBT_THEME_DIR . '/theme_config/demo-content';
+		$base_demo_url = 'http://bigbangthemes.net/themes-repo/demo_imports/';
+		$config_file = $base_demo_url . BBT_THEME_NAME .'/config.php';
 
-		//get demos folders paths
-		$demos = glob($demos_path . '/*' , GLOB_ONLYDIR);
+		$response = wp_remote_get( $config_file , array('method' => 'POST', 'timeout' => 100, 'body' => array( 'request' => true )));
+		$demos = array();
+		if( !is_wp_error( $response ) && is_array($response) ) {
+			$demos = json_decode($response['body']);
+		}
 
 		//array of cofigurations
 		$configs = array();
 		if(!empty($demos)){
 			$cnt = 0;
-			foreach($demos as $demo_path){
+			foreach($demos as $demo){
+				$demo_path = $base_demo_url . BBT_THEME_NAME . '/' . $demo;
+
 				//check if in demo exist demo.xml file
-				if(!file_exists($demo_path . '/demo.xml')) continue;
+				if(bbt_check_external_file($demo_path . '/demo.xml') != 200) continue;
 
 				//demo path
 				$configs['demo-' . md5($demo_path)] = array('demo_path' => $demo_path);
 
 				//check if in demo exist config file
-				if(file_exists($demo_path . '/config.php')){
-					include($demo_path . '/config.php');
+				if(bbt_check_external_file($demo_path . '/config.php') == 200){
+					$request = wp_remote_get( $demo_path . '/config.php' , array('method' => 'POST', 'timeout' => 100, 'body' => array( 'request' => true )) );
 
-					//get demo title
-					$configs['demo-' . md5($demo_path)]['title'] = (isset($config['title']) && !empty($config['title'])) ? $config['title'] : esc_html__('Demo Title','bbt_fw_plugin');
-					//get demo screenshot
-					$configs['demo-' . md5($demo_path)]['screenshot'] = (isset($config['screenshot']) && !empty($config['screenshot'])) ? $config['screenshot'] : '';
-					//get demo preview_link
-					$configs['demo-' . md5($demo_path)]['preview_link'] = (isset($config['preview_link']) && !empty($config['preview_link'])) ? $config['preview_link'] : '';
+					if( !is_wp_error( $request ) && is_array($request) ) {
+						$config = (array)json_decode($request['body']);
+
+						//get demo title
+						$configs['demo-' . md5($demo_path)]['title'] = (isset($config['title']) && !empty($config['title'])) ? $config['title'] : esc_html__('Demo Title','bbt_fw_plugin');
+						//get demo screenshot
+						$configs['demo-' . md5($demo_path)]['screenshot'] = (isset($config['screenshot']) && !empty($config['screenshot'])) ? $config['screenshot'] : '';
+						//get demo preview_link
+						$configs['demo-' . md5($demo_path)]['preview_link'] = (isset($config['preview_link']) && !empty($config['preview_link'])) ? $config['preview_link'] : '';
+					}
 				}
 
 				$cnt++;
@@ -190,7 +200,7 @@ class BBT_Demo_Import{
 
 			//get clicked demo path
 			$demo_path = (array_key_exists($_POST['install_id'], $this->demoConfigs)) ? $this->demoConfigs[$_POST['install_id']]['demo_path'] : array();
-
+			
 			if(empty($demo_path)){
 				echo json_encode(array('install' => 'no', 'message' => esc_html__('No Demo Path','bbt_fw_plugin')));
 				die();

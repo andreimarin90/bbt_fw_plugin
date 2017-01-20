@@ -49,6 +49,8 @@ jQuery(document).ready(function($){
                     $mainThis.showTimer();
                 },
                 success: function(rsp) {
+                    console.log(rsp);
+
                     var obj = {};
 
                     try {
@@ -80,7 +82,7 @@ jQuery(document).ready(function($){
                         $mainThis.hidePopup();
 
                         //redirect to homepage
-                        //window.location = obj['home_url'];
+                        window.location = obj['home_url'];
                     }
                     else{
                        // setTimeout(function(){ $mainThis.hidePopup(); }, 5000);

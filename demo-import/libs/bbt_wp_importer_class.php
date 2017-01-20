@@ -194,11 +194,13 @@ class BBT_WP_IMPORTER extends BBT_WP_Import {
     */
     function xcopy($source, $dest)
     {
+
+
         // Simple copy for a file 
-        if (is_file($source)) { 
+        if (bbt_check_external_file($source) == 200) {
             copy($source, $dest);
             return chmod($dest, 0755);
-        } 
+        }
 
         // Make destination directory 
         if (!is_dir($dest)) { 
@@ -234,7 +236,7 @@ class BBT_WP_IMPORTER extends BBT_WP_Import {
 	function bbt_install_attachments() {
 		$error = false;
 
-		if(file_exists($this->install_dir . '/demo.xml')){
+		if(bbt_check_external_file($this->install_dir . '/demo.xml') == 200){
 			$filename = $this->install_dir . '/demo.xml';
 			//change framework link in wordpress xml
 			//$this->fly_change_wordpress_xml_links($filename);
@@ -256,7 +258,7 @@ class BBT_WP_IMPORTER extends BBT_WP_Import {
 			$defaults = array( 'file' => '');
 			$args = wp_parse_args( $args, $defaults );
 
-			if ( file_exists( $args['file'] ) ) {
+			if ( bbt_check_external_file( $args['file'] ) == 200) {
 
 				// for windows systems
 				$file = str_replace( '\\', '/', $args['file'] );
@@ -292,8 +294,8 @@ class BBT_WP_IMPORTER extends BBT_WP_Import {
 			//copy all attachments in uplods directory
 			//$file_copy = $this->xcopy($this->install_dir . '/uploads',  $uploads['basedir']);
 			//copy xml file in uploads directory
-			$install_file_copy = $this->xcopy($this->xmlfile , $uploads['basedir'] .'/'.basename( $this->xmlfile ));
 
+			$install_file_copy = $this->xcopy($this->xmlfile , $uploads['basedir'] .'/'.basename( $this->xmlfile ));
 			if(!$install_file_copy)
 			{
 				$error = new WP_Error( 'import_file_error', 'Upload error!' );

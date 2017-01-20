@@ -110,3 +110,14 @@ if ( ! function_exists( 'bbt_get_view' ) ) :
             print $buffer;
     }
 endif;
+
+function bbt_check_external_file($url)
+{
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_NOBODY, true);
+    curl_exec($ch);
+    $retCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    return $retCode;
+}
