@@ -138,7 +138,7 @@ class BBT_Demo_Import{
 	 */
 	protected  function bbt_get_demos_configurations(){
 		$base_demo_url = 'http://bigbangthemes.net/themes-repo/demo_imports/';
-		$config_file = $base_demo_url . BBT_THEME_NAME .'/demos_config.php';
+		$config_file = $base_demo_url . strtolower(BBT_THEME_NAME) .'/demos_config.php';
 
 		$response = wp_remote_get( $config_file , array('method' => 'POST', 'timeout' => 100, 'body' => array( 'request' => true )));
 		$demos = array();
@@ -151,7 +151,7 @@ class BBT_Demo_Import{
 		if(!empty($demos)){
 			$cnt = 0;
 			foreach($demos as $demo){
-				$demo_path = $base_demo_url . BBT_THEME_NAME . '/' . $demo;
+				$demo_path = $base_demo_url . strtolower(BBT_THEME_NAME) . '/' . $demo;
 
 				//check if in demo exist demo.xml file
 				if(bbt_check_external_file($demo_path . '/demo.xml') != 200) continue;
