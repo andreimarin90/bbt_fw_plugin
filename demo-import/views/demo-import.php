@@ -1,3 +1,16 @@
+
+<div class="settings-error notice">
+	<br>
+	<strong>You should contact your web hosting support and ask them to increase those limits in PHP.ini to this values:
+	<br><br>
+	<span style="color: #0073aa;">max_execution_time</span> = <span style="color: #dc3232;">300</span><br>
+	<span style="color: #0073aa;">memory_limit</span> = <span style="color: #dc3232;">256M</span><br>
+	<span style="color: #0073aa;">post_max_size</span> = <span style="color: #dc3232;">32M</span><br>
+	<span style="color: #0073aa;">upload_max_filesize</span> = <span style="color: #dc3232;">32M</span><br>
+	<span style="color: #0073aa;">max_input_vars</span> = <span style="color: #dc3232;">2000</span><br>
+	</strong>
+	<br>
+</div>
 <div class="wrap">
 	<h2><?php esc_html_e('BBT Demo Content','BigBangThemesFramework'); ?></h2>
 	<div style="margin-top:15px;"></div>
