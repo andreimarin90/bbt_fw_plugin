@@ -53,6 +53,8 @@ class BBT_Demo_Import{
 		if ( ! is_admin())
 			return;
 
+		if(!class_exists('BBT_Load')) return;
+		
 		//load BBT_Load class methods
 		$this->load = new BBT_Load;
 		$this->selfPath = plugin_dir_url( __FILE__ );
