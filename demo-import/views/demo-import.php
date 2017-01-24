@@ -55,7 +55,7 @@
 			<div id="bbt_popup_action" class="bbt_popup_description"
 			     data-begin="<?php esc_html_e('Installing Demo Content...','BigBangThemesFramework'); ?>"
 			     data-time="<?php esc_html_e('Please wait and do not refresh your page.','BigBangThemesFramework'); ?>"
-				 data-estimated-time="<?php esc_html_e('Estimated time - 5 min','BigBangThemesFramework'); ?>" 
+				 data-estimated-time="<?php esc_html_e('Estimated time - up to 10 min','BigBangThemesFramework'); ?>"
 			     data-timer="<?php esc_html_e('Elapsed Time','BigBangThemesFramework'); ?>:  ">
 			</div>
 		</div>
