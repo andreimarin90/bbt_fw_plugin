@@ -140,7 +140,7 @@ class BBT_Demo_Import{
 	 */
 	protected  function bbt_get_demos_configurations(){
 		$base_demo_url = 'http://bigbangthemes.net/Plugins_Repo/Themes/demo_imports/';
-		$config_file = $base_demo_url . BBT_THEME_NAME .'/demos_config.php';
+		$config_file = $base_demo_url . strtolower(BBT_THEME_NAME) .'/demos_config.php';
 
 		$response = wp_remote_get( $config_file , array('method' => 'POST', 'timeout' => 100, 'body' => array( 'request' => true )));
 		$demos = array();
