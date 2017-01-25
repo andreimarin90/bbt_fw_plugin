@@ -1,7 +1,7 @@
 
 <div class="settings-error notice">
 	<br>
-	<strong>You should contact your web hosting support and ask them to increase those limits in PHP.ini to this values:
+	<strong>In case your demo import doesn't work, please make sure to contact your web hosting support and ask them to check the following limits in PHP.ini and make sure they match:
 	<br><br>
 	<span style="color: #0073aa;">max_execution_time</span> = <span style="color: #dc3232;">300</span><br>
 	<span style="color: #0073aa;">memory_limit</span> = <span style="color: #dc3232;">256M</span><br>
