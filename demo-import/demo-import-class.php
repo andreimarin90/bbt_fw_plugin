@@ -53,6 +53,8 @@ class BBT_Demo_Import{
 		if ( ! is_admin())
 			return;
 
+		if(!class_exists('BBT_Load')) return;
+		
 		//load BBT_Load class methods
 		$this->load = new BBT_Load;
 		$this->selfPath = plugin_dir_url( __FILE__ );
@@ -151,7 +153,7 @@ class BBT_Demo_Import{
 		if(!empty($demos)){
 			$cnt = 0;
 			foreach($demos as $demo){
-				$demo_path = $base_demo_url . BBT_THEME_NAME . '/' . $demo;
+				$demo_path = $base_demo_url . strtolower(BBT_THEME_NAME) . '/' . $demo;
 
 				//check if in demo exist demo.xml file
 				if(bbt_check_external_file($demo_path . '/demo.xml') != 200) continue;
