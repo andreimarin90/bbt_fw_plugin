@@ -253,9 +253,9 @@
 .about-wrap div.error.bbt_update_notices.bbt_update_notices_yes.notice_product_key {
   display: block !important;
 }
-div.error.bbt_update_notices.notice_product_key {
+/*div.error.bbt_update_notices.notice_product_key {
   display: none !important;
-}
+}*/
 /* =========================================================================
    New Styles
  =========================================================================== */
