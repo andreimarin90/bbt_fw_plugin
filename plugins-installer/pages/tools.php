@@ -26,7 +26,7 @@ $installed_plugins = get_plugins();
 			<?php
 			foreach( $plugins as $plugin ):
 				//if (!$plugin['required']) continue;
-				if($plugin['slug'] == 'bbt_fw_plugin') continue;
+				//if($plugin['slug'] == 'bbt_fw_plugin') continue;
 
 				$class = '';
 				$plugin_status = '';
@@ -65,7 +65,16 @@ $installed_plugins = get_plugins();
 						</div>
 
 						<div class="plugin-buttons">
-							<?php foreach( $plugin_action as $action ) { bbt_print($action); } ?>
+							<?php foreach( $plugin_action as $key => $action ) {
+								if($plugin['slug'] == 'bbt_fw_plugin')
+								{
+									echo ($key == 'update') ? $action : '';
+								}
+								else
+								{
+									bbt_print($action);
+								}
+							} ?>
 						</div>
 
 						<?php if( isset( $plugin_action['update'] ) && $plugin_action['update'] ): ?>
