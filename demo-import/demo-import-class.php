@@ -167,9 +167,9 @@ class BBT_Demo_Import{
 
 					if( !is_wp_error( $request ) && is_array($request) ) {
 						$config = (array)json_decode($request['body']);
-
+						
 						//get demo title
-						$configs['demo-' . md5($demo_path)]['title'] = (isset($config['title']) && !empty($config['title'])) ? $config['title'] : esc_html__('Demo Title','bbt_fw_plugin');
+						$configs['demo-' . md5($demo_path)]['title'] = (isset($config['title']) && !empty($config['title'])) ? $config['title'] : '';//esc_html__('Demo Title','bbt_fw_plugin');
 						//get demo screenshot
 						$configs['demo-' . md5($demo_path)]['screenshot'] = (isset($config['screenshot']) && !empty($config['screenshot'])) ? $config['screenshot'] : '';
 						//get demo preview_link
