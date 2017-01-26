@@ -81,30 +81,28 @@
 
         <?php elseif ($activated && $activated != ''): ?>
             <style>.about-wrap div.error.bbt_update_notices.notice_product_key{display:none !important;}</style>
-            <div class="bbt-registration-done">
 
-                <img src="<?php echo BBT_PL_URL . '/plugins-installer/img/hand-ok.svg'; ?>" />
-                <h2><?php esc_html_e("Product Key Active!", "BigBangThemesFramework"); ?></h2>
+            <div class="bbt-registration-success">
+                <div class="inner steps clearfix">
+                    <div class="step">
+                        <img src="<?php echo BBT_PL_URL . '/plugins-installer/img/hand-ok.svg'; ?>" />
 
-                <div class="bbt_product_key_wrapper">
-                <span class="bbt_product_key">
-                    <?php echo get_option("bbt_".THEME_FOLDER_NAME."_license");?>
-                </span>
+                        <div class="title"><?php esc_html_e("Product Key Active!", "BigBangThemesFramework"); ?></div>
 
-                    <a class="button button-primary" href="<?php echo esc_url(BBT_Plugin_Installer::$bbt_api_url); ?>" target="_blank">
-                        <?php esc_html_e("Change Domain Name", "BigBangThemesFramework"); ?>
-                    </a>
+                        <div class="note"><?php echo get_option("bbt_".THEME_FOLDER_NAME."_license");?></div>
 
-                    <form class="delete_key" method="POST" action="">
-                        <input type="hidden" name="action" value="bbt-delkey">
-                        <button class="button" alt="<?php esc_html_e('Remove this key', "BigBangThemesFramework"); ?>" type="submit" value="submit">
-                            <?php esc_html_e("Remove Key", "BigBangThemesFramework"); ?>
-                        </button>
-                    </form>
+                        <a class="button" href="<?php echo esc_url(BBT_Plugin_Installer::$bbt_api_url); ?>" target="_blank">
+                            <?php esc_html_e("Change Domain Name", "BigBangThemesFramework"); ?>
+                        </a>
 
-                    <div class="clear"></div>
+                        <form class="delete_key" method="POST" action="">
+                            <input type="hidden" name="action" value="bbt-delkey">
+                            <button class="button" alt="<?php esc_html_e('Remove this key', "BigBangThemesFramework"); ?>" type="submit" value="submit">
+                                <?php esc_html_e("Remove Key", "BigBangThemesFramework"); ?>
+                            </button>
+                        </form>
+                    </div>
                 </div>
-
             </div>
 
         <?php elseif ($activated != ''): ?>

@@ -563,208 +563,226 @@ div.error.bbt_update_notices.notice_product_key{
    Registration Form
  =========================================================================== */
 
-.bbt-registration-form .inner.steps {
-	.step {
-		float: left;
-		width: 24%;
-		position: relative;
-		margin-left: 1.33%;
-		margin-bottom: 3%;
-		background-color: #fff;
-		-webkit-box-shadow: 0 1px 4px fade(#000, 25%);
-		box-shadow: 0 1px 4px fade(#000, 25%);
-		border-radius: 3px;
-		padding: 60px 50px 50px;
-		-webkit-box-sizing: border-box;
-		-moz-box-sizing: border-box;
-		box-sizing: border-box;
+.bbt-registration-form,
+.bbt-registration-success {
+	.inner.steps {
+		.step {
+			float: left;
+			width: 24%;
+			position: relative;
+			margin-left: 1.33%;
+			margin-bottom: 3%;
+			background-color: #fff;
+			-webkit-box-shadow: 0 1px 4px fade(#000, 25%);
+			box-shadow: 0 1px 4px fade(#000, 25%);
+			border-radius: 3px;
+			padding: 60px 50px 50px;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
 
-		&:nth-child(4n + 1) {
-			margin-left: 0;
-			clear: left;
+			&:nth-child(4n + 1) {
+				margin-left: 0;
+				clear: left;
+			}
+
+			@media (max-width: 1599px) {
+				padding: 40px 20px 30px;
+			}
+
+			@media (max-width: 1439px) {
+				width: 32%;
+				margin-left: 2%;
+			}
+
+			@media (max-width: 1199px) {
+				width: 49%;
+				margin-left: 2%;
+			}
+
+			@media (max-width: 767px) {
+				width: 100%;
+				margin-left: 0;
+			}
+
+			img {
+				display: block;
+				margin: 0 auto 50px;
+			}
+
+			.title {
+				font-size: 20px;
+				font-weight: 700;
+				color: @color-dark;
+				text-transform: uppercase;
+				margin-bottom: 2em;
+			}
+
+			&.step-1 {
+				&.step-error {
+					display: none;
+				}
+			}
 		}
 
-		@media (max-width: 1599px) {
-			padding: 40px 20px 30px;
-		}
-
-		@media (max-width: 1439px) {
-			width: 32%;
-			margin-left: 2%;
-		}
-
-		@media (max-width: 1199px) {
-			width: 49%;
-			margin-left: 2%;
-		}
-
-		@media (max-width: 767px) {
-			width: 100%;
-			margin-left: 0;
-		}
-
-		img {
-			display: block;
-			margin: 0 auto 50px;
-		}
-
-		.title {
-			font-size: 20px;
-			font-weight: 700;
-			color: @color-dark;
-			text-transform: uppercase;
-			margin-bottom: 2em;
-		}
-
-		&.step-1 {
-			&.step-error {
+		&.has-error {
+			.step-1:not(.step-error) {
 				display: none;
 			}
+
+			.step-1.step-error {
+				display: block !important;
+			}
+
+			.step-error {
+				background: #de302b;
+				font-size: 16px;
+				color: #FFF;
+				padding: 80px 70px 27px;
+				box-sizing: border-box;
+				text-align: left;
+				line-height: 22px;
+
+				.button {
+					margin-top: 54px;
+					margin-bottom: 0;
+				}
+			}
+		}
+
+		.button {
+			display: block;
+			font-size: 14px;
+			font-weight: 500;
+			width: 100%;
+			height: 46px;
+			line-height: 46px;
+			margin: 10px 0;
+			padding: 0 10px;
+			border: none;
+			color: #fff;
+			text-transform: uppercase;
+			background: @color-blue;
+			-webkit-box-shadow: 0 2px 3px fade(#000, 20%);
+			box-shadow: 0 2px 3px fade(#000, 20%);
+			-webkit-transition: all .2s;
+			transition: all .2s;
+
+			&:hover, &:active {
+				background: darken(@color-blue, 10%);
+				-webkit-transform: none;
+				transform: none;
+			}
+
+			.dashicons {display: none;}
+		}
+
+		#bbt_product_key {
+			font-size: 14px;
+			font-weight: 500;
+			color: @color-dark;
+			height: 46px;
+			width: 100%;
+			border-color: #dcdcdc;
+			text-align: center;
+			-webkit-box-shadow: none;
+			box-shadow: none;
+			-webkit-transition: all .2s;
+			transition: all .2s;
+			border-radius: 3px;
+			margin: 0 0 28px;
+			display: block;
+
+
+			&::-webkit-input-placeholder  {color: @color-lightGray;}
+			&:-moz-placeholder            {color: @color-lightGray;}
+			&::-moz-placeholder           {color: @color-lightGray;}
+			&:-ms-input-placeholder       {color: @color-lightGray;}
+
+			&:focus {border-color: @color-gray;}
+		}
+
+		.note {
+			font-size: 14px;
+			font-weight: 500;
+			color: @color-gray;
+			text-align: center;
+			max-width: 200px;
+			padding-top: 6px;
+			margin: 0 auto 32px;
 		}
 	}
 
-	&.has-error {
-		.step-1:not(.step-error) {
-			display: none;
-		}
+	.inner .center p {
+		font-size: 16px;
+		font-weight: 500;
+		color: @color-dark;
+		text-align: left;
+	}
 
-		.step-1.step-error {
-			display: block !important;
-		}
+	.bbt_footer {
+		font-size: 14px;
+		color: #999999;
+		text-align: left;
+		margin-top: 30px;
+		padding-top: 24px;
+		border-top: solid 1px #cccccc;
 
-		.step-error {
-			background: #de302b;
-			font-size: 16px;
-			color: #FFF;
-			padding: 80px 70px 27px;
-			box-sizing: border-box;
-			text-align: left;
-			line-height: 22px;
+		a {
+			margin-right: 20px;
 
-			.button {
-				margin-top: 54px;
-				margin-bottom: 0;
+			display: inline-block;
+			text-decoration: none;
+			font-size: 14px;
+			font-weight: 500;
+			padding: 0;
+			white-space: nowrap;
+			color: @color-gray;
+			border: none;
+			border-radius: 0;
+			background: none;
+			-webkit-box-shadow: none;
+			box-shadow: none;
+			vertical-align: top;
+			-webkit-transition: all .2s;
+			transition: all .2s;
+
+			.dashicons {
+				color: inherit;
+				margin-right: 4px;
+			}
+
+			&:focus {
+				background: none;
+				color: @color-gray;
+				-webkit-box-shadow: none;
+				box-shadow: none;
+			}
+
+			&:hover, &:active {
+				background: none;
+				color: @color-dark;
+				-webkit-box-shadow: none;
+				box-shadow: none;
+				-webkit-transform: none;
+				-ms-transform: none;
+				transform: none;
 			}
 		}
 	}
-
-	.button {
-		display: block;
-		font-size: 14px;
-		font-weight: 500;
-		width: 100%;
-		height: 46px;
-		line-height: 46px;
-		margin: 10px 0;
-		padding: 0 10px;
-		border: none;
-		color: #fff;
-		text-transform: uppercase;
-		background: @color-blue;
-		-webkit-box-shadow: 0 2px 3px fade(#000, 20%);
-		box-shadow: 0 2px 3px fade(#000, 20%);
-		-webkit-transition: all .2s;
-		transition: all .2s;
-
-		&:hover, &:active {
-			background: darken(@color-blue, 10%);
-			-webkit-transform: none;
-			transform: none;
-		}
-
-		.dashicons {display: none;}
-	}
-
-	#bbt_product_key {
-		font-size: 14px;
-		font-weight: 500;
-		color: @color-dark;
-		height: 46px;
-		width: 100%;
-		border-color: #dcdcdc;
-		text-align: center;
-		-webkit-box-shadow: none;
-		box-shadow: none;
-		-webkit-transition: all .2s;
-		transition: all .2s;
-		border-radius: 3px;
-		margin: 0 0 28px;
-		display: block;
-
-
-		&::-webkit-input-placeholder  {color: @color-lightGray;}
-		&:-moz-placeholder            {color: @color-lightGray;}
-		&::-moz-placeholder           {color: @color-lightGray;}
-		&:-ms-input-placeholder       {color: @color-lightGray;}
-
-		&:focus {border-color: @color-gray;}
-	}
-
-	.note {
-		font-size: 14px;
-		font-weight: 500;
-		color: @color-gray;
-		text-align: center;
-		max-width: 200px;
-		padding-top: 6px;
-		margin: 0 auto 32px;
-	}
 }
 
-.bbt-registration-form .inner .center p {
-	font-size: 16px;
-	font-weight: 500;
-	color: @color-dark;
-	text-align: left;
-}
-
-.bbt-registration-form .bbt_footer {
-	font-size: 14px;
-	color: #999999;
-	text-align: left;
-	margin-top: 30px;
-	padding-top: 24px;
-	border-top: solid 1px #cccccc;
-
-	a {
-		margin-right: 20px;
-
-		display: inline-block;
-		text-decoration: none;
-		font-size: 14px;
-		font-weight: 500;
-		padding: 0;
-		white-space: nowrap;
-		color: @color-gray;
-		border: none;
-		border-radius: 0;
-		background: none;
-		-webkit-box-shadow: none;
-		box-shadow: none;
-		vertical-align: top;
-		-webkit-transition: all .2s;
-		transition: all .2s;
-
-		.dashicons {
-			color: inherit;
-			margin-right: 4px;
+.bbt-registration-success {
+	.inner.steps {
+		.step {
+			text-align: center;
+			img {max-width: 200px;}
 		}
 
-		&:focus {
-			background: none;
-			color: @color-gray;
-			-webkit-box-shadow: none;
-			box-shadow: none;
-		}
-
-		&:hover, &:active {
-			background: none;
-			color: @color-dark;
-			-webkit-box-shadow: none;
-			box-shadow: none;
-			-webkit-transform: none;
-			-ms-transform: none;
-			transform: none;
+		.note {
+			max-width: none;
+			word-wrap: break-word;
+			font-size: 13px;
 		}
 	}
 }

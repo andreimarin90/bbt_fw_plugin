@@ -253,9 +253,9 @@
 .about-wrap div.error.bbt_update_notices.bbt_update_notices_yes.notice_product_key {
   display: block !important;
 }
-/*div.error.bbt_update_notices.notice_product_key {
+div.error.bbt_update_notices.notice_product_key {
   display: none !important;
-}*/
+}
 /* =========================================================================
    New Styles
  =========================================================================== */
@@ -524,7 +524,8 @@
 /* =========================================================================
    Registration Form
  =========================================================================== */
-.bbt-registration-form .inner.steps .step {
+.bbt-registration-form .inner.steps .step,
+.bbt-registration-success .inner.steps .step {
   float: left;
   width: 24%;
   position: relative;
@@ -539,54 +540,65 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-.bbt-registration-form .inner.steps .step:nth-child(4n + 1) {
+.bbt-registration-form .inner.steps .step:nth-child(4n + 1),
+.bbt-registration-success .inner.steps .step:nth-child(4n + 1) {
   margin-left: 0;
   clear: left;
 }
 @media (max-width: 1599px) {
-  .bbt-registration-form .inner.steps .step {
+  .bbt-registration-form .inner.steps .step,
+  .bbt-registration-success .inner.steps .step {
     padding: 40px 20px 30px;
   }
 }
 @media (max-width: 1439px) {
-  .bbt-registration-form .inner.steps .step {
+  .bbt-registration-form .inner.steps .step,
+  .bbt-registration-success .inner.steps .step {
     width: 32%;
     margin-left: 2%;
   }
 }
 @media (max-width: 1199px) {
-  .bbt-registration-form .inner.steps .step {
+  .bbt-registration-form .inner.steps .step,
+  .bbt-registration-success .inner.steps .step {
     width: 49%;
     margin-left: 2%;
   }
 }
 @media (max-width: 767px) {
-  .bbt-registration-form .inner.steps .step {
+  .bbt-registration-form .inner.steps .step,
+  .bbt-registration-success .inner.steps .step {
     width: 100%;
     margin-left: 0;
   }
 }
-.bbt-registration-form .inner.steps .step img {
+.bbt-registration-form .inner.steps .step img,
+.bbt-registration-success .inner.steps .step img {
   display: block;
   margin: 0 auto 50px;
 }
-.bbt-registration-form .inner.steps .step .title {
+.bbt-registration-form .inner.steps .step .title,
+.bbt-registration-success .inner.steps .step .title {
   font-size: 20px;
   font-weight: 700;
   color: rgba(0, 0, 0, 0.87);
   text-transform: uppercase;
   margin-bottom: 2em;
 }
-.bbt-registration-form .inner.steps .step.step-1.step-error {
+.bbt-registration-form .inner.steps .step.step-1.step-error,
+.bbt-registration-success .inner.steps .step.step-1.step-error {
   display: none;
 }
-.bbt-registration-form .inner.steps.has-error .step-1:not(.step-error) {
+.bbt-registration-form .inner.steps.has-error .step-1:not(.step-error),
+.bbt-registration-success .inner.steps.has-error .step-1:not(.step-error) {
   display: none;
 }
-.bbt-registration-form .inner.steps.has-error .step-1.step-error {
+.bbt-registration-form .inner.steps.has-error .step-1.step-error,
+.bbt-registration-success .inner.steps.has-error .step-1.step-error {
   display: block !important;
 }
-.bbt-registration-form .inner.steps.has-error .step-error {
+.bbt-registration-form .inner.steps.has-error .step-error,
+.bbt-registration-success .inner.steps.has-error .step-error {
   background: #de302b;
   font-size: 16px;
   color: #FFF;
@@ -595,11 +607,13 @@
   text-align: left;
   line-height: 22px;
 }
-.bbt-registration-form .inner.steps.has-error .step-error .button {
+.bbt-registration-form .inner.steps.has-error .step-error .button,
+.bbt-registration-success .inner.steps.has-error .step-error .button {
   margin-top: 54px;
   margin-bottom: 0;
 }
-.bbt-registration-form .inner.steps .button {
+.bbt-registration-form .inner.steps .button,
+.bbt-registration-success .inner.steps .button {
   display: block;
   font-size: 14px;
   font-weight: 500;
@@ -618,15 +632,19 @@
   transition: all .2s;
 }
 .bbt-registration-form .inner.steps .button:hover,
-.bbt-registration-form .inner.steps .button:active {
+.bbt-registration-success .inner.steps .button:hover,
+.bbt-registration-form .inner.steps .button:active,
+.bbt-registration-success .inner.steps .button:active {
   background: #32408f;
   -webkit-transform: none;
   transform: none;
 }
-.bbt-registration-form .inner.steps .button .dashicons {
+.bbt-registration-form .inner.steps .button .dashicons,
+.bbt-registration-success .inner.steps .button .dashicons {
   display: none;
 }
-.bbt-registration-form .inner.steps #bbt_product_key {
+.bbt-registration-form .inner.steps #bbt_product_key,
+.bbt-registration-success .inner.steps #bbt_product_key {
   font-size: 14px;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.87);
@@ -642,22 +660,28 @@
   margin: 0 0 28px;
   display: block;
 }
-.bbt-registration-form .inner.steps #bbt_product_key::-webkit-input-placeholder {
+.bbt-registration-form .inner.steps #bbt_product_key::-webkit-input-placeholder,
+.bbt-registration-success .inner.steps #bbt_product_key::-webkit-input-placeholder {
   color: rgba(0, 0, 0, 0.38);
 }
-.bbt-registration-form .inner.steps #bbt_product_key:-moz-placeholder {
+.bbt-registration-form .inner.steps #bbt_product_key:-moz-placeholder,
+.bbt-registration-success .inner.steps #bbt_product_key:-moz-placeholder {
   color: rgba(0, 0, 0, 0.38);
 }
-.bbt-registration-form .inner.steps #bbt_product_key::-moz-placeholder {
+.bbt-registration-form .inner.steps #bbt_product_key::-moz-placeholder,
+.bbt-registration-success .inner.steps #bbt_product_key::-moz-placeholder {
   color: rgba(0, 0, 0, 0.38);
 }
-.bbt-registration-form .inner.steps #bbt_product_key:-ms-input-placeholder {
+.bbt-registration-form .inner.steps #bbt_product_key:-ms-input-placeholder,
+.bbt-registration-success .inner.steps #bbt_product_key:-ms-input-placeholder {
   color: rgba(0, 0, 0, 0.38);
 }
-.bbt-registration-form .inner.steps #bbt_product_key:focus {
+.bbt-registration-form .inner.steps #bbt_product_key:focus,
+.bbt-registration-success .inner.steps #bbt_product_key:focus {
   border-color: rgba(0, 0, 0, 0.54);
 }
-.bbt-registration-form .inner.steps .note {
+.bbt-registration-form .inner.steps .note,
+.bbt-registration-success .inner.steps .note {
   font-size: 14px;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.54);
@@ -666,13 +690,15 @@
   padding-top: 6px;
   margin: 0 auto 32px;
 }
-.bbt-registration-form .inner .center p {
+.bbt-registration-form .inner .center p,
+.bbt-registration-success .inner .center p {
   font-size: 16px;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.87);
   text-align: left;
 }
-.bbt-registration-form .bbt_footer {
+.bbt-registration-form .bbt_footer,
+.bbt-registration-success .bbt_footer {
   font-size: 14px;
   color: #999999;
   text-align: left;
@@ -680,7 +706,8 @@
   padding-top: 24px;
   border-top: solid 1px #cccccc;
 }
-.bbt-registration-form .bbt_footer a {
+.bbt-registration-form .bbt_footer a,
+.bbt-registration-success .bbt_footer a {
   margin-right: 20px;
   display: inline-block;
   text-decoration: none;
@@ -698,18 +725,22 @@
   -webkit-transition: all .2s;
   transition: all .2s;
 }
-.bbt-registration-form .bbt_footer a .dashicons {
+.bbt-registration-form .bbt_footer a .dashicons,
+.bbt-registration-success .bbt_footer a .dashicons {
   color: inherit;
   margin-right: 4px;
 }
-.bbt-registration-form .bbt_footer a:focus {
+.bbt-registration-form .bbt_footer a:focus,
+.bbt-registration-success .bbt_footer a:focus {
   background: none;
   color: rgba(0, 0, 0, 0.54);
   -webkit-box-shadow: none;
   box-shadow: none;
 }
 .bbt-registration-form .bbt_footer a:hover,
-.bbt-registration-form .bbt_footer a:active {
+.bbt-registration-success .bbt_footer a:hover,
+.bbt-registration-form .bbt_footer a:active,
+.bbt-registration-success .bbt_footer a:active {
   background: none;
   color: rgba(0, 0, 0, 0.87);
   -webkit-box-shadow: none;
@@ -717,6 +748,17 @@
   -webkit-transform: none;
   -ms-transform: none;
   transform: none;
+}
+.bbt-registration-success .inner.steps .step {
+  text-align: center;
+}
+.bbt-registration-success .inner.steps .step img {
+  max-width: 200px;
+}
+.bbt-registration-success .inner.steps .note {
+  max-width: none;
+  word-wrap: break-word;
+  font-size: 13px;
 }
 /* =========================================================================
    Tabs
