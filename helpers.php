@@ -121,3 +121,28 @@ function bbt_check_external_file($url)
 
     return $retCode;
 }
+
+function verifyPurchase($userName, $apiKey , $purchaseCode, $itemId = false) {
+    // Open cURL channel
+    $ch = curl_init();
+
+    // Set cURL options
+    curl_setopt($ch, CURLOPT_URL, "http://marketplace.envato.com/api/edge/$userName/$apiKey/verify-purchase:$purchaseCode.json");
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_USERAGENT, 'ENVATO-PURCHASE-VERIFY'); //api requires any user agent to be set
+
+    // Decode returned JSON
+    $result = json_decode( curl_exec($ch) , true );
+
+    //check if purchase code is correct
+    if ( !empty($result['verify-purchase']['item_id']) && $result['verify-purchase']['item_id'] && isset($result['verify-purchase']['buyer']) ) {
+        //if no item name is given - any valid purchase code will work
+        if ( !$itemId ) return true;
+        //else - also check if purchased item is given item to check
+        return $result['verify-purchase']['item_id'] == $itemId;
+    }
+
+    //invalid purchase code
+    return false;
+
+}
