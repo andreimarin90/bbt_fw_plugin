@@ -52,16 +52,6 @@ class BBT_Shortcoder{
 		add_action( 'wp_enqueue_scripts' , array( 'BBT_Shortcoder' , 'add_wp_scripts' ) );
 	}
 
-	private static function get_shortcodes_only_config(){
-		$options = self::$config;
-		$shortcodes = array();
-		if(!empty($options['groups'])){
-			foreach ($options['groups'] as $group_id => $group) {
-				$shortcodes = array_merge($shortcodes,$group['shortcodes']);
-			}
-			self::$shortcodes_only = $shortcodes;
-		}
-	}
 
 	private static function generate_shortcodes(){
 		$shortcodes = self::$shortcodes_only;
