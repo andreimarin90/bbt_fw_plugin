@@ -91,16 +91,18 @@ class BBT_Shortcoder{
 	}
 
 	public static function add_shortcode_button(){
-		$admin_page = get_current_screen();
-		if( !empty($admin_page) && $admin_page->base === 'post'){
-			add_thickbox();
-			echo '<a href="#" id="shortcoder" class="sc-button radius-5">
-				<span class="button-label radius-5 bg-dark" data-title="' . esc_html__("Shortcodes","bbt_fw_plugin") . '">
-					<i class="icon-brand"></i>
-				</span>
-				<span class="button-text">' . esc_html__("Shortcodes","bbt_fw_plugin") . '</span>
-			</a>';
-		}
+		if(file_exists(get_template_directory() . 'theme_config/shortcodes-options.php')) :
+			$admin_page = get_current_screen();
+			if( !empty($admin_page) && $admin_page->base === 'post'){
+				add_thickbox();
+				echo '<a href="#" id="shortcoder" class="sc-button radius-5">
+					<span class="button-label radius-5 bg-dark" data-title="' . esc_html__("Shortcodes","bbt_fw_plugin") . '">
+						<i class="icon-brand"></i>
+					</span>
+					<span class="button-text">' . esc_html__("Shortcodes","bbt_fw_plugin") . '</span>
+				</a>';
+			}
+		endif;
 	}
 
 	public static function add_inline_popup_content(){
