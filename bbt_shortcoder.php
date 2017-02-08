@@ -35,7 +35,6 @@ class BBT_Shortcoder{
 			vc_add_shortcode_param('image_selector', array( 'BBT_Shortcoder' , 'bbt_image_selector'));
 			vc_add_shortcode_param('image_preview', array( 'BBT_Shortcoder' , 'bbt_image_preview'));
 			vc_add_shortcode_param('bbt_icons' , array( 'BBT_Shortcoder' , 'bbt_icon_field'));
-			vc_add_shortcode_param('bbt_md_icons' , array( 'BBT_Shortcoder' , 'bbt_md_icon_field'));
 			vc_add_shortcode_param('slider', array( 'BBT_Shortcoder' , 'bbt_slider_vc_option'));
 		}
 	}
@@ -119,6 +118,7 @@ class BBT_Shortcoder{
 		$protocol = is_ssl() ? 'https' : 'http';
 		wp_enqueue_style( 'bbt-g-font', $protocol . "://fonts.googleapis.com/css?family=Open+Sans:400,700|Montserrat:400,700");
 		wp_enqueue_style( 'bbt-fa-css', BBT_FW . '/static/css/font-awesome.min.css' );
+		wp_enqueue_style( 'bbt-font-material', BBT_FW . '/static/css/font-material.css' );
 		wp_enqueue_style( 'bbt-select2-css', BBT_FW . '/static/css/select2.css' );
 		wp_enqueue_style( 'bbt-shortcoder-css', BBT_FW . '/static/css/shortcoder.css' );
 		wp_enqueue_style( 'bbt-metadata-css', BBT_FW . '/static/css/metadata.css' );
@@ -475,6 +475,7 @@ class BBT_Shortcoder{
 		$type = isset($settings['type']) ? $settings['type'] : '';
 		$class = isset($settings['class']) ? $settings['class'] : '';
 		$icons = myGlobals::$bbt_custom_vc_icons;
+		$icons_md = myGlobals::$bbt_md_vc_icons;
 		$uniqID    = uniqid();
 
 		if(is_array($value)) {
@@ -494,6 +495,13 @@ class BBT_Shortcoder{
 			$selected = ($icon == $value) ? 'class="selected"' : '';
 			$id = 'icon-'.$n;
 			$output .= '<li '.$selected.' data-ico="'.$icon.'"><i class="icon-'.$icon.'"></i><label class="icon">'.$icon.'</label></li>';
+			$n++;
+		}
+		foreach($icons_md as $icons_md)
+		{
+			$selected = ($icons_md == $value) ? 'class="selected"' : '';
+			$id = 'icon-'.$n;
+			$output .= '<li '.$selected.' data-ico="'.$icon.'"><i class="mi-icon">'.$icon.'</i><label class="icon">'.$icon.'</label></li>';
 			$n++;
 		}
 		$output .='</ul>';
@@ -525,68 +533,6 @@ class BBT_Shortcoder{
 					var icon = jQuery(this).attr("data-ico");
 					$input_hiddent.attr("value", icon);
 					jQuery(".icon-preview").html("<i class=\'icon "+icon+"\'></i><label>"+icon+"</label>");
-				});
-		</script>';
-		return $output;
-	}
-
-	public static  function bbt_md_icon_field($settings, $value)
-	{
-		$dependency = vc_generate_dependencies_attributes($settings);
-		$param_name = isset($settings['param_name']) ? $settings['param_name'] : '';
-		$type = isset($settings['type']) ? $settings['type'] : '';
-		$class = isset($settings['class']) ? $settings['class'] : '';
-		$icons = myGlobals::$bbt_md_vc_icons;
-		$uniqID    = uniqid();
-
-		if(is_array($value)) {
-			foreach ($value as $key => $val) {
-				$value = $key;
-			}
-		}
-
-		$output = '<input type="text" name="search_icon" class="search_md_icon" value="" id="search-'. $uniqID .'" style="width: 510px; margin-bottom: 15px; padding-right: 25px;" />
-		<i class="fa fa-search" style="position:relative; left:-25px;"></i>
-		<input type="hidden" name="'.$param_name.'" class="wpb_vc_param_value ' . $dependency . ' '.$param_name.' '.$type.' '.$class.'" ' . $dependency . ' value="'.$value.'" id="trace-'. $uniqID .'"/>';
-		$output .='<div id="icon-dropdown" style="max-height: 300px; overflow-y: auto;">';
-		$output .= '<ul class="bbt-icon-list">';
-		$n = 1;
-		foreach($icons as $icon)
-		{
-			$selected = ($icon == $value) ? 'class="selected"' : '';
-			$id = 'icon-'.$n;
-			$output .= '<li '.$selected.' data-ico="'.$icon.'"><span class="md-icon">'.$icon.'</i><label class="icon">'.$icon.'</label></li>';
-			$n++;
-		}
-		$output .='</ul>';
-		$output .='</div>';
-		$output .= '<script type="text/javascript">
-				jQuery(document).ready(function(){
-					jQuery("#search-'. $uniqID .'").keyup(function(){
-				 
-						// Retrieve the input field text and reset the count to zero
-						var filter = jQuery(this).val(), count = 0;
-				 
-						// Loop through the icon list
-						jQuery(".bbt-icon-list li").each(function(){
-				 
-							// If the list item does not contain the text phrase fade it out
-							if (jQuery(this).text().search(new RegExp(filter, "i")) < 0) {
-								jQuery(this).fadeOut();
-							} else {
-								jQuery(this).show();
-								count++;
-							}
-						});
-					});
-				});
-
-				jQuery("#icon-dropdown li").click(function() {
-					var $input_hiddent = jQuery(this).parents("#icon-dropdown").siblings("input");
-					jQuery(this).attr("class","selected").siblings().removeAttr("class");
-					var icon = jQuery(this).attr("data-ico");
-					$input_hiddent.attr("value", icon);
-					jQuery(".icon-preview").html("<span class=\'md-icon\'>"+icon+"</span><label>"+icon+"</label>");
 				});
 		</script>';
 		return $output;
