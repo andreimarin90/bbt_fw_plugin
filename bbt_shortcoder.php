@@ -501,7 +501,7 @@ class BBT_Shortcoder{
 		{
 			$selected = ($icons_md == $value) ? 'class="selected"' : '';
 			$id = 'icon-'.$n;
-			$output .= '<li '.$selected.' data-ico="'.$icon.'"><i class="mi-icon">'.$icon.'</i><label class="icon">'.$icon.'</label></li>';
+			$output .= '<li '.$selected.' data-ico="'.$icons_md.'"><i class="mi-icon">'.$icons_md.'</i><label class="icon">'.$icons_md.'</label></li>';
 			$n++;
 		}
 		$output .='</ul>';
