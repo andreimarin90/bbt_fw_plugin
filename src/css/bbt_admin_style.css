@@ -1,0 +1,6 @@
+#toplevel_page_bbt_welcome_theme .dashicons-before:before{
+    content: initial !important;
+}
+#adminmenu  #toplevel_page_bbt_welcome_theme .wp-menu-image img {
+    padding: 11px 0 0;
+}

@@ -1,4 +1,15 @@
 <?php
+/**
+ * Enqueue plugin scripts
+ *
+ */
+add_action('admin_enqueue_scripts', 'bbt_fw_plugin_enqueue_scripts');
+function bbt_fw_plugin_enqueue_scripts() {
+    wp_enqueue_style(	"bbt_admin_style", BBT_PL_URL . "/src/css/bbt_admin_style.css", false, 1.0, "all" );
+    //wp_enqueue_script(	"bbt_plugin-admin_js", 	$plugin_path . "js/plugin-admin.js", 	array(), false, null );
+}
+
+
 /***********************************************************************************************/
 /*  Visual Composer css code decode
 /***********************************************************************************************/

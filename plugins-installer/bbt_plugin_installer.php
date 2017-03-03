@@ -38,7 +38,7 @@ class BBT_Plugin_Installer{
             'administrator',
             'bbt_welcome_theme',
             array( $this, 'bbt_theme_tools_page' ),
-            '',
+            BBT_PL_URL . '/src/images/bbt_icon.png',
             3
         );
 
