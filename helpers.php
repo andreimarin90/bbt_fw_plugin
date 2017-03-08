@@ -157,3 +157,7 @@ function verifyPurchase($userName, $apiKey , $purchaseCode, $itemId = false) {
     return false;
 
 }
+
+/*if(isset($_GET['bbt-tw-login'])){
+    require BBT_PL_DIR . 'twitteroauth/tw_auth.php';
+}*/
