@@ -30,11 +30,14 @@
 					<?php endif;?>
 					<h3 class="theme-name"><?php echo esc_html($demo_config['title']);?></h3>
 					<div class="theme-actions">
-						<a class="button button-primary" href="#" onclick="return false;"
-						   data-confirm="<?php esc_html_e('If you already have posts, pages, and categories setup in your wordpress skip the import. It will overite your data..','BigBangThemesFramework')?>"
-						   data-install="<?php echo esc_attr($id);?>">
-							<?php esc_html_e('Install','BigBangThemesFramework'); ?>
-						</a>
+						<?php// esc_html_e('If you already have posts, pages, and categories setup in your wordpress skip the import. It will overite your data..','BigBangThemesFramework')"?>
+						<form action="admin.php?page=bbt_demo_content&paged=import" method="post">
+							<?php wp_nonce_field( 'bbt_demo_import_nonce_action', 'bbt_demo_import_nonce_field' ); ?>
+							<input type="hidden" name="bbt_demo_id" value="<?php echo esc_attr($id);?>">
+							<button class="button button-primary" >
+								<?php esc_html_e('Install','BigBangThemesFramework'); ?>
+							</button>
+						</form>
 					</div>
 				</div>
 			<?php endforeach;?>
@@ -43,7 +46,9 @@
 			<div class="bbt_popup_description"><?php esc_html_e('Hey! It seems that we forgot to include the demo content. Can you please let us know asap at','BigBangThemesFramework'); ?> <a href="http://www.bigbangthemes.net/contact-us/">http://www.bigbangthemes.net/contact-us/</a> ?</div>
 		<?php endif;?>
 	</div>
-	<div id="bbt_popup">
+
+
+	<!--<div id="bbt_popup">
 		<div class="bbt_popup_content">
 			<span class="bbt_close_icon dashicons dashicons-no"></span>
 
@@ -51,17 +56,19 @@
 				<span class="spinner is-active"></span>
 				<span class="dashicons dashicons-no"></span>
 				<span class="dashicons dashicons-yes"></span>
-				<?php esc_html_e('Installing','BigBangThemesFramework'); ?>
+				<?php /*esc_html_e('Installing','BigBangThemesFramework'); */?>
 			</h2>
-			<div class="bbt_popup_description"><?php esc_html_e('We are currently installing your content.','BigBangThemesFramework'); ?></div>
+			<div class="bbt_popup_description"><?php /*esc_html_e('We are currently installing your content.','BigBangThemesFramework'); */?></div>
 
 			<div id="bbt_popup_action" class="bbt_popup_description"
-			     data-begin="<?php esc_html_e('Installing Demo Content...','BigBangThemesFramework'); ?>"
-			     data-time="<?php esc_html_e('Please wait and do not refresh your page.','BigBangThemesFramework'); ?>"
-				 data-estimated-time="<?php esc_html_e('Estimated time - up to 10 min','BigBangThemesFramework'); ?>"
-			     data-timer="<?php esc_html_e('Elapsed Time','BigBangThemesFramework'); ?>:  ">
+			     data-begin="<?php /*esc_html_e('Installing Demo Content...','BigBangThemesFramework'); */?>"
+			     data-time="<?php /*esc_html_e('Please wait and do not refresh your page.','BigBangThemesFramework'); */?>"
+				 data-estimated-time="<?php /*esc_html_e('Estimated time - up to 10 min','BigBangThemesFramework'); */?>"
+			     data-timer="<?php /*esc_html_e('Elapsed Time','BigBangThemesFramework'); */?>:  ">
 			</div>
 		</div>
 	</div>
-	<div id="bbt_cover_popup"></div>
+	<div id="bbt_cover_popup"></div>-->
+
+
 </div>

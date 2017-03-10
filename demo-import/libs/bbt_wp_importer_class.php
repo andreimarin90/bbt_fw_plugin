@@ -41,9 +41,9 @@ class BBT_WP_IMPORTER extends BBT_WP_Import {
 
 	    $info = $this->bbt_install_attachments();
 
-	    if(empty($info['id'])){
+	    /*if(empty($info['id'])){
 		    return array('install' => 'no', 'message' => $info['message'], 'notices' => '');
-	    }
+	    }*/
 
 	    $this->fetch_attachments = true;
 	    $this->id  = !empty($info['id']) ? (int)$info['id'] : '';
@@ -54,118 +54,24 @@ class BBT_WP_IMPORTER extends BBT_WP_Import {
 
 	    //call import function
 	    //in $result can be an error so we will display it
-	    $result = $this->import($file);
+		$this->import($file);
 
 	    //if error display it
-	    if ( is_wp_error( $result ) )
+	    /*if ( is_wp_error( $result ) )
 		    return array( 'install' => 'no', 'message' => $result->get_error_message(), 'notices' => '' );
 	    elseif(isset($result['notices']))
-		    $notice_messages = $result['notices'];
+		    $notice_messages = $result['notices'];*/
 
 	    //echo footer in any case
         $this->footer();
 
-	    return array( 'install' => 'yes', 'message' => $this->finish_msg, 'notices' => $notice_messages );
+	    //return array( 'install' => 'yes', 'message' => $this->finish_msg, 'notices' => $notice_messages );
     }
 
     //echo footer
     function footer() {
        echo '';
     }
-
-    /**
-     * The main controller for the actual import stage.
-     *
-     * @param string $file Path to the WXR file for importing
-     */
-    function import( $file ) {
-        add_filter( 'import_post_meta_key', array( $this, 'is_valid_meta_key' ) );
-        add_filter( 'http_request_timeout', array( &$this, 'bump_request_timeout' ) );
-
-        $info_star = $this->import_start( $file );
-
-	    //if error display it
-	    if ( is_wp_error( $info_star ) ) {
-		    return  new WP_Error('import_error', $info_star->get_error_message() );
-	    }
-
-	    ob_start();
-
-        $this->get_author_mapping();
-
-        wp_suspend_cache_invalidation( true );
-        $this->process_categories();
-        $this->process_tags();
-        $this->process_terms();
-        $this->process_posts();
-        wp_suspend_cache_invalidation( false );
-
-        // update incorrect/missing information in the DB
-        $this->backfill_parents();
-        $this->backfill_attachment_urls();
-        $this->remap_featured_images();
-
-        $this->import_end();
-
-	    $messages = ob_get_contents();
-
-	    ob_end_clean();
-
-	    return array('notices' => $messages);
-    }
-
-    /**
-     * Parses the WXR file and prepares us for the task of processing parsed data
-     *
-     * @param string $file Path to the WXR file for importing
-     */
-    function import_start( $file ) {
-        if ( ! is_file($file) ) {
-	        return new WP_Error( 'import_error', '<p>' . __( 'The file does not exist, please try again.', 'bbt_fw_plugin' ) . '</p>' . $this->footer() );
-        }
-
-        $import_data = $this->parse( $file );
-
-        if ( is_wp_error( $import_data ) ) {
-	        return new WP_Error( 'import_error', esc_html( $import_data->get_error_message() ) . $this->footer() );
-        }
-
-        $this->version = $import_data['version'];
-
-        $this->get_authors_from_import( $import_data );
-
-        $this->posts = $import_data['posts'];
-        $this->terms = $import_data['terms'];
-        $this->categories = $import_data['categories'];
-        $this->tags = $import_data['tags'];
-        $this->base_url = esc_url( $import_data['base_url'] );
-
-        wp_defer_term_counting( true );
-        wp_defer_comment_counting( true );
-
-        do_action( 'import_start' );
-    }
-
-	/**
-	 * Performs post-import cleanup of files and the cache
-	 */
-	function import_end() {
-		wp_import_cleanup( $this->id );
-
-		wp_cache_flush();
-		foreach ( get_taxonomies() as $tax ) {
-			delete_option( "{$tax}_children" );
-			_get_term_hierarchy( $tax );
-		}
-
-		wp_defer_term_counting( false );
-		wp_defer_comment_counting( false );
-
-		$this->finish_msg .= '<p>' . __( 'All done.', 'bbt_fw_plugin' ) . ' <a href="' . admin_url() . '">' . __( 'Have fun!', 'bbt_fw_plugin' ) . '</a>' . '</p>'
-		                          . '<p>' . __( 'Remember to update the passwords and roles of imported users.', 'bbt_fw_plugin' ) . '</p>';
-
-		do_action( 'import_end' );
-	}
 
     /**
      * replace old urls with new ones
@@ -267,8 +173,7 @@ class BBT_WP_IMPORTER extends BBT_WP_Import {
 			}
 			else
 			{
-				$error = new WP_Error( 'import_file_error', 'File not found!' );
-				return array( 'file' => '', 'id' => '' , 'message' => $error);
+				esc_html_e('File not found!', 'bbt_fw_plugin');
 			}
 
 			//return;
@@ -298,8 +203,7 @@ class BBT_WP_IMPORTER extends BBT_WP_Import {
 			$install_file_copy = $this->xcopy($this->xmlfile , $uploads['basedir'] .'/'.basename( $this->xmlfile ));
 			if(!$install_file_copy)
 			{
-				$error = new WP_Error( 'import_file_error', 'Upload error!' );
-				return array( 'file' => '', 'id' => '' , 'message' => $error);
+				esc_html_e('Upload error!', 'bbt_fw_plugin');
 			}
 
 			// schedule a cleanup for one day from now in case of failed import or missing wp_import_cleanup() call
@@ -308,9 +212,9 @@ class BBT_WP_IMPORTER extends BBT_WP_Import {
 			return array( 'file' => $file, 'id' => $id , 'message' => '');
 		}
 
-		$error = new WP_Error( 'import_file_error', 'The import file could not be found at <code>'.$this->install_dir .'import_files </code>.' );
+		$error = new WP_Error( 'import_file_error' );
 		if ( is_wp_error( $error ) ) {
-			return array( 'file' => '', 'id' => '' , 'message' => 'The import file could not be found at <code>'.$this->install_dir .'import_files </code>.');
+			echo 'The import file could not be found at <code>'.$this->install_dir .'import_files </code>.';
 		}
 	}
 }

@@ -69,8 +69,8 @@ class BBT_Demo_Import{
 		add_action( 'admin_print_styles', array( $this, 'load_scripts_styles' ) );
 
 		//call import function on ajax request
-		add_action('wp_ajax_bbt_make_import' ,array( $this, 'bbt_make_import'));
-		add_action('wp_ajax_nopriv_bbt_make_import',array( $this, 'bbt_make_import'));
+		/*add_action('wp_ajax_bbt_make_import' ,array( $this, 'bbt_make_import'));
+		add_action('wp_ajax_nopriv_bbt_make_import',array( $this, 'bbt_make_import'));*/
 	}
 
 	/**
@@ -104,11 +104,16 @@ class BBT_Demo_Import{
 	 * @access public
 	 */
 	public function bbt_main_view_page(){
-		if(file_exists( BBT_PL_DIR . '/demo-import/views/demo-import.php' ))
-		{
-			echo bbt_plugin_view('demo-import', 'demo-import', array('configs' => $this->demoConfigs), TRUE, NULL);
+		if(file_exists( BBT_PL_DIR . '/demo-import/views/demo-import.php' )) {
+			if(isset($_GET['paged']) && $_GET['paged'] == 'import')
+			{
+				$config = $this->bbt_make_import();
+				echo bbt_plugin_view('demo-import-import', 'demo-import', array('configs' => $config), TRUE, NULL);
+			}
+			else {
+				echo bbt_plugin_view('demo-import', 'demo-import', array('configs' => $this->demoConfigs), TRUE, NULL);
+			}
 		}
-
 	}
 
 	/**
@@ -128,7 +133,7 @@ class BBT_Demo_Import{
 			wp_enqueue_style( 'bbt-demo-import-style', $plugin_path . '/css/demo-import-style.css' );
 
 			// Enqueue Meta Box Scripts
-			wp_enqueue_script( 'bbt-demo-import-script', $plugin_path . '/js/demo-import-script.js', array( 'jquery' ), null, true );
+			//wp_enqueue_script( 'bbt-demo-import-script', $plugin_path . '/js/demo-import-script.js', array( 'jquery' ), null, true );
 		}
 	}
 
@@ -176,14 +181,12 @@ class BBT_Demo_Import{
 						$configs['demo-' . md5($demo_path)]['preview_link'] = (isset($config['preview_link']) && !empty($config['preview_link'])) ? $config['preview_link'] : '';
 					}
 				}
-
 				$cnt++;
 			}
 		}
 
 		return $configs;
 	}
-
 
 	/**
 	 * fly_make_import
@@ -192,42 +195,55 @@ class BBT_Demo_Import{
 	 */
 	public function bbt_make_import() {
 
-		//check if install id exists
-		if(isset($_POST['install_id']))
-		{
-			if(empty($_POST['install_id'])){
-				echo json_encode(array('install' => 'no', 'message' => esc_html__('Missing Install','bbt_fw_plugin')));
-				die();
+		if (isset($_POST['bbt_demo_import_nonce_field']) || wp_verify_nonce($_POST['bbt_demo_import_nonce_field'], 'bbt_demo_import_nonce_action')) {
+
+			//check if install id exists
+			if (isset($_POST['bbt_demo_id'])) {
+
+				if (empty($_POST['bbt_demo_id'])) {
+					return array('message' => esc_html__('Missing Install', 'bbt_fw_plugin'));
+				}
+
+				//get clicked demo path
+				$demo_path = (array_key_exists($_POST['bbt_demo_id'], $this->demoConfigs)) ? $this->demoConfigs[$_POST['bbt_demo_id']]['demo_path'] : array();
+
+				if (empty($demo_path)) {
+					return array('message' => esc_html__('No Demo Path', 'bbt_fw_plugin'));
+				}
+
+				echo '<strong>' . esc_html__('Importing...', 'bbt_fw_plugin') . '</strong><br />';
+				
+				// include importer file parsers
+				if (!defined('WP_LOAD_IMPORTERS'))
+					define('WP_LOAD_IMPORTERS', true);
+
+				require_once $this->selfPathDir . 'libs/wordpress-importer.php';
+				require_once $this->selfPathDir . 'libs/bbt_wp_importer_class.php';
+
+				$bbt_wp_import = new BBT_WP_IMPORTER();
+				//start import
+				$bbt_wp_import->bbt_start_importing($demo_path);
+
+				$this->bbt_redirect(home_url('/'));
+				exit;
+			} else
+			{
+				return array('message' => esc_html__('Some configurations are missing', 'bbt_fw_plugin'));
 			}
-
-			//get clicked demo path
-			$demo_path = (array_key_exists($_POST['install_id'], $this->demoConfigs)) ? $this->demoConfigs[$_POST['install_id']]['demo_path'] : array();
-			
-			if(empty($demo_path)){
-				echo json_encode(array('install' => 'no', 'message' => esc_html__('No Demo Path','bbt_fw_plugin')));
-				die();
-			}
-
-			// include importer file parsers
-			if ( ! defined( 'WP_LOAD_IMPORTERS' ) )
-				define('WP_LOAD_IMPORTERS', true);
-
-			require_once $this->selfPathDir . 'libs/wordpress-importer.php';
-			require_once $this->selfPathDir . 'libs/bbt_wp_importer_class.php';
-
-			$bbt_wp_import = new BBT_WP_IMPORTER();
-			//start import
-			$install_info = $bbt_wp_import->bbt_start_importing($demo_path);
-			$install_info = array_merge($install_info, array('home_url' => home_url('/') ));
-
-			echo json_encode($install_info);
 		}
 		else
 		{
-			echo json_encode(array('install' => 'no', 'message' => esc_html__('Some configurations are missing','bbt_fw_plugin')));
+			return array('message' => esc_html__('You are not allowed to import content', 'bbt_fw_plugin'));
 		}
+	}
 
-		die();
+	function bbt_redirect($url)
+	{
+		$string = '<script type="text/javascript">';
+		$string .= 'window.location = "' . $url . '"';
+		$string .= '</script>';
+
+		echo $string;
 	}
 }
 
