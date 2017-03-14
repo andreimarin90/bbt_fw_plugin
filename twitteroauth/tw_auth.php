@@ -8,6 +8,8 @@ define('CONSUMER_SECRET', '7fSqZQCKurK8eIEb8FRQObwpL6AUQr8IHm3N8WHwPhsgmET3Ym');
 
 $consumer_key = 'CKUg9sd3S3gFEJ4GGgpU6hnb1';
 $consumer_secret = 'L8xJ8qHYuXDzzANRQP2XzXSB6gnV2LUUbdyfjc1Wan84oKu7T9';
+$outh_token = '2315691576-J2Rac34O9rNVdlhFhwzIK7UcnMF8CIOvY8Txm51';
+$oauthTokenSecret = 'YXkZ3CJHuYmPgN6ghFvfKYTAfTqvMFP0pAfQvFbb8EPVi';
 
 if(!empty($consumer_key) && !empty($consumer_secret))
 {
@@ -45,7 +47,7 @@ if(!empty($consumer_key) && !empty($consumer_secret))
     }
     else
     {
-        $connection = new TwitterOAuth($consumer_key, $consumer_secret);
+        $connection = new TwitterOAuth($consumer_key, $consumer_secret, $outh_token, $oauthTokenSecret);
         $request_token = $connection->oauth('oauth/request_token', array('oauth_callback' => $oauth_callback));
 
         $_SESSION['oauth_token'] = $request_token['oauth_token'];
