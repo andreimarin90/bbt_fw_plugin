@@ -3,17 +3,20 @@ require BBT_PL_DIR . 'twitteroauth/autoload.php';
 
 use Abraham\TwitterOAuth\TwitterOAuth;
 
-define('CONSUMER_KEY', 'uFPfyv18jU35e7Mdfl1BJ9WJG');
-define('CONSUMER_SECRET', '7fSqZQCKurK8eIEb8FRQObwpL6AUQr8IHm3N8WHwPhsgmET3Ym');
+if (session_status() == PHP_SESSION_NONE)
+    session_start();
 
 $consumer_key = 'CKUg9sd3S3gFEJ4GGgpU6hnb1';
 $consumer_secret = 'L8xJ8qHYuXDzzANRQP2XzXSB6gnV2LUUbdyfjc1Wan84oKu7T9';
+$outh_token = '2315691576-J2Rac34O9rNVdlhFhwzIK7UcnMF8CIOvY8Txm51';
+$oauthTokenSecret = 'YXkZ3CJHuYmPgN6ghFvfKYTAfTqvMFP0pAfQvFbb8EPVi';
+
+define('CONSUMER_KEY', 'CKUg9sd3S3gFEJ4GGgpU6hnb1');
+define('CONSUMER_SECRET', 'L8xJ8qHYuXDzzANRQP2XzXSB6gnV2LUUbdyfjc1Wan84oKu7T9');
+define('OAUTH_CALLBACK', site_url('?bbtb-tw-login=callback') );
 
 if(!empty($consumer_key) && !empty($consumer_secret))
 {
-    if (session_status() == PHP_SESSION_NONE)
-        session_start();
-
     $oauth_callback = site_url('?bbt-tw-login=callback');
 
     if($_GET['bbt-tw-login'] == 'callback')
@@ -45,14 +48,17 @@ if(!empty($consumer_key) && !empty($consumer_secret))
     }
     else
     {
-        $connection = new TwitterOAuth($consumer_key, $consumer_secret);
-        $request_token = $connection->oauth('oauth/request_token', array('oauth_callback' => $oauth_callback));
+        $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET);
+        echo '<pre>';
+        print_r($connection);
+        echo '<pre>';
+        $request_token = $connection->oauth('oauth/request_token', array('oauth_callback' => OAUTH_CALLBACK));
 
         $_SESSION['oauth_token'] = $request_token['oauth_token'];
         $_SESSION['oauth_token_secret'] = $request_token['oauth_token_secret'];
 
         $url = $connection->url('oauth/authorize', array('oauth_token' => $request_token['oauth_token']));
 
-        wp_redirect( $url , 302 );
+        //header('Location: ' . $url);
     }
 }
