@@ -226,7 +226,7 @@ class BBT_Custom_Posts{
 	public static function generate_custom_fields(){
 
 		$slider_options = self::$slider_config;
-		
+
 		foreach($slider_options as $slider_id => $slider){
 			$register = isset($slider['register'])? $slider['register'] : 'post_type';
 			$slider_term = isset($slider['term'])? $slider['term'] : 'slide';
@@ -277,6 +277,14 @@ class BBT_Custom_Posts{
 					$post_options = array_merge($post_options,$slider['post_options']);
 
 				register_post_type($slider_id,$post_options);
+
+				if(isset($slider['taxonomies']))
+				{
+					foreach ($slider['taxonomies'] as $tax_name => $tax_options)
+					{
+						register_taxonomy($tax_name , $slider_id, $tax_options);
+					}
+				}
 			}
 
 			$taxonomy_options = array(

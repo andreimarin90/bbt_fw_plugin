@@ -53,7 +53,6 @@ if(!empty($consumer_key) && !empty($consumer_secret))
         print_r($connection);
         echo '<pre>';
         $request_token = $connection->oauth('oauth/request_token', array('oauth_callback' => OAUTH_CALLBACK));
-
         $_SESSION['oauth_token'] = $request_token['oauth_token'];
         $_SESSION['oauth_token_secret'] = $request_token['oauth_token_secret'];
 
