@@ -133,7 +133,7 @@ class TwitterOAuth extends Config
         $this->response->setApiPath($path);
         $url = sprintf('%s/%s', self::API_HOST, $path);
         $result = $this->oAuthRequest($url, 'POST', $parameters);
-        
+
         if ($this->getLastHttpCode() != 200) {
             throw new TwitterOAuthException($result);
         }
@@ -219,6 +219,96 @@ class TwitterOAuth extends Config
     }
 
     /**
+     * Upload media to upload.twitter.com.
+     *
+     * @param string $path
+     * @param array  $parameters
+     * @param boolean  $chunked
+     *
+     * @return array|object
+     */
+    public function upload($path, array $parameters = [], $chunked = false)
+    {
+        if ($chunked) {
+            return $this->uploadMediaChunked($path, $parameters);
+        } else {
+            return $this->uploadMediaNotChunked($path, $parameters);
+        }
+    }
+
+    /**
+     * Private method to upload media (not chunked) to upload.twitter.com.
+     *
+     * @param string $path
+     * @param array  $parameters
+     *
+     * @return array|object
+     */
+    private function uploadMediaNotChunked($path, array $parameters)
+    {
+        $file = file_get_contents($parameters['media']);
+        $base = base64_encode($file);
+        $parameters['media'] = $base;
+        return $this->http('POST', self::UPLOAD_HOST, $path, $parameters);
+    }
+
+    /**
+     * Private method to upload media (chunked) to upload.twitter.com.
+     *
+     * @param string $path
+     * @param array  $parameters
+     *
+     * @return array|object
+     */
+    private function uploadMediaChunked($path, array $parameters)
+    {
+        $init = $this->http('POST', self::UPLOAD_HOST, $path, $this->mediaInitParameters($parameters));
+        // Append
+        $segment_index = 0;
+        $media = fopen($parameters['media'], 'rb');
+        while (!feof($media))
+        {
+            $this->http('POST', self::UPLOAD_HOST, 'media/upload', [
+                'command' => 'APPEND',
+                'media_id' => $init->media_id_string,
+                'segment_index' => $segment_index++,
+                'media_data' => base64_encode(fread($media, self::UPLOAD_CHUNK))
+            ]);
+        }
+        fclose($media);
+        // Finalize
+        $finalize = $this->http('POST', self::UPLOAD_HOST, 'media/upload', [
+            'command' => 'FINALIZE',
+            'media_id' => $init->media_id_string
+        ]);
+        return $finalize;
+    }
+
+    /**
+     * Private method to get params for upload media chunked init.
+     * Twitter docs: https://dev.twitter.com/rest/reference/post/media/upload-init.html
+     *
+     * @param array  $parameters
+     *
+     * @return array
+     */
+    private function mediaInitParameters(array $parameters)
+    {
+        $return = [
+            'command' => 'INIT',
+            'media_type' => $parameters['media_type'],
+            'total_bytes' => filesize($parameters['media'])
+        ];
+        if (isset($parameters['additional_owners'])) {
+            $return['additional_owners'] = $parameters['additional_owners'];
+        }
+        if (isset($parameters['media_category'])) {
+            $return['media_category'] = $parameters['media_category'];
+        }
+        return $return;
+    }
+
+    /**
      * @param string $method
      * @param string $host
      * @param string $path
@@ -274,29 +364,76 @@ class TwitterOAuth extends Config
      * @return string
      * @throws TwitterOAuthException
      */
-    private function request($url, $method, $authorization, $postfields)
+    private function request($url, $method, $authorization, array $postfields)
     {
-        /* Changed to WP function wp_remote_get */
-        $args = array(
-            'timeout'     => $this->timeout,
-            'user-agent'  => $this->userAgent,
-            'headers'     => $authorization,
-            'compress'    => 'gzip',
-        );
-        if (in_array($method, ['GET', 'PUT', 'DELETE']) && !empty($postfields)) {
-            $url .= '?' . Util::buildHttpQuery($postfields);
+        /* Curl settings */
+        $options = [
+            // CURLOPT_VERBOSE => true,
+            CURLOPT_CAINFO => __DIR__ . DIRECTORY_SEPARATOR . 'cacert.pem',
+            CURLOPT_CONNECTTIMEOUT => $this->connectionTimeout,
+            CURLOPT_HEADER => true,
+            CURLOPT_HTTPHEADER => ['Accept: application/json', $authorization, 'Expect:'],
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_SSL_VERIFYHOST => 2,
+            CURLOPT_SSL_VERIFYPEER => true,
+            CURLOPT_TIMEOUT => $this->timeout,
+            CURLOPT_URL => $url,
+            CURLOPT_USERAGENT => $this->userAgent,
+        ];
+
+        /* Remove CACert file when in a PHAR file. */
+        if ($this->pharRunning()) {
+            unset($options[CURLOPT_CAINFO]);
         }
 
-        $response_raw = wp_remote_get( $url, $args );
-        $response = wp_remote_retrieve_body( $response_raw );
+        if($this->gzipEncoding) {
+            $options[CURLOPT_ENCODING] = 'gzip';
+        }
 
-        if(!empty($response_raw['response']['code']))
-            $this->response->setHttpCode($response_raw['response']['code']);
+        if (!empty($this->proxy)) {
+            $options[CURLOPT_PROXY] = $this->proxy['CURLOPT_PROXY'];
+            $options[CURLOPT_PROXYUSERPWD] = $this->proxy['CURLOPT_PROXYUSERPWD'];
+            $options[CURLOPT_PROXYPORT] = $this->proxy['CURLOPT_PROXYPORT'];
+            $options[CURLOPT_PROXYAUTH] = CURLAUTH_BASIC;
+            $options[CURLOPT_PROXYTYPE] = CURLPROXY_HTTP;
+        }
+
+        switch ($method) {
+            case 'GET':
+                break;
+            case 'POST':
+                $options[CURLOPT_POST] = true;
+                $options[CURLOPT_POSTFIELDS] = Util::buildHttpQuery($postfields);
+                break;
+            case 'DELETE':
+                $options[CURLOPT_CUSTOMREQUEST] = 'DELETE';
+                break;
+            case 'PUT':
+                $options[CURLOPT_CUSTOMREQUEST] = 'PUT';
+                break;
+        }
+
+        if (in_array($method, ['GET', 'PUT', 'DELETE']) && !empty($postfields)) {
+            $options[CURLOPT_URL] .= '?' . Util::buildHttpQuery($postfields);
+        }
+
+
+        $curlHandle = curl_init();
+        curl_setopt_array($curlHandle, $options);
+        $response = curl_exec($curlHandle);
+
+        // Throw exceptions on cURL errors.
+        if (curl_errno($curlHandle) > 0) {
+            throw new TwitterOAuthException(curl_error($curlHandle), curl_errno($curlHandle));
+        }
+
+        $this->response->setHttpCode(curl_getinfo($curlHandle, CURLINFO_HTTP_CODE));
         $parts = explode("\r\n\r\n", $response);
         $responseBody = array_pop($parts);
         $responseHeader = array_pop($parts);
         $this->response->setHeaders($this->parseHeaders($responseHeader));
 
+        curl_close($curlHandle);
 
         return $responseBody;
     }
@@ -322,17 +459,26 @@ class TwitterOAuth extends Config
     }
 
     /**
-     * Encode application authorization header.
+     * Encode application authorization header with base64.
      *
      * @param Consumer $consumer
      *
      * @return string
      */
-    private function encodeAppAuthorization($consumer)
+    private function encodeAppAuthorization(Consumer $consumer)
     {
-        // TODO: key and secret should be rfc 1738 encoded
-        $key = $consumer->key;
-        $secret = $consumer->secret;
+        $key = rawurlencode($consumer->key);
+        $secret = rawurlencode($consumer->secret);
         return base64_encode($key . ':' . $secret);
+    }
+
+    /**
+     * Is the code running from a Phar module.
+     *
+     * @return boolean
+     */
+    private function pharRunning()
+    {
+        return class_exists('Phar') && \Phar::running(false) !== '';
     }
 }

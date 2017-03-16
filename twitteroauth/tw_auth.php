@@ -6,14 +6,14 @@ use Abraham\TwitterOAuth\TwitterOAuth;
 if (session_status() == PHP_SESSION_NONE)
     session_start();
 
-$consumer_key = 'CKUg9sd3S3gFEJ4GGgpU6hnb1';
-$consumer_secret = 'L8xJ8qHYuXDzzANRQP2XzXSB6gnV2LUUbdyfjc1Wan84oKu7T9';
+$consumer_key = 'SrktO4dVgmqUdLFlHtnKt0NuH';
+$consumer_secret = 'UsVXkJakZ1tClWFUuSVxnDK0W1Qin7PYkz3fe30O5JQEcSX5Lp';
 $outh_token = '2315691576-J2Rac34O9rNVdlhFhwzIK7UcnMF8CIOvY8Txm51';
 $oauthTokenSecret = 'YXkZ3CJHuYmPgN6ghFvfKYTAfTqvMFP0pAfQvFbb8EPVi';
 
-define('CONSUMER_KEY', 'CKUg9sd3S3gFEJ4GGgpU6hnb1');
-define('CONSUMER_SECRET', 'L8xJ8qHYuXDzzANRQP2XzXSB6gnV2LUUbdyfjc1Wan84oKu7T9');
-define('OAUTH_CALLBACK', site_url('?bbtb-tw-login=callback') );
+/*define('CONSUMER_KEY', 'SrktO4dVgmqUdLFlHtnKt0NuH');
+define('CONSUMER_SECRET', 'UsVXkJakZ1tClWFUuSVxnDK0W1Qin7PYkz3fe30O5JQEcSX5Lp');
+define('OAUTH_CALLBACK', site_url('?bbtb-tw-login=callback') );*/
 
 if(!empty($consumer_key) && !empty($consumer_secret))
 {
@@ -48,16 +48,19 @@ if(!empty($consumer_key) && !empty($consumer_secret))
     }
     else
     {
-        $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET);
-        echo '<pre>';
-        print_r($connection);
-        echo '<pre>';
-        $request_token = $connection->oauth('oauth/request_token', array('oauth_callback' => OAUTH_CALLBACK));
+        $connection = new TwitterOAuth($consumer_key, $consumer_secret, $outh_token, $oauthTokenSecret);
+        //echo '<pre>';
+        //print_r($connection);
+        //print_r($connection->get("statuses/user_timeline", array("screen_name" => 'toleabivol')));
+        //echo '<pre>';
+        //var_dump(urlencode($oauth_callback));
+        $request_token = $connection->oauth('oauth/request_token', array('oauth_callback' => $oauth_callback));
         $_SESSION['oauth_token'] = $request_token['oauth_token'];
         $_SESSION['oauth_token_secret'] = $request_token['oauth_token_secret'];
 
         $url = $connection->url('oauth/authorize', array('oauth_token' => $request_token['oauth_token']));
 
-        //header('Location: ' . $url);
+        header('Location: ' . $url, true, 302);
+        die();
     }
 }
