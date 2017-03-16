@@ -11,18 +11,16 @@ $consumer_secret = esc_html(toco_go('consumer_secret'));
 $outh_token = esc_html(toco_go('oauth_token'));
 $oauthTokenSecret = esc_html(toco_go('oauth_token_secret'));
 
-if(!empty($consumer_key) && !empty($consumer_secret) && !empty($outh_token) && !empty($oauthTokenSecret))
-{
+if(!empty($consumer_key) && !empty($consumer_secret) && !empty($outh_token) && !empty($oauthTokenSecret)) {
     $oauth_callback = site_url('?bbt-tw-login=callback');
 
-    if($_GET['bbt-tw-login'] == 'callback')
-    {
+    if ($_GET['bbt-tw-login'] == 'callback') {
         $request_token = [];
         $request_token['oauth_token'] = $_SESSION['oauth_token'];
         $request_token['oauth_token_secret'] = $_SESSION['oauth_token_secret'];
 
         if (isset($_REQUEST['oauth_token']) && $request_token['oauth_token'] !== $_REQUEST['oauth_token']) {
-            wp_die( "Abort! Something is wrong." );
+            wp_die("Abort! Something is wrong.");
         }
         //get access tocken
         $connection = new TwitterOAuth($consumer_key, $consumer_secret, $request_token['oauth_token'], $request_token['oauth_token_secret']);
@@ -41,9 +39,7 @@ if(!empty($consumer_key) && !empty($consumer_secret) && !empty($outh_token) && !
             window.close();
         </script>
         <?php
-    }
-    else
-    {
+    } else {
         $connection = new TwitterOAuth($consumer_key, $consumer_secret, $outh_token, $oauthTokenSecret);
         $request_token = $connection->oauth('oauth/request_token', array('oauth_callback' => $oauth_callback));
         $_SESSION['oauth_token'] = $request_token['oauth_token'];
