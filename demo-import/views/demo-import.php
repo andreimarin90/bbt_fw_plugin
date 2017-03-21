@@ -30,7 +30,7 @@
 					<?php endif;?>
 					<h3 class="theme-name"><?php echo esc_html($demo_config['title']);?></h3>
 					<div class="theme-actions">
-						<?php// esc_html_e('If you already have posts, pages, and categories setup in your wordpress skip the import. It will overite your data..','BigBangThemesFramework')"?>
+						<?php // esc_html_e('If you already have posts, pages, and categories setup in your wordpress skip the import. It will overite your data..','BigBangThemesFramework')"?>
 						<form action="admin.php?page=bbt_demo_content&paged=import" method="post">
 							<?php wp_nonce_field( 'bbt_demo_import_nonce_action', 'bbt_demo_import_nonce_field' ); ?>
 							<input type="hidden" name="bbt_demo_id" value="<?php echo esc_attr($id);?>">
