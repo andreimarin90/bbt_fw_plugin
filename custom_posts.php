@@ -114,7 +114,7 @@ class BBT_Custom_Posts{
 					if(isset($output['ajax_javascript']))
 						$ajax_string .= $output['ajax_javascript'].':
 							function(offset,nr,callback,category){
-								jQuery.post(bbt_ajax.url, {action:"bbt_slider",id:"'.$slider_id.'",view:"'.$output_id.'","offset":offset,"nr":nr,"category":category===undefined?"":category,nonce:bbt_ajax.nonce}, callback);
+					 			jQuery.post(bbt_ajax.url, {action:"bbt_slider",id:"'.$slider_id.'",view:"'.$output_id.'","offset":offset,"nr":nr,"category":category===undefined?"":category,nonce:bbt_ajax.nonce}, callback);
 							},'."\n";
 
 				}
@@ -372,7 +372,6 @@ class BBT_Custom_Posts{
 	}
 
 	private static function generate_option($name, $args, $value, $name_original=null, $disabled=false){
-
 		if(!isset($args['type']))
 			return;
 
@@ -389,11 +388,11 @@ class BBT_Custom_Posts{
 
 		$type = $args['type'];
 
-		$title = isset($args['title'])?$args['title']:'';
-		$description = isset($args['description'])?$args['description']:'';
-		$placeholder = isset($args['placeholder'])?$args['placeholder']:'';
-		$label = isset($args['label'])?$args['label']:'';
-		$default = isset($args['default'])?$args['default']:'';
+		$title = isset($args['title']) ? $args['title'] : '';
+		$description = isset($args['description']) ? $args['description'] : '';
+		$placeholder = isset($args['placeholder']) ? ['placeholder'] : '';
+		$label = isset($args['label']) ? $args['label'] : '';
+		$default = isset($args['default']) ? $args['default'] : '';
 
 		$name_original = !is_null($name_original) ? 'data-option="'.$name_original.'"' : '';
 
@@ -703,7 +702,7 @@ class BBT_Custom_Posts{
 
 	}
 
-	private static function generate_input($type, $name, $value='', $placeholder='', $label='', $default='', $disabled=false){
+	private static function generate_input($type, $name, $value = '', $placeholder = '', $label = '', $default = '', $disabled = false){
 
 		if($disabled)
 			$disabled = 'disabled="disabled"';
@@ -715,10 +714,12 @@ class BBT_Custom_Posts{
 		switch($type){
 
 			case 'line':
+			case 'input':
 				$output .= '<input type="text" name="'.$name.'" value="'.esc_attr($value).'" placeholder="'.$placeholder.'" '.$disabled.' />';
 				break;
 
 			case 'text':
+			case 'textarea':
 				$output .= '<textarea rows="1" cols="40" name="'.$name.'" placeholder="'.$placeholder.'" '.$disabled.'>'.esc_textarea($value).'</textarea>';
 				break;
 
@@ -739,6 +740,23 @@ class BBT_Custom_Posts{
 				}
 				break;
 
+			case 'toggle':
+				$uniqID     = uniqid();
+
+				if(is_array($value)) {
+					foreach ($value as $key => $val) {
+						$value = $key;
+					}
+				}
+
+				$value = ($value) ? $value : 'false';
+
+				$output .= '<span class="bbt_toggle_option_input bbt_toggle mk-composer-toggle" data-id="toggle-switch-' . $uniqID . '">
+								<span class="toggle-handle"></span>
+								<input type="hidden" class="wpb_vc_param_value ' . $name . ' ' . $type . '" value="' . $value . '" name="' . $name . '"/>
+							</span>';
+				break;
+				
 			case 'radio':
 				if(!empty($label)&&is_array($label)){
 					$label_keys = array_keys($label);
@@ -786,10 +804,12 @@ class BBT_Custom_Posts{
 				}
 				break;
 
+			case 'colorpicker':
 			case 'color':
 				$output .= '<input class="bbt-option-color" type="text" name="'.$name.'" value="'.(''===$value&&''!==$default?$default:$value).'" placeholder="'.$placeholder.'" '.$disabled.' '.( !empty($default) ? 'data-default-color="'.$default.'"' : '' ).' />';
 				break;
 
+			case 'datepicker':
 			case 'date':
 				$output .= '<input class="bbt-option-date" type="text" name="'.$name.'" value="'.(''===$value&&''!==$default?$default:$value).'" placeholder="'.$placeholder.'" '.$disabled.' />';
 				break;
