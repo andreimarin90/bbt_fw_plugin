@@ -5,6 +5,7 @@
  */
 add_action('admin_enqueue_scripts', 'bbt_fw_plugin_enqueue_admin_scripts');
 function bbt_fw_plugin_enqueue_admin_scripts() {
+    wp_enqueue_style(	"bbt_frontend_style", BBT_PL_URL . "/src/css/bbt_admin_style.css", false, 1.0, "all" );
     wp_enqueue_script(	"bbt_plugin-framework-admin_js", BBT_PL_URL . "/src/js/bbt_plugin-framework-admin.js", array(), false, null );
 }
 
