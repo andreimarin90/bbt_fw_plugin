@@ -146,3 +146,21 @@ function verifyPurchase($userName, $apiKey , $purchaseCode, $itemId = false) {
     return false;
 
 }
+
+add_filter('widget_text', 'do_shortcode');
+
+
+/*  ==============================  
+Audio Post audio embed  
+=================================*/
+
+if(!function_exists('bbt_get_audio_shortcode')){
+    function bbt_get_audio_shortcode( $content ) {
+        if(preg_match('@(\[audio.*\])@is',$content,$match))
+            return do_shortcode($match[1]);
+        elseif(preg_match('@(\[audio.*\[/audio\])@is',$content,$match_more))
+            return do_shortcode($match_more[1]);
+        else
+            return esc_html_e('Audio shortcode not found','BigBangThemesFramework');
+    }
+}
