@@ -5,7 +5,7 @@
  */
 add_action('admin_enqueue_scripts', 'bbt_fw_plugin_enqueue_admin_scripts');
 function bbt_fw_plugin_enqueue_admin_scripts() {
-    wp_enqueue_script( "bbt_plugin-framework-admin_js", BBT_PL_URL . "/src/js/bbt_plugin-framework-admin.js", array('jquery'), false, null );
+    wp_enqueue_script( "bbt_plugin-framework-admin_js", BBT_PL_URL . "/src/js/bbt_plugin-framework-admin.js", array('jquery'), false, true );
     wp_enqueue_style( "bbt_frontend_style", BBT_PL_URL . "/src/css/bbt_admin_style.css", false, 1.0, "all" );
 }
 
@@ -92,28 +92,3 @@ function bbt_pl_innclude_tw_auth_file(){
     }
 }
 add_action('init', 'bbt_pl_innclude_tw_auth_file');
-
-/*
-************
-Deregisterring WPML plugin styles and scripts. We don't need them anyway.
-************
-*/
-define('ICL_DONT_LOAD_LANGUAGE_SELECTOR_CSS', true);
-define('ICL_DONT_LOAD_LANGUAGES_JS', true);
-define('ICL_DONT_LOAD_NAVIGATION_CSS', true);
-
-/*
-************
-Deferring parsing of javascript on non-vital scripts. All in the name of speed
-************
-*/
-add_filter( 'clean_url', 'bbt_deferring_non_vital_scripts', 11, 1);
-function bbt_deferring_non_vital_scripts($url)
-{
-    if ( FALSE === strpos( $url, '.js' ) )
-    { // not our file
-        return $url;
-    }
-    // Must be a ', not "!
-    return "$url' defer='defer";
-}
