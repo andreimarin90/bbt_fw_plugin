@@ -16,7 +16,7 @@ function bbt_fw_plugin_enqueue_admin_scripts() {
 add_action('wp_enqueue_scripts', 'bbt_fw_plugin_enqueue_scripts');
 function bbt_fw_plugin_enqueue_scripts() {
     //wp_enqueue_style(	"bbt_frontend_style", BBT_PL_URL . "/src/css/bbt_admin_style.css", false, 1.0, "all" );
-    wp_enqueue_script(	"bbt_plugin_framework_js", 	BBT_PL_URL . "/src/js/bbt-plugin-framework.js", array('jquery'), false, null );
+    wp_enqueue_script(	"bbt_plugin_framework_js", 	BBT_PL_URL . "/src/js/bbt-plugin-framework.js", array('jquery'), false, true );
 }
 
 add_action('wp_ajax_bbt_fb_login', 'bbt_fb_login');
