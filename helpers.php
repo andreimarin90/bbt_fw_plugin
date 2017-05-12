@@ -91,25 +91,6 @@ function bbt_plugin_view( $_name, $extension = NULL ,$_data = NULL, $__return = 
         print $buffer;
 }
 
-if ( ! function_exists( 'bbt_get_view' ) ) :
-    function bbt_get_view( $_name, $folder = '' ,$_data = NULL, $__return = FALSE) {
-        $_name = strtolower( $_name );
-        if ( !file_exists( get_stylesheet_directory() . '/'.$folder.'/'.$_name.'.php' ) )
-            exit( 'View not found: ' . $_name );
-        if ( $_data !== NULL && count( $_data ) > 0 )
-            foreach ( $_data as $_name_var => $_value )
-                ${$_name_var} = $_value;
-        ob_start();
-
-        require (get_stylesheet_directory() . '/'.$folder.'/'.$_name.'.php') ;
-
-        $buffer = ob_get_clean();
-        if ( $__return === TRUE )
-            return $buffer;
-        else
-            print $buffer;
-    }
-endif;
 
 function bbt_check_external_file($url)
 {
