@@ -475,7 +475,7 @@ class BBT_Shortcoder{
 		$type = isset($settings['type']) ? $settings['type'] : '';
 		$class = isset($settings['class']) ? $settings['class'] : '';
 		$icons = myGlobals::$bbt_custom_vc_icons;
-		$icons_md = myGlobals::$bbt_md_vc_icons;
+		$icons_md = isset(myGlobals::$bbt_md_vc_icons) ? myGlobals::$bbt_md_vc_icons : '';
 		$uniqID    = uniqid();
 
 		if(is_array($value)) {
@@ -497,13 +497,15 @@ class BBT_Shortcoder{
 			$output .= '<li '.$selected.' data-ico="'.$icon.'"><i class="icon-'.$icon.'"></i><label class="icon">'.$icon.'</label></li>';
 			$n++;
 		}
-		foreach($icons_md as $icons_md)
-		{
-			$selected = ($icons_md == $value) ? 'class="selected"' : '';
-			$id = 'icon-'.$n;
-			$output .= '<li '.$selected.' data-ico="'.$icons_md.'"><i class="mi-icon">'.$icons_md.'</i><label class="icon">'.$icons_md.'</label></li>';
-			$n++;
-		}
+		if(!empty($icons_md))
+            foreach($icons_md as $icons_md)
+            {
+                $selected = ($icons_md == $value) ? 'class="selected"' : '';
+                $id = 'icon-'.$n;
+                $output .= '<li '.$selected.' data-ico="'.$icons_md.'"><i class="mi-icon">'.$icons_md.'</i><label class="icon">'.$icons_md.'</label></li>';
+                $n++;
+            }
+
 		$output .='</ul>';
 		$output .='</div>';
 		$output .= '<script type="text/javascript">
