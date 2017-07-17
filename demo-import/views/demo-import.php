@@ -1,4 +1,11 @@
-
+<?php $activated = get_option("bbt_".THEME_FOLDER_NAME."_license"); ?>
+<?php if($activated == ''): ?>
+    <div class="settings-error notice">
+        <br>
+        <h2>Please enter your product key to be able to import demo content - <?php echo sprintf( __( 'Please visit <a href="%1$s" target="_blank">Product Activation</a> to activate your theme.', 'BigBangThemesFramework' ), admin_url( 'admin.php?page=bbt_product_key_page' ) );?></h2>
+        <br>
+    </div>
+<?php else: ?>
 <div class="settings-error notice">
 	<br>
 	<strong>In case your demo import doesn't work, please make sure to contact your web hosting support and ask them to check the following limits in PHP.ini and make sure they match:
@@ -46,8 +53,6 @@
 			<div class="bbt_popup_description"><?php esc_html_e('Hey! It seems that we forgot to include the demo content. Can you please let us know asap at','BigBangThemesFramework'); ?> <a href="http://www.bigbangthemes.net/contact-us/">http://www.bigbangthemes.net/contact-us/</a> ?</div>
 		<?php endif;?>
 	</div>
-
-
 	<!--<div id="bbt_popup">
 		<div class="bbt_popup_content">
 			<span class="bbt_close_icon dashicons dashicons-no"></span>
@@ -67,8 +72,6 @@
 			     data-timer="<?php /*esc_html_e('Elapsed Time','BigBangThemesFramework'); */?>:  ">
 			</div>
 		</div>
-	</div>
-	<div id="bbt_cover_popup"></div>-->
-
-
+	</div>-->
 </div>
+<?php endif; ?>
