@@ -143,9 +143,9 @@
                         </form>
                     </div>
 
-                    <div class="clear"></div> <a href="<?php echo esc_url('http://bigbangthemes.net/knowledgebase/register-product-key/'); ?>" target="_blank"><span class="dashicons dashicons-info"></span><?php esc_html_e("Product Key — Common Issues & FAQs", "BigBangThemesFramework"); ?></a>
-                    <a href="<?php echo esc_url('http://bigbangthemes.net/knowledgebase/register-product-key/#domain_change'); ?>" target="_blank"><span class="dashicons dashicons-info"></span><?php esc_html_e("Can I change the domain name later?", "BigBangThemesFramework"); ?></a>
-                    <a href="<?php echo esc_url('http://bigbangthemes.net/knowledgebase/register-product-key/#localhost'); ?>" target="_blank"><span class="dashicons dashicons-info"></span><?php esc_html_e("Can I activate a local / development site?", "BigBangThemesFramework"); ?></a>
+                    <div class="clear"></div> <a href="<?php echo esc_url('https://bigbangthemes.net/knowledgebase/register-product-key/'); ?>" target="_blank"><span class="dashicons dashicons-info"></span><?php esc_html_e("Product Key — Common Issues & FAQs", "BigBangThemesFramework"); ?></a>
+                    <a href="<?php echo esc_url('https://bigbangthemes.net/knowledgebase/register-product-key/#domain_change'); ?>" target="_blank"><span class="dashicons dashicons-info"></span><?php esc_html_e("Can I change the domain name later?", "BigBangThemesFramework"); ?></a>
+                    <a href="<?php echo esc_url('https://bigbangthemes.net/knowledgebase/register-product-key/#localhost'); ?>" target="_blank"><span class="dashicons dashicons-info"></span><?php esc_html_e("Can I activate a local / development site?", "BigBangThemesFramework"); ?></a>
 
                 </div>
 
@@ -154,9 +154,9 @@
         <?php endif; ?>
 
         <div class="bbt_footer">
-            <a href="<?php echo esc_url('http://bigbangthemes.net/knowledgebase/register-product-key/'); ?>" target="_blank"><span class="dashicons dashicons-info"></span><?php esc_html_e("Product Key — Common Issues & FAQs", "BigBangThemesFramework"); ?></a>
-            <a href="<?php echo esc_url('http://bigbangthemes.net/knowledgebase/register-product-key/#domain_change'); ?>" target="_blank"><span class="dashicons dashicons-info"></span><?php esc_html_e("Can I change the domain name later?", "BigBangThemesFramework"); ?></a>
-            <a href="<?php echo esc_url('http://bigbangthemes.net/knowledgebase/register-product-key/#localhost'); ?>" target="_blank"><span class="dashicons dashicons-info"></span><?php esc_html_e("Can I activate a local / development site?", "BigBangThemesFramework"); ?></a>
+            <a href="<?php echo esc_url('https://bigbangthemes.net/knowledgebase/register-product-key/'); ?>" target="_blank"><span class="dashicons dashicons-info"></span><?php esc_html_e("Product Key — Common Issues & FAQs", "BigBangThemesFramework"); ?></a>
+            <a href="<?php echo esc_url('https://bigbangthemes.net/knowledgebase/register-product-key/#domain_change'); ?>" target="_blank"><span class="dashicons dashicons-info"></span><?php esc_html_e("Can I change the domain name later?", "BigBangThemesFramework"); ?></a>
+            <a href="<?php echo esc_url('https://bigbangthemes.net/knowledgebase/register-product-key/#localhost'); ?>" target="_blank"><span class="dashicons dashicons-info"></span><?php esc_html_e("Can I activate a local / development site?", "BigBangThemesFramework"); ?></a>
         </div>
 
         <!-- <i> TESTING BUTTON </i>

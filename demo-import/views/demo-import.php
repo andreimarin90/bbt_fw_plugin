@@ -50,7 +50,7 @@
 			<?php endforeach;?>
 
 		<?php else: ?>
-			<div class="bbt_popup_description"><?php esc_html_e('Hey! It seems that we forgot to include the demo content. Can you please let us know asap at','BigBangThemesFramework'); ?> <a href="http://www.bigbangthemes.net/contact-us/">http://www.bigbangthemes.net/contact-us/</a> ?</div>
+			<div class="bbt_popup_description"><?php esc_html_e('Hey! It seems that we forgot to include the demo content. Can you please let us know asap at','BigBangThemesFramework'); ?> <a href="https://www.bigbangthemes.net/contact-us/">https://www.bigbangthemes.net/contact-us/</a> ?</div>
 		<?php endif;?>
 	</div>
 	<!--<div id="bbt_popup">

@@ -2,8 +2,8 @@
 class BBT_Plugin_Installer{
     //static public $bbt_api_url = 'http://localhost/bigbang/showoff/user/';
     //private $api_url = "http://localhost/bigbang/showoff/api-listener/";
-    static public $bbt_api_url = 'http://bigbangthemes.net/user/';
-    private $api_url = "http://bigbangthemes.net/api-listener/";
+    static public $bbt_api_url = 'https://bigbangthemes.net/user/';
+    private $api_url = "https://bigbangthemes.net/api-listener/";
 
     function __construct(){
         if(defined('BBT_THEME_PRODUCT_KEY') && BBT_THEME_PRODUCT_KEY) {

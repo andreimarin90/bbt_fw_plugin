@@ -4,7 +4,7 @@ if( ! class_exists( 'BBT_Updater' ) ) {
 	class BBT_Updater {
 
 		//var $api_url = "http://localhost/bigbang/showoff/update-theme/";
-		var $api_url = "http://bigbangthemes.net/update-theme/";
+		var $api_url = "https://bigbangthemes.net/update-theme/";
 
 		function __construct( $license_key, $theme_version ) {
 
@@ -56,7 +56,7 @@ if( ! class_exists( 'BBT_Updater' ) ) {
 						$transient->response[$curr_theme->get_template()] = array(
 							"new_version"	=> 		$data->version,
 							"package"		=>	    $data->download_url,
-							"url"			=>		'http://bigbangthemes.net'
+							"url"			=>		'https://bigbangthemes.net'
 						);
 
 						// add_action( 'admin_notices', array(&$this, 'update_notice') );

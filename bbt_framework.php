@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: BBT Framework
- * Plugin URI: http://bigbangthemes.com/
+ * Plugin URI: https://bigbangthemes.com/
  * Description: BBTFramework plugin part (registers custom post types, shortcodes and other features of the theme required to be in a plugin)
- * Version: 1.4.6
+ * Version: 1.4.8
  * Author: BigBangThemes
- * Author URI: http://bigbangthemes.com/
+ * Author URI: https://bigbangthemes.com/
  * License: GPL2
  */
 use Abraham\TwitterOAuth\TwitterOAuth;
