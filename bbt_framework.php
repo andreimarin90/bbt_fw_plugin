@@ -3,7 +3,7 @@
  * Plugin Name: BBT Framework
  * Plugin URI: https://bigbangthemes.com/
  * Description: BBTFramework plugin part (registers custom post types, shortcodes and other features of the theme required to be in a plugin)
- * Version: 1.4.8
+ * Version: 1.4.9
  * Author: BigBangThemes
  * Author URI: https://bigbangthemes.com/
  * License: GPL2

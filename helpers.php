@@ -145,3 +145,35 @@ if(!function_exists('bbt_get_audio_shortcode')){
             return esc_html_e('Audio shortcode not found','BigBangThemesFramework');
     }
 }
+
+/*
+ * get option from BD
+ */
+//rewrited toco go
+if(!function_exists('toco_go')) {
+    function toco_go($setting_key)
+    {
+        return bbt_get_db_option($setting_key);
+    }
+}
+
+if(!function_exists('toco_eo')){
+    function toco_eo($setting_key){
+        echo toco_go($setting_key);
+    }
+}
+if(!function_exists('bbt_get_option')) {
+    function bbt_get_option($setting_key)
+    {
+        return bbt_get_db_option($setting_key);
+    }
+}
+
+if(!function_exists('bbt_eo_option')){
+    function bbt_eo_option($setting_key){
+        echo bbt_get_option($setting_key);
+    }
+}
+/*
+ * end get option from BD
+ */
