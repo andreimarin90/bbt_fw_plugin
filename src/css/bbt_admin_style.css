@@ -4,3 +4,6 @@
 #adminmenu  #toplevel_page_bbt_welcome_theme .wp-menu-image img {
     padding: 11px 0 0;
 }
+.bbt_admin_map {
+    height: 200px;
+}

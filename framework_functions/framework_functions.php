@@ -175,10 +175,6 @@ if(!function_exists('bbt_get_db_option')){
         $theme_customizer_options = get_theme_mod('theme_options');
         $theme_options = get_option(THEME_SMALL_NAME . '_settings');
 
-        /*echo '<pre>';
-        print_r($theme_customizer_options);
-        echo '</pre>';*/
-
         //get option from theme customizer if exists
         if(!empty($theme_customizer_options) && isset($theme_customizer_options[$setting_key]))
         {
