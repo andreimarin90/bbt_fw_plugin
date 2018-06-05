@@ -383,8 +383,11 @@ class BBT_Shortcoder{
         $param_name = isset($settings['param_name']) ? $settings['param_name'] : '';
         $type       = isset($settings['type']) ? $settings['type'] : '';
         $options    = isset($settings['options']) ? $settings['options'] : '';
+        $limit    = isset($settings['limit']) ? $settings['limit'] : '';
         $output     = '';
         $uniqID    = uniqid();
+
+        $max_select = (!empty($limit)) ? '{max_selected_options: '.$limit.'}' : '';
 
         $output .= '<select multiple="multiple" name="' . $param_name . '" id="multiselect-' . $uniqID . '" style="width:100%" ' . $dependency . ' class="wpb-multiselect ' . $dependency . ' wpb_vc_param_value ' . $param_name . ' ' . $type . '">';
         if ($options != null && !empty($options)) {
@@ -400,7 +403,7 @@ class BBT_Shortcoder{
 
         $output .= '<script type="text/javascript">
 
-		jQuery("#multiselect-' . $uniqID . '").chosen();
+		jQuery("#multiselect-' . $uniqID . '").chosen('.$max_select.');
 
 		</script>';
 
