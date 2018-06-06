@@ -177,3 +177,43 @@ if(!function_exists('bbt_eo_option')){
 /*
  * end get option from BD
  */
+/**
+ * get address by latitude and longitude
+ *
+ * @param string $coordinates - map coordinates (latitude,longitude)
+ * @return string $data - map address
+ */
+if(!function_exists('bbt_get_address_by_coordinates')) {
+    function bbt_get_address_by_coordinates($coordinates, $get = 'address')
+    {
+        $coordinates = explode(',', $coordinates);
+        // Google Map
+        $maps_key = '&key=' . bbt_get_option('map_api_key');
+        $url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='.trim($coordinates[0]).','.trim($coordinates[1]).'&sensor=false'.$maps_key;
+
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_HEADER, false);
+        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_ENCODING, "");
+        $curlData = curl_exec($curl);
+        curl_close($curl);
+
+        $address = json_decode($curlData);
+
+        if($address->status == "OK")
+        {
+            if($get == 'city') {
+                return $address->results[2]->address_components[4]->long_name;
+            }
+            else {
+                return $address->results[0]->formatted_address;
+            }
+        }
+        else
+        {
+            return false;
+        }
+    }
+}
