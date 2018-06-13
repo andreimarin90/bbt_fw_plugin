@@ -158,12 +158,16 @@ abstract class PayPal_Digital_Goods {
 	 * 
 	 */
 	public function request_checkout_token(){
+	    try {
+            $response = $this->call_paypal( 'SetExpressCheckout' );
 
-		$response = $this->call_paypal( 'SetExpressCheckout' );
+            $this->token = $response['TOKEN'];
 
-		$this->token = $response['TOKEN'];
-
-		return $response;
+            return $response;
+        }
+		catch (Exception $e) {
+	        echo $e->getMessage();
+        }
 	}
 
 
@@ -300,7 +304,7 @@ abstract class PayPal_Digital_Goods {
 			if( $args['href'] == PayPal_Digital_Goods_Configuration::checkout_url() )
 				$args['href'] .= $this->token;
 
-			$button = '<a class="mdl-button mdl-js-button mdl-js-ripple-effect" href="' . $args['href'] . '" id="' . $args['id'] . '" alt="' . $args['alt'] . '">Paypal</a>';
+			$button = '<br /><a class="mdl-button mdl-js-button mdl-js-ripple-effect" href="' . $args['href'] . '" id="' . $args['id'] . '" alt="' . $args['alt'] . '">Paypal</a>';
 		} else {
 			$button = '<input type="image" id="' . $args['id'] . '" alt="' . $args['alt'] . '" src="https://www.paypal.com/' . $args['locale'] . '/i/btn/btn_dg_pay_w_paypal.gif">';
 		}

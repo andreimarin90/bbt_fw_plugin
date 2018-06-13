@@ -1,5 +1,5 @@
 <?php
-require_once( BBT_PL_DIR . '/paypal-digital-goods/paypal-digital-goods.class.php' );
+require_once( 'paypal-digital-goods.class.php' );
 
 $username = bbt_get_option('paypal_username');
 $password = bbt_get_option('paypal_password');

@@ -217,3 +217,13 @@ if(!function_exists('bbt_get_address_by_coordinates')) {
         }
     }
 }
+
+//remove font action from customify
+if(!function_exists('bbt_remove_customify_fonts')) {
+    function bbt_remove_customify_fonts()
+    {
+        if(class_exists('Customify_Font_Selector')) {
+            remove_action('wp_head', array(Customify_Font_Selector::instance(), 'output_font_dynamic_style'), 100);
+        }
+    }
+}
