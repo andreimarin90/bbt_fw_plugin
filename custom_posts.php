@@ -276,7 +276,7 @@ class BBT_Custom_Posts{
                 if(isset($slider['post_options']))
                     $post_options = array_merge($post_options,$slider['post_options']);
 
-                register_post_type($slider_id,$post_options);
+                register_post_type($slider_id, $post_options);
 
                 if(isset($slider['taxonomies']))
                 {
@@ -287,47 +287,48 @@ class BBT_Custom_Posts{
                 }
             }
 
-            $taxonomy_options = array(
-                'label' => 'Categories',
-                'labels' => array(
-                    'name' => ucwords($slider_term) . ' Categories',
-                    'singular_name' => 'Category',
-                    'menu_name' => 'Categories',
-                    'all_items' => 'All Categories',
-                    'edit_item' => 'Edit Categories',
-                    'view_item' => 'View Category',
-                    'update_item' => 'Update Category',
-                    'add_new_item' => 'Add New Category',
-                    'new_item_name' => 'New Category',
-                    'parent_item' => 'Parent Category',
-                    'parent_item_colon' => 'Parent Category:',
-                    'search_items' => 'Search Categories',
-                    'popular_items' => 'Popular Categories',
-                    'separate_items_with_commas' => 'Separate categories with commas',
-                    'add_or_remove_items' => 'Add or remove categories',
-                    'choose_from_most_used' => 'Choose from the most used categories',
-                    'not_found' => 'No categories found'
-                ),
-                'public' => true,
-                'show_ui' => true,
-                'show_in_nav_menus' => true,
-                'show_tagcloud' => false,
-                'show_admin_column' => true,
-                'hierarchical' => true
-            );
+            if(!isset($slider['has_archive']) ||  (isset($slider['has_archive']) && $slider['has_archive'])) {
+                $taxonomy_options = array(
+                    'label' => 'Categories',
+                    'labels' => array(
+                        'name' => ucwords($slider_term) . ' Categories',
+                        'singular_name' => 'Category',
+                        'menu_name' => 'Categories',
+                        'all_items' => 'All Categories',
+                        'edit_item' => 'Edit Categories',
+                        'view_item' => 'View Category',
+                        'update_item' => 'Update Category',
+                        'add_new_item' => 'Add New Category',
+                        'new_item_name' => 'New Category',
+                        'parent_item' => 'Parent Category',
+                        'parent_item_colon' => 'Parent Category:',
+                        'search_items' => 'Search Categories',
+                        'popular_items' => 'Popular Categories',
+                        'separate_items_with_commas' => 'Separate categories with commas',
+                        'add_or_remove_items' => 'Add or remove categories',
+                        'choose_from_most_used' => 'Choose from the most used categories',
+                        'not_found' => 'No categories found'
+                    ),
+                    'public' => true,
+                    'show_ui' => true,
+                    'show_in_nav_menus' => true,
+                    'show_tagcloud' => false,
+                    'show_admin_column' => true,
+                    'hierarchical' => true
+                );
 
-            if(isset($slider['taxonomy_options']))
-                $taxonomy_options = array_merge($taxonomy_options,$slider['taxonomy_options']);
+                if(isset($slider['taxonomy_options']))
+                    $taxonomy_options = array_merge($taxonomy_options,$slider['taxonomy_options']);
 
-            register_taxonomy($slider_id.'_tax',$slider_id,$taxonomy_options);
+                register_taxonomy($slider_id.'_tax',$slider_id,$taxonomy_options);
 
-            //register other taxonomies
-            if(isset($slider['sub_taxonomy'])){
-                foreach($slider['sub_taxonomy'] as $sub_tax_id => $sub_tax){
-                    register_taxonomy($sub_tax_id, $slider_id, $sub_tax);
+                //register other taxonomies
+                if(isset($slider['sub_taxonomy'])){
+                    foreach($slider['sub_taxonomy'] as $sub_tax_id => $sub_tax){
+                        register_taxonomy($sub_tax_id, $slider_id, $sub_tax);
+                    }
                 }
             }
-
         }
     }
 
