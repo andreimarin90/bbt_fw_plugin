@@ -194,3 +194,13 @@ if(!function_exists('bbt_get_db_option')){
         }
     }
 }
+
+if(!function_exists('bbt_remove_bbpress_topic_notifications')) {
+    function bbt_remove_bbpress_topic_notifications()
+    {
+        if(defined('BBT_THEME_NAME')) {
+            if(BBT_THEME_NAME == 'ticketlab') remove_action( 'bbp_new_topic', 'bbp_notify_forum_subscribers', 11 );
+        }
+    }
+    add_action('bbp_new_topic', 'bbt_remove_bbpress_topic_notifications');
+}
