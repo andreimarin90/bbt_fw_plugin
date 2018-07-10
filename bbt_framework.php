@@ -3,7 +3,7 @@
  * Plugin Name: BBT Framework
  * Plugin URI: https://bigbangthemes.com/
  * Description: BBTFramework plugin part (registers custom post types, shortcodes and other features of the theme required to be in a plugin)
- * Version: 1.5.2
+ * Version: 1.6.0
  * Author: BigBangThemes
  * Author URI: https://bigbangthemes.com/
  * License: GPL2
@@ -59,6 +59,15 @@ if(!function_exists('getConnectionWithAccessToken')){
 		$connection = new TwitterOAuth($cons_key, $cons_secret, $oauth_token, $oauth_token_secret);
 		return $connection;
 	}
+}
+
+if(!class_exists('BBT_Post_By_Email')){
+    require_once BBT_PL_DIR . 'post_by_email/bbt_post_by_email.php';
+
+    add_action('after_setup_theme','bbt_post_by_email');
+    function bbt_post_by_email(){
+        BBT_Post_By_Email::get_instance();
+    }
 }
 
 require_once BBT_PL_DIR . 'framework_functions/framework_functions.php';

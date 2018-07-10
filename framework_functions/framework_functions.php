@@ -156,7 +156,7 @@ function bbt_customify_filter_theme_customizer_options( $config ) {
             {
                 if(file_exists($file))
                 {
-                    include $file;
+                    require $file;
                 }
             }
 
