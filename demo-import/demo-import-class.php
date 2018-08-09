@@ -189,7 +189,7 @@ class BBT_Demo_Import{
 	}
 
 	/**
-	 * fly_make_import
+	 * bbt_make_import
 	 *
 	 * @access public
 	 */
