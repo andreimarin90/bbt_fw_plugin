@@ -57,8 +57,8 @@ if(!class_exists('BBT_Changelog')){
     require_once BBT_PL_DIR . 'changelog/changelog-class.php';
     add_action('after_setup_theme','bbt_changelog_plugin');
     function bbt_changelog_plugin(){
-        if(file_exists(get_template_directory() . '/theme_config/changelog.txt')) {
-            new BBT_Changelog(get_template_directory() . '/theme_config/changelog.txt');
+        if(file_exists(get_template_directory() . '/changelog/changelog.txt')) {
+            new BBT_Changelog(get_template_directory() . '/changelog/changelog.txt');
         }
     }
 }
