@@ -6,7 +6,7 @@ class BBT_Plugin_Installer{
     private $api_url = "https://bigbangthemes.net/api-listener/";
 
     function __construct(){
-        if(defined('BBT_THEME_PRODUCT_KEY') && BBT_THEME_PRODUCT_KEY) {
+        //if(defined('BBT_THEME_PRODUCT_KEY') && BBT_THEME_PRODUCT_KEY) {
             add_action('register_sidebar', array($this, 'bbt_theme_admin_init'));
             add_action('admin_menu', array($this, 'bbt_theme_admin_menu'), 1);
             add_action('admin_menu', array($this, 'bbt_theme_admin_product_key_submenu'), 1);
@@ -15,7 +15,7 @@ class BBT_Plugin_Installer{
             add_action('admin_enqueue_scripts', array($this, 'bbt_theme_admin_pages'));
             add_action('admin_notices', array($this, 'bbt_admin_notices'), 99);
             add_action('admin_notices', array($this, 'bbt_update_notice'));
-        }
+        //}
     }
 
     // =============================================================================
