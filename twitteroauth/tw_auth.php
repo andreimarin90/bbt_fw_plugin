@@ -6,10 +6,10 @@ use Abraham\TwitterOAuth\TwitterOAuth;
 if (session_status() == PHP_SESSION_NONE)
     session_start();
 
-$consumer_key = esc_html(toco_go('consumer_key'));
-$consumer_secret = esc_html(toco_go('consumer_secret'));
-$outh_token = esc_html(toco_go('oauth_token'));
-$oauthTokenSecret = esc_html(toco_go('oauth_token_secret'));
+$consumer_key = esc_html(bbt_get_option('consumer_key'));
+$consumer_secret = esc_html(bbt_get_option('consumer_secret'));
+$outh_token = esc_html(bbt_get_option('oauth_token'));
+$oauthTokenSecret = esc_html(bbt_get_option('oauth_token_secret'));
 
 if(!empty($consumer_key) && !empty($consumer_secret) && !empty($outh_token) && !empty($oauthTokenSecret)) {
     $oauth_callback = site_url('?bbt-tw-login=callback');

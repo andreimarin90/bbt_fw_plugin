@@ -370,7 +370,7 @@ class BBT_Shortcoder{
 
         $output .= '<script type="text/javascript">
 
-			jQuery("#toggle-switch-' . $uniqID . '") .bbtToggleVcOption();
+			jQuery("#toggle-switch-' . $uniqID . '").bbtToggleVcOption();
 
 		</script>';
 
